@@ -10,4 +10,5 @@ class Marketing extends CI_Controller
         $this->load->view('marketing/dashboard/index');
         $this->load->view('marketing/templates/footer');
     }
+
 }
