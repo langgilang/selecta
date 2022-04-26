@@ -9,5 +9,14 @@ class Wahana_m extends CI_Model {
         $query = $this->db->get();
         return $query;
     }
+
+    public function add($data)
+    {
+        $param = array(
+            'nama_wahana' => $data['nama_wahana'],
+            'harga' => $data['harga'],
+        );
+        $this->db->insert('tb_wahana', $param);
+    }
     
 }

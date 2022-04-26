@@ -20,6 +20,9 @@
     <section class="content">
         <!-- form tambah data wahana -->
         <div class="row">
+            <div class="col-md-2">
+                <a href="<?=site_url('wahana/add');?>"><button class="btn btn-block btn-success">Tambah</button></a>
+            </div><br><br>
             <!-- ukuran konten -->
             <div class="col-md-12">
                 <div class="box">
@@ -37,12 +40,12 @@
                             </thead>
                             <?php
                             $no = 1;
-                            foreach ($wahana as $w => $data) { ?>
+                            foreach ($wahana as $w => $row) { ?>
                                 <tbody>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $data->nama_wahana; ?></td>
-                                        <td><?= $data->harga; ?></td>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= $row->nama_wahana; ?></td>
+                                        <td><?= $row->harga; ?></td>
                                     </tr>
                                 </tbody>
                             <?php
