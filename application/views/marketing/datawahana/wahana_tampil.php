@@ -1,3 +1,4 @@
+<title><?=$header;?></title>
 <!-- Left side column. contains the logo and sidebar -->
 
 
@@ -21,7 +22,7 @@
         <!-- form tambah data wahana -->
         <div class="row">
             <div class="col-md-2">
-                <a href="<?=site_url('wahana/add');?>"><button class="btn btn-block btn-success">Tambah</button></a>
+                <a href="<?= site_url('wahana/add'); ?>"><button class="btn btn-block btn-success">Tambah</button></a>
             </div><br><br>
             <!-- ukuran konten -->
             <div class="col-md-12">
@@ -36,6 +37,7 @@
                                     <th>No</th>
                                     <th>Nama Wahana</th>
                                     <th>Harga</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <?php
@@ -46,6 +48,14 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row->nama_wahana; ?></td>
                                         <td><?= $row->harga; ?></td>
+                                        <td>
+                                            <a href="<?= site_url('wahana/edit'.$row->id_wahana); ?>" class="btn btn-default">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="<?= site_url('wahana/del'.$row->id_wahana); ?>" class="btn btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             <?php
@@ -56,6 +66,7 @@
                                     <th>No</th>
                                     <th>Nama Wahana</th>
                                     <th>Harga</th>
+                                    <th>#</th>
                                 </tr>
                             </tfoot>
                         </table>

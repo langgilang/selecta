@@ -16,6 +16,7 @@ class Wahana extends CI_Controller
         $query = $this->wahana->get();
         // $data['wahana'] = $query->result();
         $data = array(
+            'header' => 'Data Wahana',
             'wahana' => $query->result()
         );
         // print_r($data);
@@ -30,7 +31,7 @@ class Wahana extends CI_Controller
         $this->load->view('marketing/templates/sidebar');
 
         $data = array(
-            'wahana' => 'Halo'
+            'header' => 'Tambah Data Wahana'
         );
         $this->load->view('marketing/datawahana/wahana_tambah', $data);
 
@@ -48,8 +49,11 @@ class Wahana extends CI_Controller
         redirect('wahana');
     }
 
-    public function edit()
+    public function edit($id = null)
     {
-        
+        $data = array(
+            'header' => 'Edit Data Wahana'
+        );
+        $this->load->view('marketing/datawahana/wahana_edit', $data);
     }
 }

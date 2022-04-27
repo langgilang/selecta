@@ -14,12 +14,12 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
-                <a href="#">
+            <li <?=$this->uri->segment(1) == 'dashboard_m' || $this->uri->segment(1) == '' ? 'class="active"' : ''?>>
+                <a href="<?=site_url('dashboard_m')?>">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="treeview">
+            <li <?=$this->uri->segment(1) == 'dashboard_m' ? 'class="active"' : ''?>>
                 <a href="#">
                     <i class="fa fa-edit"></i>
                     <span>Master Data</span>
@@ -28,7 +28,7 @@
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i> Data Konsumen</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Data Portir</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Data Wahana</a></li>
+                    <li><a href="<?=site_url('datawahana_m')?>"><i class="fa fa-circle-o"></i> Data Wahana</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Data Tiket</a></li>
                 </ul>
             </li>

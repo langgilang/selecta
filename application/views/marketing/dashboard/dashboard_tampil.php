@@ -1,3 +1,4 @@
+<title><?=$header;?></title>
 <!-- Left side column. contains the logo and sidebar -->
 
 
