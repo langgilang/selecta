@@ -7,7 +7,12 @@ class Marketing extends CI_Controller
     {
         $this->load->view('marketing/templates/sidebar');
         $this->load->view('marketing/templates/header');
-        $this->load->view('marketing/dashboard/index');
+
+        $data = array(
+            'header' => 'Dashboard'
+        );
+        $this->load->view('marketing/dashboard/dashboard_tampil', $data);
+
         $this->load->view('marketing/templates/footer');
     }
 
