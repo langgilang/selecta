@@ -6,26 +6,14 @@ class Portir extends CI_Controller
     {
         $this->load->view('portir/templates/header');
         $this->load->view('portir/templates/sidebar');
-        $this->load->view('portir/dashboard/index');
-        $this->load->view('portir/templates/footer');
-        $this->load->helper('url');
-    }
 
-    public function linktiketoffline()
-    {
-        $this->load->view('portir/templates/header');
-        $this->load->view('portir/templates/sidebar');
-        $this->load->view('portir/tiketoffline/index');
-        $this->load->view('potir/templates/footer');
-        $this->load->helper('url');
-    }
+        $data = array(
+            'header' => 'Dashboard'
+        );
 
-    public function linkdashboard()
-    {
-        $this->load->view('portir/templates/header');
-        $this->load->view('portir/templates/sidebar');
-        $this->load->view('portir/dashboard/index');
+        $this->load->view('portir/dashboard/index_tampil', $data);
         $this->load->view('portir/templates/footer');
-        $this->load->helper('url');
+        // $this->load->helper('url');
+
     }
 }

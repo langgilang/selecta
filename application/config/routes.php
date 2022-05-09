@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['dashboard_m'] = 'marketing';
 $route['datawahana_m'] = 'wahana';
+$route['tiketoffline_p'] = 'tiketoffline_p';
