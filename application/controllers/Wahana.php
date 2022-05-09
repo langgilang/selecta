@@ -10,9 +10,6 @@ class Wahana extends CI_Controller
 
     public function index()
     {
-        $this->load->view('marketing/templates/header');
-        $this->load->view('marketing/templates/sidebar');
-
         $query = $this->wahana->get();
         // $data['wahana'] = $query->result();
         $data = array(
@@ -20,22 +17,15 @@ class Wahana extends CI_Controller
             'wahana' => $query->result()
         );
         // print_r($data);
-        $this->load->view('marketing/datawahana/wahana_tampil', $data);
-        
-        $this->load->view('marketing/templates/footer');
+        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_tampil', $data);
     }
 
     public function add()
     {
-        $this->load->view('marketing/templates/header');
-        $this->load->view('marketing/templates/sidebar');
-
         $data = array(
             'header' => 'Tambah Data Wahana'
         );
-        $this->load->view('marketing/datawahana/wahana_tambah', $data);
-
-        $this->load->view('marketing/templates/footer');
+        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_tambah', $data);
     }
 
     public function proses()
@@ -52,17 +42,13 @@ class Wahana extends CI_Controller
 
     public function edit($id = null)
     {
-        $this->load->view('marketing/templates/header');
-        $this->load->view('marketing/templates/sidebar');
-
-        $query= $this->wahana->get($id);
+        $query = $this->wahana->get($id);
         $data = array(
             'header' => 'Edit Data Wahana',
             'wahana' => $query->row()
         );
-        $this->load->view('marketing/datawahana/wahana_edit', $data);
-        
-        $this->load->view('marketing/templates/footer');
+
+        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_edit', $data);
     }
 
     public function del($id)
