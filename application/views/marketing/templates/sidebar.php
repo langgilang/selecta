@@ -11,9 +11,12 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
+<<<<<<< HEAD
         <!-- search form -->
 
         <!-- /.search form -->
+=======
+>>>>>>> b29bdd82144be5f4db47f9cf5a1765f740452489
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
