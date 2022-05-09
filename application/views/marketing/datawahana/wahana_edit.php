@@ -30,19 +30,20 @@
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form role="form" action="<?=site_url('wahana/proses'); ?>" method="post">
+                    <input type="hidden" name="id_wahana" value="<?= $wahana->id_wahana; ?>">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nama Wahana</label>
-                                <input type="text" class="form-control" name="nama_wahana" placeholder="Masukan Nama Wahana">
+                                <input type="text" value="<?= $wahana->nama_wahana; ?>" class="form-control" name="nama_wahana" placeholder="Masukan Nama Wahana">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Harga</label>
-                                <input type="number" class="form-control" name="harga" placeholder="Masukan Harga Wahana">
+                                <input type="number" value="<?= $wahana->harga; ?>" class="form-control" name="harga" placeholder="Masukan Harga Wahana" >
                             </div>
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" name="add" class="btn btn-primary">Submit</button>
+                            <button type="submit" name="edit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div><!-- /.box -->

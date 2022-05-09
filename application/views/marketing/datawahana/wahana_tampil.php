@@ -49,10 +49,10 @@
                                         <td><?= $row->nama_wahana; ?></td>
                                         <td><?= $row->harga; ?></td>
                                         <td>
-                                            <a href="<?= site_url('wahana/edit'.$row->id_wahana); ?>" class="btn btn-default">
+                                            <a href="<?= site_url('wahana/edit/'.$row->id_wahana); ?>" class="btn btn-default">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="<?= site_url('wahana/del'.$row->id_wahana); ?>" class="btn btn-danger">
+                                            <a href="<?= site_url('wahana/del/'.$row->id_wahana); ?>" class="btn btn-danger">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </td>

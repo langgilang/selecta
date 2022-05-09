@@ -44,16 +44,24 @@ class Wahana extends CI_Controller
             $inputan = $this->input->post(null, TRUE);
             $this->wahana->add($inputan);
         } else if (isset($_POST['edit'])) {
-            echo 'proses edit';
+            $inputan = $this->input->post(null, TRUE);
+            $this->wahana->edit($inputan);
         }
         redirect('wahana');
     }
 
     public function edit($id = null)
     {
+        $this->load->view('marketing/templates/header');
+        $this->load->view('marketing/templates/sidebar');
+
+        $query= $this->wahana->get($id);
         $data = array(
-            'header' => 'Edit Data Wahana'
+            'header' => 'Edit Data Wahana',
+            'wahana' => $query->row()
         );
         $this->load->view('marketing/datawahana/wahana_edit', $data);
+        
+        $this->load->view('marketing/templates/footer');
     }
 }
