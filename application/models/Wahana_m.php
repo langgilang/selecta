@@ -34,4 +34,10 @@ class Wahana_m extends CI_Model
         $this->db->where('id_wahana', $data['id_wahana']);
         $this->db->update('tb_wahana');
     }
+
+    public function del($id)
+    {
+        $this->db->where('id_wahana', $id);
+        $this->db->delete('tb_wahana');
+    }
 }

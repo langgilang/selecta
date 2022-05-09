@@ -64,4 +64,10 @@ class Wahana extends CI_Controller
         
         $this->load->view('marketing/templates/footer');
     }
+
+    public function del($id)
+    {
+        $this->wahana->del($id);
+        redirect('wahana');
+    }
 }
