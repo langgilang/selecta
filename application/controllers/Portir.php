@@ -4,16 +4,12 @@ class Portir extends CI_Controller
 
     public function index()
     {
-        $this->load->view('portir/templates/header');
-        $this->load->view('portir/templates/sidebar');
-
+        check_not_login();
         $data = array(
             'header' => 'Dashboard'
         );
 
-        $this->load->view('portir/dashboard/index_tampil', $data);
-        $this->load->view('portir/templates/footer');
+        $this->template->load('templates', 'portir/dashboard/dashboard_tampil', $data);
         // $this->load->helper('url');
-
     }
 }

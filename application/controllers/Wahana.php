@@ -10,6 +10,7 @@ class Wahana extends CI_Controller
 
     public function index()
     {
+        check_not_login();
         $query = $this->wahana->get();
         // $data['wahana'] = $query->result();
         $data = array(
@@ -17,7 +18,7 @@ class Wahana extends CI_Controller
             'wahana' => $query->result()
         );
         // print_r($data);
-        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_tampil', $data);
+        $this->template->load('templates', 'marketing/datawahana/wahana_tampil', $data);
     }
 
     public function add()
@@ -25,7 +26,7 @@ class Wahana extends CI_Controller
         $data = array(
             'header' => 'Tambah Data Wahana'
         );
-        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_tambah', $data);
+        $this->template->load('templates', 'marketing/datawahana/wahana_tambah', $data);
     }
 
     public function proses()
@@ -48,7 +49,7 @@ class Wahana extends CI_Controller
             'wahana' => $query->row()
         );
 
-        $this->template->load('marketing/templates', 'marketing/datawahana/wahana_edit', $data);
+        $this->template->load('templates', 'marketing/datawahana/wahana_edit', $data);
     }
 
     public function del($id)

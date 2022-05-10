@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
@@ -74,7 +73,7 @@
                 </li>
                 <!-- Menu Body -->
                 <li class="user-body">
-                  
+
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
@@ -82,7 +81,7 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="<?= site_url('auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                   </div>
                 </li>
               </ul>
@@ -122,32 +121,56 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
           <li class="header">MAIN NAVIGATION</li>
-          <li <?=$this->uri->segment(1) == 'dashboard_m' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-            <a href="<?= site_url('dashboard_m') ?>">
+
+          <!-- MENU MARKETING -->
+          <?php if ($this->session->userdata('level') ==  1) { ?>
+            <li <?= $this->uri->segment(1) == 'dashboard_m' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+              <a href="<?= site_url('dashboard_m') ?>">
+                <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
+              </a>
+            </li>
+            <li class="treeview <?= $this->uri->segment(1) == 'datawahana_m'  ? 'active' : '' ?>">
+              <a href="#">
+                <i class="fa fa-table"></i> <span>Master Data</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu ">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Data Konsumen</a></li>
+                <li <?= $this->uri->segment(1) == 'datawahana_m' ? 'class="active"' : '' ?>><a href="<?= site_url('datawahana_m') ?>"><i class="fa fa-circle-o"></i> Data Wahana</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Data Tiket</a></li>
+                <li <?= $this->uri->segment(1) == 'dataportir_m' ? 'class="active"' : '' ?>><a href="#"><i class="fa fa-circle-o"></i> Data Portir</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-book"></i> <span>Multilevel</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+              </ul>
+            </li>
+            <li class="header">SETTINGS</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-user"></i> <span>Profile</span></i>
+              </a>
+            </li>
+          <?php } ?>
+          <!-- END MENU MARKETING -->
+
+          <!-- MENU PORTIR -->
+          <?php if ($this->session->userdata('level') ==  3) { ?>
+          <li <?= $this->uri->segment(1) == 'dashboard_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+            <a href="<?= site_url('dashboard_p') ?>">
               <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
             </a>
           </li>
-          <li class="treeview <?=$this->uri->segment(1) == 'datawahana_m'  ? 'active' : '' ?>">
-            <a href="#">
-              <i class="fa fa-table"></i> <span>Master Data</span>
-              <i class="fa fa-angle-left pull-right"></i>
+          <li <?= $this->uri->segment(1) == 'tiketoffline_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+            <a href="<?= site_url('tiketoffline_p') ?>">
+              <i class="fa fa-dashboard active"></i> <span>Tiket Offline</span></i>
             </a>
-            <ul class="treeview-menu ">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Data Konsumen</a></li>
-              <li <?=$this->uri->segment(1) == 'datawahana_m' ? 'class="active"' : '' ?>><a href="<?= site_url('datawahana_m') ?>"><i class="fa fa-circle-o"></i> Data Wahana</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Data Tiket</a></li>
-              <li <?=$this->uri->segment(1) == 'dataportir_m' ? 'class="active"' : '' ?>><a href="#"><i class="fa fa-circle-o"></i> Data Portir</a></li>
-            </ul>
-          </li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-book"></i> <span>Multilevel</span>
-              <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            </ul>
           </li>
           <li class="header">SETTINGS</li>
           <li class="treeview">
@@ -155,6 +178,9 @@
               <i class="fa fa-user"></i> <span>Profile</span></i>
             </a>
           </li>
+          <?php } ?>
+          <!-- END MENU PORTIR -->
+
         </ul>
       </section>
       <!-- /.sidebar -->
