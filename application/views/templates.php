@@ -60,15 +60,15 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?php echo base_url() ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?=$this->fungsi->user_login()->name?></span>
+                <span class="hidden-xs"><?= $this->fungsi->user_login()->name ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
                   <img src="<?php echo base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                   <p>
-                  <?=$this->fungsi->user_login()->name?> - <?=ucfirst($this->fungsi->user_login()->username)?> 
-                    <small><?=$this->fungsi->user_login()->address?></small>
+                    <?= $this->fungsi->user_login()->name ?>
+                    <small><?= $this->fungsi->user_login()->created_at ?></small>
                   </p>
                 </li>
                 <!-- Menu Body -->
@@ -104,7 +104,7 @@
             <img src="<?php echo base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
-            <p><?=$this->fungsi->user_login()->name?></p>
+            <p><?= $this->fungsi->user_login()->name ?></p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
           </div>
         </div>
@@ -162,22 +162,22 @@
 
           <!-- MENU PORTIR -->
           <?php if ($this->session->userdata('level') ==  3) { ?>
-          <li <?= $this->uri->segment(1) == 'dashboard_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-            <a href="<?= site_url('dashboard_p') ?>">
-              <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
-            </a>
-          </li>
-          <li <?= $this->uri->segment(1) == 'tiketoffline_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
-            <a href="<?= site_url('tiketoffline_p') ?>">
-              <i class="fa fa-dashboard active"></i> <span>Tiket Offline</span></i>
-            </a>
-          </li>
-          <li class="header">SETTINGS</li>
-          <li class="treeview">
-            <a href="#">
-              <i class="fa fa-user"></i> <span>Profile</span></i>
-            </a>
-          </li>
+            <li <?= $this->uri->segment(1) == 'dashboard_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+              <a href="<?= site_url('dashboard_p') ?>">
+                <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
+              </a>
+            </li>
+            <li <?= $this->uri->segment(1) == 'tiketoffline_p' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+              <a href="<?= site_url('tiketoffline_p') ?>">
+                <i class="fa fa-dashboard active"></i> <span>Tiket Offline</span></i>
+              </a>
+            </li>
+            <li class="header">SETTINGS</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-user"></i> <span>Profile</span></i>
+              </a>
+            </li>
           <?php } ?>
           <!-- END MENU PORTIR -->
 

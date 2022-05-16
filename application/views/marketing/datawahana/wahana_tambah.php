@@ -22,6 +22,11 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Tambah Data Wahana</h3>
+                    <div class="pull-right">
+                        <a href="<?= site_url('wahana'); ?>" class="btn btn-sm btn-warning">
+                            <i class="fa fa-undo"></i> Kembali
+                        </a>
+                    </div>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" action="<?= site_url('wahana/proses'); ?>" method="post">

@@ -11,5 +11,4 @@ class Marketing extends CI_Controller
         );
         $this->template->load('templates', 'marketing/dashboard/dashboard_tampil', $data);
     }
-
 }
