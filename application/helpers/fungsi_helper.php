@@ -18,17 +18,38 @@ function check_not_login()
     }
 }
 
-function check_admin()
+function check_marketing()
 {
     $ci = &get_instance();
     $ci->load->library('fungsi');
     if ($ci->fungsi->user_login()->level != 1) {
         redirect('auth/logout');
-    } elseif ($ci->fungsi->user_login()->level != 2) {
+    }
+}
+
+function check_portir()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 2) {
         redirect('auth/logout');
-    } elseif ($ci->fungsi->user_login()->level != 3) {
+    }
+}
+
+function check_kasir()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 3) {
         redirect('auth/logout');
-    } elseif ($ci->fungsi->user_login()->level != 4) {
+    }
+}
+
+function check_konsumen()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 4) {
         redirect('auth/logout');
     }
 }

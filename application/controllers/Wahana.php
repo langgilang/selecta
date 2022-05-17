@@ -11,7 +11,7 @@ class Wahana extends CI_Controller
     public function index()
     {
         check_not_login();
-        check_admin();
+        check_marketing();
         $query = $this->wahana->get();
         // $data['wahana'] = $query->result();
         $data = array(
