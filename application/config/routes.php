@@ -53,6 +53,10 @@ $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// ROUTE MARKETING
 $route['dashboard_m'] = 'marketing';
 $route['datawahana_m'] = 'wahana';
+
+// ROUTE PORTIR
+$route['dashboard_p'] = 'portir';
 $route['tiketoffline_p'] = 'tiketoffline_p';

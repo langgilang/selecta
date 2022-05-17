@@ -16,14 +16,17 @@
 <section class="content">
     <!-- form tambah data wahana -->
     <div class="row">
-        <div class="col-md-2">
-            <a href="<?= site_url('wahana/add'); ?>"><button class="btn btn-block btn-success">Tambah</button></a>
-        </div><br><br>
+
         <!-- ukuran konten -->
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Data Wahana</h3>
+                    <div class="pull-right">
+                        <a href="<?= site_url('wahana/add'); ?>" class="btn btn-sm btn-success">
+                            <i class="fa fa-plus"></i> Tambah
+                        </a>
+                    </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="example1" class="table table-bordered table-striped">
@@ -43,12 +46,12 @@
                                     <td><?= $no++; ?></td>
                                     <td><?= $row->nama_wahana; ?></td>
                                     <td><?= $row->harga; ?></td>
-                                    <td>
-                                        <a href="<?= site_url('wahana/edit/' . $row->id_wahana); ?>" class="btn btn-default">
-                                            <i class="fa fa-edit"></i>
+                                    <td class="text-center" width="160px">
+                                        <a href="<?= site_url('wahana/edit/' . $row->id_wahana); ?>" class="btn btn-xs btn-primary">
+                                            <i class="fa fa-edit"></i> Update
                                         </a>
-                                        <a href="<?= site_url('wahana/del/' . $row->id_wahana); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-danger">
-                                            <i class="fa fa-trash"></i>
+                                        <a href="<?= site_url('wahana/del/' . $row->id_wahana); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i> Delete
                                         </a>
                                     </td>
                                 </tr>
