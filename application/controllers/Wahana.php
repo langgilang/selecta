@@ -39,7 +39,11 @@ class Wahana extends CI_Controller
             $inputan = $this->input->post(null, TRUE);
             $this->wahana->edit($inputan);
         }
-        redirect('wahana');
+
+        if ($this->db->affected_rows() > 0) {
+            echo "<script>alert('Data Berhasil disimpan');</script>";
+        }
+        echo "<script>window.location='" . site_url('wahana') . "'</script>";
     }
 
     public function edit($id = null)
@@ -56,6 +60,9 @@ class Wahana extends CI_Controller
     public function del($id)
     {
         $this->wahana->del($id);
-        redirect('wahana');
+        if ($this->db->affected_rows() > 0) {
+            echo "<script>alert('Data Berhasil dihapus');</script>";
+        }
+        echo "<script>window.location='" . site_url('wahana') . "'</script>";
     }
 }
