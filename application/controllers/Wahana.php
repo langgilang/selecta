@@ -41,7 +41,7 @@ class Wahana extends CI_Controller
         }
 
         if ($this->db->affected_rows() > 0) {
-            echo "<script>alert('Data Berhasil disimpan');</script>";
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
         echo "<script>window.location='" . site_url('wahana') . "'</script>";
     }
