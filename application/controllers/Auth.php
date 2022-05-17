@@ -69,7 +69,17 @@ class Auth extends CI_Controller
         if (isset($_POST['add'])) {
             $inputan = $this->input->post(null, TRUE);
             $this->auth->add($inputan);
-            redirect('auth');
+            if ($inputan == false) {
+                echo "<script>
+                    alert('Register gagal, silahkan daftar kembali kembali');
+                    window.location='" . site_url('auth/register') . "';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Register berhasil, silahkan ke halaman login');
+                    window.location='" . site_url('auth') . "';
+                </script>";
+            }
         } else if (isset($_POST['edit'])) {
             $inputan = $this->input->post(null, TRUE);
             $this->auth->edit($inputan);
