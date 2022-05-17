@@ -7,7 +7,7 @@ class Portir extends CI_Controller
         $this->template->load('portir/templates', 'portir/tiketoffline/tiketoffline_tampil');
 =======
         check_not_login();
-        check_admin();
+        check_portir();
         $data = array(
             'header' => 'Dashboard'
         );
