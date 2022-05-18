@@ -15,6 +15,7 @@
 <!-- Main content -->
 <section class="content">
     <!-- form tambah data wahana -->
+    <?php $this->view('marketing/messages') ?>
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Data Wahana</h3>
@@ -35,10 +36,10 @@
                         <th>#</th>
                     </tr>
                 </thead>
-                <?php
-                $no = 1;
-                foreach ($wahana as $w => $row) { ?>
-                    <tbody>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($wahana as $w => $row) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $row->nama_wahana; ?></td>
@@ -52,10 +53,10 @@
                                 </a>
                             </td>
                         </tr>
-                    </tbody>
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                </tbody>
                 <tfoot>
                     <tr>
                         <th>No</th>

@@ -43,7 +43,7 @@ class Wahana extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        echo "<script>window.location='" . site_url('wahana') . "'</script>";
+        redirect('wahana');
     }
 
     public function edit($id = null)
@@ -61,8 +61,8 @@ class Wahana extends CI_Controller
     {
         $this->wahana->del($id);
         if ($this->db->affected_rows() > 0) {
-            echo "<script>alert('Data Berhasil dihapus');</script>";
+            $this->session->set_flashdata('success', 'Data berhasil dihapus');
         }
-        echo "<script>window.location='" . site_url('wahana') . "'</script>";
+        redirect('wahana');
     }
 }
