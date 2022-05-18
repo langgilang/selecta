@@ -2,7 +2,7 @@
 class Portir extends CI_Controller
 {
     public function index()
-    {
+    { 
         check_not_login();
         check_portir();
         $data = array(
@@ -11,4 +11,5 @@ class Portir extends CI_Controller
         $this->template->load('templates', 'portir/dashboard/dashboard_tampil', $data);
         // $this->load->helper('url');
     }
+    
 }
