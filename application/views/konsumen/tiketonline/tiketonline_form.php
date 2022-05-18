@@ -72,6 +72,21 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Foto KTP <font color="red">*</font></label>
+                                    <?php if ($page == 'edit') {
+                                        if ($row->image != null) { ?>
+                                            <div style="margin-bottom: 10px;">
+                                                <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
+                                            </div>
+                                    <?php
+                                        }
+                                    } ?>
+                                    <input type="file" class="form-control" id="image" name="image" required>
+                                    <small>(Biarkan kosong jika tidak <?= $page == 'edit' ? 'diganti' : 'ada' ?>)</small>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

@@ -10,6 +10,6 @@
     <div class="alert callout callout-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4> <i class="icon fa fa-ban"></i> Error!</h4>
-        <p><?= $this->session->flashdata('error'); ?></p>
+        <p><?= strip_tags(str_replace('</p>', '', $this->session->flashdata('error'))); ?></p>
     </div>
 <?php } ?>

@@ -32,27 +32,75 @@ class Konsumen extends CI_Controller
 
     public function proses()
     {
+        $config['upload_path'] = './uploads/tiketonline_ktp/';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+        $config['max_size'] = 20480;
+        $config['file_name'] = 'ktp-' . date('ymd') . '-' . substr(md5(rand()), 0, 10);
+        $this->load->library('upload', $config);
+
         $post = $this->input->post(null, TRUE);
         if (isset($_POST['add'])) {
             if ($this->konsumen_m->check_barcode($post['barcode'])->num_rows() > 0) {
                 $this->session->set_flashdata('error', "Barcode $post[barcode] sudah dipakai");
                 redirect('konsumen/add');
             } else {
-                $this->konsumen_m->add($post);
+                if (@$_FILES['image']['name'] != null) {
+                    if ($this->upload->do_upload('image')) {
+                        $post['image'] = $this->upload->data('file_name');
+                        $this->konsumen_m->add($post);
+                        if ($this->db->affected_rows() > 0) {
+                            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+                        }
+                        redirect('konsumen/tampil_konsumen');
+                    } else {
+                        $error = $this->upload->display_errors();
+                        $this->session->set_flashdata('error', $error);
+                        redirect('konsumen/add');
+                    }
+                } else {
+                    $post['image'] = null;
+                    $this->konsumen_m->add($post);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->session->set_flashdata('success', 'Data berhasil disimpan');
+                    }
+                    redirect('konsumen/tampil_konsumen');
+                }
             }
         } else if (isset($_POST['edit'])) {
             if ($this->konsumen_m->check_barcode($post['barcode'], $post['tiketonline_id'])->num_rows() > 0) {
                 $this->session->set_flashdata('error', "Barcode $post[barcode] sudah dipakai");
                 redirect('konsumen/add');
             } else {
-                $this->konsumen_m->edit($post);
+                if (@$_FILES['image']['name'] != null) {
+                    if ($this->upload->do_upload('image')) {
+
+                        $item = $this->konsumen_m->get($post['tiketonline_id'])->row();
+                        if ($item->image != null) {
+                            $target_file = './uploads/tiketonline_ktp/' . $item->image;
+                            unlink($target_file);
+                        }
+
+                        $post['image'] = $this->upload->data('file_name');
+                        $this->konsumen_m->edit($post);
+                        if ($this->db->affected_rows() > 0) {
+                            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+                        }
+                        redirect('konsumen/tampil_konsumen');
+                    } else {
+                        $error = $this->upload->display_errors();
+                        $this->session->set_flashdata('error', $error);
+                        redirect('konsumen/add');
+                    }
+                } else {
+                    $post['image'] = null;
+                    $this->konsumen_m->edit($post);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->session->set_flashdata('success', 'Data berhasil disimpan');
+                    }
+                    redirect('konsumen/tampil_konsumen');
+                }
             }
         }
-
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data berhasil disimpan');
-        }
-        redirect('konsumen/tampil_konsumen');
     }
 
     public function add()
@@ -98,6 +146,11 @@ class Konsumen extends CI_Controller
 
     public function del($id)
     {
+        $item = $this->konsumen_m->get($id)->row();
+        if ($item->image != null) {
+            $target_file = './uploads/tiketonline_ktp/' . $item->image;
+            unlink($target_file);
+        }
 
         $this->konsumen_m->del($id);
         if ($this->db->affected_rows() > 0) {

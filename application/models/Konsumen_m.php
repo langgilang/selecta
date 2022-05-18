@@ -12,6 +12,7 @@ class Konsumen_m extends CI_Model
         if ($id != null) {
             $this->db->where('tiketonline_id', $id);
         }
+        $this->db->order_by('barcode', 'asc');
         $query = $this->db->get();
         return $query;
     }
@@ -26,6 +27,7 @@ class Konsumen_m extends CI_Model
             'wahana_id' => $data['wahana'],
             'ticket_total' => $data['ticket_total'],
             'ticket_type' => $data['ticket_type'],
+            'image' => $data['image']
         );
         $this->db->insert('tb_tiketonline', $param);
     }
@@ -42,9 +44,11 @@ class Konsumen_m extends CI_Model
             'ticket_type' => $data['ticket_type'],
             'updated_at' => date('Y-m-d H:i:s')
         );
-        $this->db->set($param);
+        if ($data['image'] != null) {
+            $params['image'] = $data['image'];
+        }
         $this->db->where('tiketonline_id', $data['tiketonline_id']);
-        $this->db->update('tb_tiketonline');
+        $this->db->update('tb_tiketonline', $params);
     }
 
     public function check_barcode($code, $id = null)

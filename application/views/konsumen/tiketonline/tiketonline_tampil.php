@@ -27,6 +27,7 @@
                     <tr>
                         <th>No</th>
                         <th>Barcode</th>
+                        <th>Foto KTP</th>
                         <th>NIK</th>
                         <th>Nama</th>
                         <th>Telephone</th>
@@ -43,6 +44,11 @@
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $row->barcode; ?></td>
+                            <td>
+                                <?php if ($row->image != null) { ?>
+                                    <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
+                                <?php } ?>
+                            </td>
                             <td><?= $row->nik; ?></td>
                             <td><?= $row->tiketonline_name; ?></td>
                             <td><?= $row->telp; ?></td>
@@ -66,6 +72,7 @@
                     <tr>
                         <th>No</th>
                         <th>Barcode</th>
+                        <th>Foto KTP</th>
                         <th>NIK</th>
                         <th>Nama</th>
                         <th>Telephone</th>
