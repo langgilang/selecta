@@ -22,14 +22,6 @@ class Wahana extends CI_Controller
         $this->template->load('templates', 'marketing/datawahana/wahana_tampil', $data);
     }
 
-    public function add()
-    {
-        $data = array(
-            'header' => 'Tambah Data Wahana'
-        );
-        $this->template->load('templates', 'marketing/datawahana/wahana_tambah', $data);
-    }
-
     public function proses()
     {
         if (isset($_POST['add'])) {
@@ -46,15 +38,35 @@ class Wahana extends CI_Controller
         redirect('wahana');
     }
 
+    public function add()
+    {
+        $wahana = new stdClass();
+        $wahana->id_wahana = null;
+        $wahana->nama_wahana = null;
+        $wahana->harga = null;
+        $data = array(
+            'page' => 'add',
+            'header' => 'Tambah Data Wahana',
+            'row' => $wahana
+        );
+        $this->template->load('templates', 'marketing/datawahana/wahana_form', $data);
+    }
+
     public function edit($id = null)
     {
         $query = $this->wahana->get($id);
-        $data = array(
-            'header' => 'Edit Data Wahana',
-            'wahana' => $query->row()
-        );
-
-        $this->template->load('templates', 'marketing/datawahana/wahana_edit', $data);
+        if ($query->num_rows() > 0) {
+            $wahana = $query->row();
+            $data = array(
+                'page' => 'edit',
+                'header' => 'Tambah Data Wahana',
+                'row' => $wahana
+            );
+            $this->template->load('templates', 'marketing/datawahana/wahana_form', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "window.location='" . site_url('wahana') . "';</script>";
+        }
     }
 
     public function del($id)

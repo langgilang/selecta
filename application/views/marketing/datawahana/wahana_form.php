@@ -9,7 +9,6 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Master Data</li>
         <li class="active">Data Wahana</li>
-        <li class="active">Tambah Data Wahana</li>
     </ol>
 </section>
 
@@ -21,7 +20,7 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tambah Data Wahana</h3>
+                    <h3 class="box-title"><?= ucfirst($page) ?> Wahana</h3>
                     <div class="pull-right">
                         <a href="<?= site_url('wahana'); ?>" class="btn btn-sm btn-warning">
                             <i class="fa fa-undo"></i> Kembali
@@ -32,17 +31,18 @@
                 <form role="form" action="<?= site_url('wahana/proses'); ?>" method="post">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Wahana</label>
-                            <input type="text" class="form-control" name="nama_wahana" placeholder="Masukan Nama Wahana" required>
+                            <label>Nama Wahana</label>
+                            <input type="hidden" name="id_wahana" value="<?= $row->id_wahana ?>">
+                            <input type="text" value="<?= $row->nama_wahana ?>" class="form-control" name="nama_wahana" placeholder="Masukan Nama Wahana" required>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Harga</label>
-                            <input type="number" class="form-control" name="harga" placeholder="Masukan Harga Wahana" required>
+                            <label>Harga</label>
+                            <input type="number" value="<?= $row->harga ?>" class="form-control" name="harga" placeholder="Masukan Harga Wahana" required>
                         </div>
                     </div><!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" name="add" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="<?= $page ?>" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div><!-- /.box -->

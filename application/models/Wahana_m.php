@@ -29,6 +29,7 @@ class Wahana_m extends CI_Model
         $param = array(
             'nama_wahana' => $data['nama_wahana'],
             'harga' => $data['harga'],
+            'updated_at' => date('Y-m-d H:i:s')
         );
         $this->db->set($param);
         $this->db->where('id_wahana', $data['id_wahana']);
