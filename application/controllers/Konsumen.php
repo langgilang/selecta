@@ -5,13 +5,14 @@ class Konsumen extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        check_not_login();
+        check_konsumen();
         $this->load->model('konsumen_m', 'konsumen');
+        $this->load->model('wahana_m', 'wahana');
     }
 
     public function dashboard()
     {
-        check_not_login();
-        check_konsumen();
         $data = array(
             'header' => 'Dashboard'
         );
@@ -21,10 +22,12 @@ class Konsumen extends CI_Controller
 
     public function tampil_konsumen()
     {
+        $query = $this->konsumen->get();
         $data = array(
-            'header' => 'Pesanan Online'
+            'header' => 'Data Pesanan',
+            'tiketonline' => $query->result()
         );
-
+        // print_r($data);
         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_tampil', $data);
     }
 
@@ -41,32 +44,40 @@ class Konsumen extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('konsumen/tiketonline_tampil');
+        redirect('konsumen/tiketonline/tiketonline_tampil');
     }
 
     public function add()
     {
-        $wahana = new stdClass();
-        $wahana->wahana_id = null;
-        $wahana->name = null;
-        $wahana->price = null;
+        $kosumen = new stdClass();
+        $kosumen->tiketonline_id = null;
+        $kosumen->barcode = null;
+        $kosumen->nik = null;
+        $kosumen->name = null;
+        $kosumen->telp = null;
+
+        $wahana = $this->wahana->get();
+
+        $kosumen->ticket_total = null;
+        $kosumen->ticket_type = null;
         $data = array(
             'page' => 'add',
-            'header' => 'Tambah Data Wahana',
-            'row' => $wahana
+            'header' => 'Tambah Data kosumen',
+            'row' => $kosumen,
+            'wahana' => $wahana
         );
-        $this->template->load('templates', 'konsumen/tiketonline_form', $data);
+        $this->template->load('templates', 'konsumen/tiketonline/tiketonline_form', $data);
     }
 
     public function edit($id = null)
     {
-        $query = $this->wahana->get($id);
+        $query = $this->kosumen->get($id);
         if ($query->num_rows() > 0) {
-            $wahana = $query->row();
+            $kosumen = $query->row();
             $data = array(
                 'page' => 'edit',
-                'header' => 'Tambah Data Wahana',
-                'row' => $wahana
+                'header' => 'Tambah Data kosumen',
+                'row' => $kosumen
             );
             $this->template->load('templates', 'konsumen/tiketonline_form', $data);
         } else {
@@ -77,10 +88,10 @@ class Konsumen extends CI_Controller
 
     public function del($id)
     {
-        $this->wahana->del($id);
+        $this->kosumen->del($id);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus');
         }
-        redirect('konsumen/tiketonline_tampil');
+        redirect('konsumen/tiketonline/tiketonline_tampil');
     }
 }

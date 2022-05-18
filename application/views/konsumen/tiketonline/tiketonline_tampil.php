@@ -26,37 +26,52 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Wahana</th>
-                        <th>Harga</th>
+                        <th>Barcode</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Telephone</th>
+                        <th>Wahana Pilihan</th>
+                        <th>Jumlah Tiket</th>
+                        <th>Jenis Tiket</th>
                         <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <?php
-                            $no = 1;
-                            foreach ($wahana as $w => $row) { ?>
+                    <?php
+                    $no = 1;
+                    foreach ($tiketonline as $w => $row) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
+                            <td><?= $row->barcode; ?></td>
+                            <td><?= $row->nik; ?></td>
                             <td><?= $row->name; ?></td>
-                            <td><?= $row->price; ?></td>
+                            <td><?= $row->telp; ?></td>
+                            <td><?= $row->wahana_id; ?></td>
+                            <td><?= $row->ticket_total; ?></td>
+                            <td><?= $row->ticket_type; ?></td>
                             <td class="text-center" width="160px">
-                                <a href="<?= site_url('wahana/edit/' . $row->wahana_id); ?>" class="btn btn-xs btn-primary">
+                                <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-primary">
                                     <i class="fa fa-edit"></i> Update
                                 </a>
-                                <a href="<?= site_url('wahana/del/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
                             </td>
                         </tr>
                     <?php
-                            }
-                    ?> -->
+                    }
+                    ?>
                 </tbody>
                 <tfoot>
                     <tr>
                         <th>No</th>
-                        <th>Nama Wahana</th>
-                        <th>Harga</th>
+                        <th>Barcode</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Telephone</th>
+                        <th>Wahana Pilihan</th>
+                        <th>Jumlah Tiket</th>
+                        <th>Jenis Tiket</th>
                         <th>#</th>
                     </tr>
                 </tfoot>

@@ -126,7 +126,7 @@
                 <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
               </a>
             </li>
-            <li class="treeview">
+            <li class="treeview <?= $this->uri->segment(1) == 'datakonsumen_m' || $this->uri->segment(1) == 'datawahana_m' || $this->uri->segment(1) == 'datatiket_m' || $this->uri->segment(1) == 'dataportir_m' ? "active" : '' ?>">
               <a href="#">
                 <i class="fa fa-table"></i> <span>Master Data</span>
                 <i class="fa fa-angle-left pull-right"></i>
