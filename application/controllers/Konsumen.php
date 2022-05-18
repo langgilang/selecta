@@ -32,12 +32,21 @@ class Konsumen extends CI_Controller
 
     public function proses()
     {
+        $post = $this->input->post(null, TRUE);
         if (isset($_POST['add'])) {
-            $inputan = $this->input->post(null, TRUE);
-            $this->konsumen_m->add($inputan);
+            if ($this->konsumen_m->check_barcode($post['barcode'])->num_rows() > 0) {
+                $this->session->set_flashdata('error', "Barcode $post[barcode] sudah dipakai");
+                redirect('konsumen/add');
+            } else {
+                $this->konsumen_m->add($post);
+            }
         } else if (isset($_POST['edit'])) {
-            $inputan = $this->input->post(null, TRUE);
-            $this->konsumen_m->edit($inputan);
+            if ($this->konsumen_m->check_barcode($post['barcode'], $post['tiketonline_id'])->num_rows() > 0) {
+                $this->session->set_flashdata('error', "Barcode $post[barcode] sudah dipakai");
+                redirect('konsumen/add');
+            } else {
+                $this->konsumen_m->edit($post);
+            }
         }
 
         if ($this->db->affected_rows() > 0) {
@@ -54,11 +63,11 @@ class Konsumen extends CI_Controller
         $kosumen->nik = null;
         $kosumen->name = null;
         $kosumen->telp = null;
-
-        $wahana = $this->wahana_m->get();
-
         $kosumen->ticket_total = null;
         $kosumen->ticket_type = null;
+        $kosumen->wahana_id = null;
+
+        $wahana = $this->wahana_m->get();
         $data = array(
             'page' => 'add',
             'header' => 'Tambah Data kosumen',
@@ -73,12 +82,14 @@ class Konsumen extends CI_Controller
         $query = $this->konsumen_m->get($id);
         if ($query->num_rows() > 0) {
             $kosumen = $query->row();
+            $wahana = $this->wahana_m->get();
             $data = array(
                 'page' => 'edit',
                 'header' => 'Tambah Data kosumen',
-                'row' => $kosumen
+                'row' => $kosumen,
+                'wahana' => $wahana
             );
-            $this->template->load('templates', 'konsumen/tiketonline_form', $data);
+            $this->template->load('templates', 'konsumen/tiketonline/tiketonline_form', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
             echo "window.location='" . site_url('konsumen/tiketonline_tampil') . "';</script>";

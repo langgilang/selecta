@@ -44,11 +44,11 @@
                             <td><?= $no++; ?></td>
                             <td><?= $row->barcode; ?></td>
                             <td><?= $row->nik; ?></td>
-                            <td><?= $row->name; ?></td>
+                            <td><?= $row->tiketonline_name; ?></td>
                             <td><?= $row->telp; ?></td>
-                            <td><?= $row->wahana_id; ?></td>
+                            <td><?= $row->wahana_name; ?></td>
                             <td><?= $row->ticket_total; ?></td>
-                            <td><?= $row->ticket_type; ?></td>
+                            <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                             <td class="text-center" width="160px">
                                 <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-primary">
                                     <i class="fa fa-edit"></i> Update

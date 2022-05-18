@@ -15,8 +15,8 @@
 <!-- Main content -->
 <section class="content">
     <!-- form tambah data wahana -->
+    <?php $this->view('konsumen/messages') ?>
     <div class="row">
-        <!-- ukuran konten -->
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -48,10 +48,10 @@
                                         <input type="number" value="<?= $row->telp ?>" id="telp" name="telp" class="form-control" placeholder="Masukan Nomer Telephone" required>
                                     </div>
                                     <label>Wahana <font color="red">*</font></label>
-                                    <select name="wahana" class="form-control">
+                                    <select name="wahana" class="form-control" required>
                                         <option value="">- Pilih -</option>
                                         <?php foreach ($wahana->result() as $key => $data) { ?>
-                                            <option value="<?= $data->wahana_id ?>"><?= $data->name ?></option>
+                                            <option value="<?= $data->wahana_id ?>" <?= $data->wahana_id == $row->wahana_id ? "selected" : null ?>><?= $data->name ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -59,8 +59,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
-                                    <input type="hidden" value="<?= $row->tiketonline_id ?>" name="tiketonline_id">
-                                    <input type="number" value="<?= $row->barcode ?>" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
+                                    <input type="number" value="<?= $row->ticket_total ?>" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
