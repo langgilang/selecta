@@ -158,4 +158,10 @@ class Konsumen extends CI_Controller
         }
         redirect('konsumen/tampil_konsumen');
     }
+
+    public function barcode_qrcode($id)
+    {
+        $data['row'] = $this->konsumen_m->get($id)->row();
+        $this->template->load('templates', 'konsumen/tiketonline/barcode_qrcode', $data);
+    }
 }

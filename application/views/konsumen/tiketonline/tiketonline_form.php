@@ -83,7 +83,7 @@
                                     <?php
                                         }
                                     } ?>
-                                    <input type="file" class="form-control" id="image" name="image" required>
+                                    <input type="file" class="form-control" id="image" name="image">
                                     <small>(Biarkan kosong jika tidak <?= $page == 'edit' ? 'diganti' : 'ada' ?>)</small>
                                 </div>
                             </div>

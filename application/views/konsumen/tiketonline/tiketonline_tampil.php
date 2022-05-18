@@ -43,7 +43,12 @@
                     foreach ($tiketonline as $w => $row) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
-                            <td><?= $row->barcode; ?></td>
+                            <td>
+                                <?= $row->barcode; ?>
+                                <a href="<?= site_url('konsumen/barcode_qrcode/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-default">
+                                    Generate Code <i class="fa fa-barcode"></i>
+                                </a>
+                            </td>
                             <td>
                                 <?php if ($row->image != null) { ?>
                                     <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
