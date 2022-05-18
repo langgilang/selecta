@@ -8,7 +8,7 @@ class Wahana extends CI_Controller
         $this->load->model('wahana_m', 'wahana');
     }
 
-    public function index()
+    public function tampil_wahana_marketing()
     {
         check_not_login();
         check_marketing();
@@ -35,15 +35,15 @@ class Wahana extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('wahana');
+        redirect('wahana/tampil_wahana_marketing');
     }
 
     public function add()
     {
         $wahana = new stdClass();
-        $wahana->id_wahana = null;
-        $wahana->nama_wahana = null;
-        $wahana->harga = null;
+        $wahana->wahana_id = null;
+        $wahana->name = null;
+        $wahana->price = null;
         $data = array(
             'page' => 'add',
             'header' => 'Tambah Data Wahana',
@@ -65,7 +65,7 @@ class Wahana extends CI_Controller
             $this->template->load('templates', 'marketing/datawahana/wahana_form', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
-            echo "window.location='" . site_url('wahana') . "';</script>";
+            echo "window.location='" . site_url('wahana/tampil_wahana_marketing') . "';</script>";
         }
     }
 
@@ -75,6 +75,6 @@ class Wahana extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus');
         }
-        redirect('wahana');
+        redirect('wahana/tampil_wahana_marketing');
     }
 }

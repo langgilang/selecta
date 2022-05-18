@@ -36,23 +36,23 @@ class Auth extends CI_Controller
                 $this->session->set_userdata($params);
                 if ($params['level'] == 1) {
                     echo "<script>
-                    alert('Selamat, login marketing berhasil');
-                    window.location='" . site_url('marketing') . "';
+                    alert('Selamat, Anda berhasil login sebagai marketing');
+                    window.location='" . site_url('marketing/dashboard') . "';
                     </script>";
                 } elseif ($params['level'] == 2) {
                     echo "<script>
-                    alert('Selamat, login kasir berhasil');
-                    window.location='" . site_url('kasir') . "';
+                    alert('Selamat, Anda berhasil login sebagai kasir');
+                    window.location='" . site_url('kasir/dashboard') . "';
                     </script>";
                 } elseif ($params['level'] == 3) {
                     echo "<script>
-                    alert('Selamat, login portir berhasil');
-                    window.location='" . site_url('portir') . "';
+                    alert('Selamat, Anda berhasil login sebagai portir');
+                    window.location='" . site_url('portir/dashboard') . "';
                     </script>";
                 } elseif ($params['level'] == 4) {
                     echo "<script>
-                    alert('Selamat, login portir berhasil');
-                    window.location='" . site_url('konsumen') . "';
+                    alert('Selamat, Anda berhasil login sebagai konsumen');
+                    window.location='" . site_url('konsumen/dashboard') . "';
                     </script>";
                 }
             } else {

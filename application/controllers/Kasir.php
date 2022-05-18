@@ -2,8 +2,12 @@
 
 class Kasir extends CI_Controller
 {
-    public function index()
+    public function dashboard()
     {
-        echo "SELAMAT DATANG KASIR";
+        $data = array(
+            'header' => 'Dashboard'
+        );
+
+        $this->template->load('templates', 'kasir', $data);
     }
 }

@@ -20,12 +20,7 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><?= ucfirst($page) ?> Wahana</h3>
-                    <div class="pull-right">
-                        <a href="<?= site_url('wahana'); ?>" class="btn btn-sm btn-warning">
-                            <i class="fa fa-undo"></i> Kembali
-                        </a>
-                    </div>
+                    <h3 class="box-title">Wahana</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form role="form" action="<?= site_url('wahana/proses'); ?>" enctype="multipart/form-data" method="post">

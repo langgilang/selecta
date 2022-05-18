@@ -3,12 +3,12 @@
 <section class="content-header">
     <h1>
         Master Data
-        <small>Data Wahana</small>
+        <small>Data Tiket</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Master Data</li>
-        <li class="active">Data Wahana</li>
+        <li class="active">Data Tiket</li>
     </ol>
 </section>
 
@@ -18,7 +18,7 @@
     <?php $this->view('marketing/messages') ?>
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Data Wahana</h3>
+            <h3 class="box-title">Data Tiket</h3>
             <div class="pull-right">
                 <a href="<?= site_url('wahana/add'); ?>" class="btn btn-sm btn-success">
                     <i class="fa fa-plus"></i> Tambah
@@ -37,9 +37,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($wahana as $w => $row) { ?>
+                    <!-- <?php
+                            $no = 1;
+                            foreach ($wahana as $w => $row) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $row->name; ?></td>
@@ -54,8 +54,8 @@
                             </td>
                         </tr>
                     <?php
-                    }
-                    ?>
+                            }
+                    ?> -->
                 </tbody>
                 <tfoot>
                     <tr>

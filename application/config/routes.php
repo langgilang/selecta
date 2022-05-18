@@ -54,9 +54,17 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // ROUTE MARKETING
-$route['dashboard_m'] = 'marketing';
-$route['datawahana_m'] = 'wahana';
+$route['dashboard_m'] = 'marketing/dashboard';
+$route['datawahana_m'] = 'wahana/tampil_wahana_marketing';
+$route['datatiket_m'] = 'tiket/tampil_marketing';
+$route['datakonsumen_m'] = 'konsumen/tampil_konsumen_marketing';
+$route['dataportir_m'] = 'portir/tampil_marketing';
 
 // ROUTE PORTIR
 $route['dashboard_p'] = 'portir';
 $route['tiketoffline_p'] = 'tiketoffline_p';
+
+//ROUTE KONSUMEN
+$route['dashboard_k'] = 'konsumen/dashboard';
+$route['tampil'] = 'konsumen/tampil_konsumen';
+$route['form'] = 'konsumen/add';

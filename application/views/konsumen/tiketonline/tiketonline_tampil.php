@@ -2,28 +2,23 @@
 
 <section class="content-header">
     <h1>
-        Master Data
-        <small>Data Wahana</small>
+        Tiket Online
+        <small>Data Pesanan</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Master Data</li>
-        <li class="active">Data Wahana</li>
+        <li class="active">Tiker Online</li>
+        <li class="active">Data Pesanan</li>
     </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
     <!-- form tambah data wahana -->
-    <?php $this->view('marketing/messages') ?>
+    <!-- <?php $this->view('marketing/messages') ?> -->
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Data Wahana</h3>
-            <div class="pull-right">
-                <a href="<?= site_url('wahana/add'); ?>" class="btn btn-sm btn-success">
-                    <i class="fa fa-plus"></i> Tambah
-                </a>
-            </div>
+            <h3 class="box-title">Data Pesanan</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -37,9 +32,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($wahana as $w => $row) { ?>
+                    <!-- <?php
+                            $no = 1;
+                            foreach ($wahana as $w => $row) { ?>
                         <tr>
                             <td><?= $no++; ?></td>
                             <td><?= $row->name; ?></td>
@@ -54,8 +49,8 @@
                             </td>
                         </tr>
                     <?php
-                    }
-                    ?>
+                            }
+                    ?> -->
                 </tbody>
                 <tfoot>
                     <tr>

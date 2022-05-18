@@ -126,16 +126,16 @@
                 <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
               </a>
             </li>
-            <li class="treeview <?= $this->uri->segment(1) == 'datawahana_m'  ? 'active' : '' ?>">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-table"></i> <span>Master Data</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu ">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Data Konsumen</a></li>
+                <li <?= $this->uri->segment(1) == 'datakonsumen_m' ? 'class="active"' : '' ?>><a href="<?= site_url('datakonsumen_m') ?>"><i class="fa fa-circle-o"></i> Data Konsumen</a></li>
                 <li <?= $this->uri->segment(1) == 'datawahana_m' ? 'class="active"' : '' ?>><a href="<?= site_url('datawahana_m') ?>"><i class="fa fa-circle-o"></i> Data Wahana</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Data Tiket</a></li>
-                <li <?= $this->uri->segment(1) == 'dataportir_m' ? 'class="active"' : '' ?>><a href="#"><i class="fa fa-circle-o"></i> Data Portir</a></li>
+                <li <?= $this->uri->segment(1) == 'datatiket_m' ? 'class="active"' : '' ?>><a href="<?= site_url('datatiket_m') ?>"><i class="fa fa-circle-o"></i> Data Tiket</a></li>
+                <li <?= $this->uri->segment(1) == 'dataportir_m' ? 'class="active"' : '' ?>><a href="<?= site_url('dataportir_m') ?>"><i class="fa fa-circle-o"></i> Data Portir</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -177,6 +177,33 @@
             </li>
           <?php } ?>
           <!-- END MENU PORTIR -->
+
+          <!-- MENU PORTIR -->
+          <?php if ($this->session->userdata('level') ==  4) { ?>
+            <li <?= $this->uri->segment(1) == 'dashboard_k' || $this->uri->segment(1) == '' ? 'class="active"' : '' ?>>
+              <a href="<?= site_url('dashboard_k') ?>">
+                <i class="fa fa-dashboard active"></i> <span>Dashboard</span></i>
+              </a>
+            </li>
+            <li class="treeview <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? "active" : '' ?>">
+              <a href="#">
+                <i class="fa fa-table"></i> <span>Tiket Online</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu ">
+                <li <?= $this->uri->segment(1) == 'tampil' ? 'class="active"' : '' ?>><a href="<?= site_url('tampil') ?>"><i class="fa fa-circle-o"></i> Data Pesanan</a></li>
+                <li <?= $this->uri->segment(1) == 'form' ? 'class="active"' : '' ?>><a href="<?= site_url('form') ?>"><i class="fa fa-circle-o"></i> Tambah Pesanan</a></li>
+              </ul>
+            </li>
+            <li class="header">SETTINGS</li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-user"></i> <span>Profile</span></i>
+              </a>
+            </li>
+          <?php } ?>
+          <!-- END MENU PORTIR -->
+
         </ul>
       </section>
       <!-- /.sidebar -->

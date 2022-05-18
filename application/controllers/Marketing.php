@@ -3,7 +3,7 @@
 class Marketing extends CI_Controller
 {
 
-    public function index()
+    public function dashboard()
     {
         check_not_login();
         check_marketing();
