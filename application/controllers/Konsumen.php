@@ -7,8 +7,7 @@ class Konsumen extends CI_Controller
         parent::__construct();
         check_not_login();
         check_konsumen();
-        $this->load->model('konsumen_m', 'konsumen');
-        $this->load->model('wahana_m', 'wahana');
+        $this->load->model(['konsumen_m', 'wahana_m']);
     }
 
     public function dashboard()
@@ -22,7 +21,7 @@ class Konsumen extends CI_Controller
 
     public function tampil_konsumen()
     {
-        $query = $this->konsumen->get();
+        $query = $this->konsumen_m->get();
         $data = array(
             'header' => 'Data Pesanan',
             'tiketonline' => $query->result()
@@ -35,16 +34,16 @@ class Konsumen extends CI_Controller
     {
         if (isset($_POST['add'])) {
             $inputan = $this->input->post(null, TRUE);
-            $this->konsumen->add($inputan);
+            $this->konsumen_m->add($inputan);
         } else if (isset($_POST['edit'])) {
             $inputan = $this->input->post(null, TRUE);
-            $this->konsumen->edit($inputan);
+            $this->konsumen_m->edit($inputan);
         }
 
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('konsumen/tiketonline/tiketonline_tampil');
+        redirect('konsumen/tampil_konsumen');
     }
 
     public function add()
@@ -56,7 +55,7 @@ class Konsumen extends CI_Controller
         $kosumen->name = null;
         $kosumen->telp = null;
 
-        $wahana = $this->wahana->get();
+        $wahana = $this->wahana_m->get();
 
         $kosumen->ticket_total = null;
         $kosumen->ticket_type = null;
@@ -71,7 +70,7 @@ class Konsumen extends CI_Controller
 
     public function edit($id = null)
     {
-        $query = $this->kosumen->get($id);
+        $query = $this->konsumen_m->get($id);
         if ($query->num_rows() > 0) {
             $kosumen = $query->row();
             $data = array(
@@ -88,10 +87,11 @@ class Konsumen extends CI_Controller
 
     public function del($id)
     {
-        $this->kosumen->del($id);
+
+        $this->konsumen_m->del($id);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus');
         }
-        redirect('konsumen/tiketonline/tiketonline_tampil');
+        redirect('konsumen/tampil_konsumen');
     }
 }

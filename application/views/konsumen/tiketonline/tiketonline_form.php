@@ -30,7 +30,7 @@
                                 <div class="form-group">
                                     <label>Barcode <font color="red">*</font></label>
                                     <input type="hidden" value="<?= $row->tiketonline_id ?>" name="tiketonline_id">
-                                    <input type="text" value="<?= $row->barcode ?>" class="form-control" name="barcode" placeholder="Masukan Nama Wahana" required>
+                                    <input type="text" value="<?= $row->barcode ?>" class="form-control" name="barcode" placeholder="Masukan Barcode" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nik">NIK <font color="red">*</font></label>
@@ -43,6 +43,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="telp">Telp <font color="red">*</font></label>
+                                        <input type="number" value="<?= $row->telp ?>" id="telp" name="telp" class="form-control" placeholder="Masukan Nomer Telephone" required>
+                                    </div>
                                     <label>Wahana <font color="red">*</font></label>
                                     <select name="wahana" class="form-control">
                                         <option value="">- Pilih -</option>
@@ -62,7 +66,11 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Jenis Tiket <font color="red">*</font></label>
-                                    <input type="text" value="<?= $row->nik ?>" name="ticket_type" class="form-control" placeholder="Masukan price Wahana" required>
+                                    <select name="ticket_type" id="" class="form-control">
+                                        <option value=""> - Pilih - </option>
+                                        <option value="1"> Perorangan </option>
+                                        <option value="2"> Rombongan </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

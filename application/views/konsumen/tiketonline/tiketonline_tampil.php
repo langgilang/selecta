@@ -15,7 +15,7 @@
 <!-- Main content -->
 <section class="content">
     <!-- form tambah data wahana -->
-    <!-- <?php $this->view('marketing/messages') ?> -->
+    <?php $this->view('konsumen/messages') ?>
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">Data Pesanan</h3>
