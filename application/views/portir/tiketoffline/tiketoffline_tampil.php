@@ -1,84 +1,73 @@
-<title><?= $header; ?></tittle>
+<title><?= $header; ?></title>
 
-    <section class="content-header">
-        <h1>
-            Tiket Offline
-            <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Tiket Offline</li>
-        </ol>
-    </section>
+<section class="content-header">
+    <h1>
+        Master Data
+        <small>Data Wahana</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Master Data</li>
+        <li class="active">Data Wahana</li>
+    </ol>
+</section>
 
-    <!-- Main content -->
-    <section class="content">
-        <!-- Main row -->
-        <div class="row">
-            <!-- Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-md-12 connectedSortable">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title"><?= ucfirst($page) ?> Tiket Offline</h3>
-                        <div class="pull-right">
-                            <a href="<?= site_url('wahana'); ?>" class="btn btn-sm btn-warning">
-                                <i class="fa fa-undo"></i> Kembali
-                            </a>
-                        </div>
-                    </div><!-- /.box-header -->
-                    <!-- form start -->
-                    <form role="form" action="<?= site_url('tiketoffline/proses'); ?>" enctype="multipart/form-data" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>Nama <label color="red">*</label></label>
-                                <input type="hidden" name="tiketoffline_id" value="<?= $row->tiketoffline_id ?>">
-                                <input type="text" value="<?= $row->name ?>" class="form-control" name="name" placeholder="Masukkan Nama">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Jumlah Tiket</label>
-                                <input type="number" value="<?= $row->ticket_total ?>" class="form-control" name="ticket_total" id="exampleInputEmail1" placeholder="Masukkan Jumlah Tiket">
-                            </div>
-                            <label>Wahana</label>
-                            <div class="form-group">
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Sepeda Air</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Kiddie Ride</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Perahu Ayun</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Sepeda Udara</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Cinema 4 Dimensi</label>
-                                </div>
-                                <div class="row"></div>
-                            </div><!-- /.box-body -->
-                            <div class="form-group">
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Family Coaster</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Mobil Ayun</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Tagada</label>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <label><input type="checkbox" value="">Bianglala</label>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <button type="submit" name="<?= $page ?>" class="btn btn-primary">Submit</button>
-                            </div>
-                    </form>
-                </div><!-- /.box -->
-            </section><!-- right col -->
-        </div><!-- /.row (main row) -->
-
-    </section><!-- /.content -->
+<!-- Main content -->
+<section class="content">
+    <!-- form tambah data wahana -->
+    <?php $this->view('portir/messages') ?>
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Data Tiket Offline</h3>
+            <div class="pull-right">
+                <a href="<?= site_url('portir/add'); ?>" class="btn btn-sm btn-success">
+                    <i class="fa fa-plus"></i> Tambah
+                </a>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="table1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Jumlah Tiket</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $no = 1;
+                    foreach ($row as $w => $data) { ?>
+                        <tr>
+                            <td><?= $no++; ?></td>
+                            <td><?= $data->name; ?></td>
+                            <td><?= $data->ticket_total; ?></td>
+                            <td class="text-center" width="160px">
+                                <a href="<?= site_url('portir/edit/' . $data->tiketoffline_id); ?>" class="btn btn-xs btn-primary">
+                                    <i class="fa fa-edit"></i> Update
+                                </a>
+                                <a href="<?= site_url('portir/del/' . $data->tiketoffline_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                    <i class="fa fa-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Jumlah Tiket</th>
+                        <th>#</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- end form tambah wahana -->
+</section><!-- /.content -->
