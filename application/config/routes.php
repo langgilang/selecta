@@ -61,8 +61,8 @@ $route['datakonsumen_m'] = 'konsumen/tampil_konsumen_marketing';
 $route['dataportir_m'] = 'portir/tampil_marketing';
 
 // ROUTE PORTIR
-$route['dashboard_p'] = 'portir';
-$route['tiketoffline_p'] = 'tiketoffline_p';
+$route['dashboard_p'] = 'portir/dashboard';
+$route['tiketoffline_p'] = 'portir/tampil_portir';
 
 //ROUTE KONSUMEN
 $route['dashboard_k'] = 'konsumen/dashboard';
