@@ -1,95 +1,100 @@
 <title><?= $header; ?></title>
 
-<section class="content-header">
-    <h1>
-        Tiket Online
-        <small>Data Pesanan</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Tiker Online</li>
-        <li class="active">Data Pesanan</li>
-    </ol>
-</section>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
-    <!-- form tambah data wahana -->
-    <?php $this->view('konsumen/messages') ?>
-    <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">Data Pesanan</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-            <table id="table1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Foto KTP</th>
-                        <th>NIK</th>
-                        <th>Nama</th>
-                        <th>Telephone</th>
-                        <th>Wahana Pilihan</th>
-                        <th>Jumlah Tiket</th>
-                        <th>Jenis Tiket</th>
-                        <th>#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($tiketonline as $w => $row) { ?>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Data Pesanan Online</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                         <tr>
-                            <td><?= $no++; ?></td>
-                            <td>
-                                <?= $row->barcode; ?>
-                                <a href="<?= site_url('konsumen/barcode_qrcode/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-default">
-                                    Generate Code <i class="fa fa-barcode"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <?php if ($row->image != null) { ?>
-                                    <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
-                                <?php } ?>
-                            </td>
-                            <td><?= $row->nik; ?></td>
-                            <td><?= $row->tiketonline_name; ?></td>
-                            <td><?= $row->telp; ?></td>
-                            <td><?= $row->wahana_name; ?></td>
-                            <td><?= $row->ticket_total; ?></td>
-                            <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
-                            <td class="text-center" width="160px">
-                                <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-primary">
-                                    <i class="fa fa-edit"></i> Update
-                                </a>
-                                <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
-                                    <i class="fa fa-trash"></i> Delete
-                                </a>
-                            </td>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Foto KTP</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Telephone</th>
+                            <th>Wahana Pilihan</th>
+                            <th>Jumlah Tiket</th>
+                            <th>Jenis Tiket</th>
+                            <th>#</th>
                         </tr>
-                    <?php
-                    }
-                    ?>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Barcode</th>
-                        <th>Foto KTP</th>
-                        <th>NIK</th>
-                        <th>Nama</th>
-                        <th>Telephone</th>
-                        <th>Wahana Pilihan</th>
-                        <th>Jumlah Tiket</th>
-                        <th>Jenis Tiket</th>
-                        <th>#</th>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($tiketonline as $w => $row) { ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td>
+                                    <?= $row->barcode; ?>
+                                    <a href="<?= site_url('konsumen/barcode_qrcode/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-default">
+                                        Generate Code <i class="fa fa-barcode"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <?php if ($row->image != null) { ?>
+                                        <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
+                                    <?php } ?>
+                                </td>
+                                <td><?= $row->nik; ?></td>
+                                <td><?= $row->tiketonline_name; ?></td>
+                                <td><?= $row->telp; ?></td>
+                                <td><?= $row->wahana_name; ?></td>
+                                <td><?= $row->ticket_total; ?></td>
+                                <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
+                                <td class="text-center" width="160px">
+                                    <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-edit"></i> Update
+                                    </a>
+                                    <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Barcode</th>
+                            <th>Foto KTP</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Telephone</th>
+                            <th>Wahana Pilihan</th>
+                            <th>Jumlah Tiket</th>
+                            <th>Jenis Tiket</th>
+                            <th>#</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.box-body -->
-    </div>
-    <!-- end form tambah wahana -->
-</section><!-- /.content -->
+        <!-- /.card -->
+    </div><!-- /.container-fluid -->
+</section>

@@ -118,7 +118,7 @@ class Konsumen extends CI_Controller
         $wahana = $this->wahana_m->get();
         $data = array(
             'page' => 'add',
-            'header' => 'Tambah Data kosumen',
+            'header' => 'Pesan Tiket Online',
             'row' => $kosumen,
             'wahana' => $wahana
         );
