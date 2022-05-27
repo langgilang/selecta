@@ -101,7 +101,7 @@
                with font-awesome or any other icon font library -->
 
             <!-- MENU MARKETING -->
-            <?php if ($this->session->userdata('level') ==  3) { ?>
+            <?php if ($this->session->userdata('level') ==  1) { ?>
               <li class="nav-item">
                 <a href="<?= site_url('dashboard_m') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_m' || $this->uri->segment(1) == '' ? 'active' : '' ?>">
                   <i class=" nav-icon fas fa-tachometer-alt"></i>
@@ -122,6 +122,28 @@
                     Dashboard
                   </p>
                 </a>
+              </li>
+              <li class="nav-item <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' || $this->uri->segment(1) == 'tiketoffline_form_p' ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' || $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Pesan Tiket
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<?= site_url('tiketoffline_tampil_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Pesanan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= site_url('tiketoffline_form_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pesan Tiket</p>
+                    </a>
+                </ul>
               </li>
             <?php } ?>
             <!-- END MENU PORTIR -->
