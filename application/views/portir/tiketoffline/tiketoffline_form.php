@@ -30,7 +30,7 @@
                 <form role="form" action="<?= site_url('portir/proses'); ?>" enctype="multipart/form-data" method="post">
                     <div class="box-body">
                         <div class="form-group">
-                            <label>Nama <label color="red">*</label></label>
+                            <label>Nama Customer <label color="red">*</label></label>
                             <input type="hidden" name="tiketoffline_id" value="<?= $row->tiketoffline_id ?>">
                             <input type="text" value="<?= $row->name ?>" class="form-control" name="name" placeholder="Masukkan Nama">
                         </div>
@@ -39,6 +39,26 @@
                             <label>Jumlah Tiket</label>
                             <input type="number" value="<?= $row->ticket_total ?>" class="form-control" name="ticket_total" id="exampleInputEmail1" placeholder="Masukkan Jumlah Tiket">
                         </div>
+                        <div class="form-group">
+                            <label>Date:</label>
+
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="datepicker">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Tiket</label>
+                            <select class="form-control select2" style="width: 100%;">
+
+                                <option>Perorangan</option>
+                                <option>Rombongan</option>
+                            </select>
+                        </div>
+
                         <label>Wahana</label>
                         <div class="form-group">
                             <div class="checkbox-inline">
