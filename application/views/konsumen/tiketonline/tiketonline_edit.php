@@ -35,12 +35,12 @@
             <!-- end card header -->
             <!-- card body -->
             <div class="card-body">
-                <form action="<?= site_url('konsumen/proses'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= site_url('konsumen/proses'); ?>" method="POST">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="hidden" value="" name="tiketonline_id">
                                 <label for="nik">NIK <font color="red">*</font></label>
+                                <input type="hidden" value="<?= $row->tiketonline_id ?>" name="tiketonline_id">
                                 <input type="number" value="<?= $row->nik ?>" id="nik" name="nik" class="form-control" placeholder="Masukan NIK Anda" required>
                             </div>
                         </div>

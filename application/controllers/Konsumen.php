@@ -32,14 +32,11 @@ class Konsumen extends CI_Controller
         $post = $this->input->post(null, TRUE);
         if (isset($_POST['add'])) {
             $this->konsumen_m->add($post);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data berhasil disimpan');
-            }
         } else if (isset($_POST['edit'])) {
             $this->konsumen_m->edit($post);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data berhasil disimpan');
-            }
+        }
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
         redirect('konsumen/tampil_konsumen');
     }
@@ -55,7 +52,7 @@ class Konsumen extends CI_Controller
         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_add', $data);
     }
 
-    public function edit($id = null)
+    public function edit($id)
     {
         $query = $this->konsumen_m->getall($id);
         if ($query->num_rows() > 0) {
@@ -75,11 +72,6 @@ class Konsumen extends CI_Controller
     public function del($id)
     {
         $item = $this->konsumen_m->getall($id);
-        if ($item->image != null) {
-            $target_file = './uploads/tiketonline_ktp/' . $item->image;
-            unlink($target_file);
-        }
-
         $this->konsumen_m->del($id);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus');

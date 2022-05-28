@@ -2,11 +2,6 @@
 
 class Konsumen_m extends CI_Model
 {
-    public function get_wahana()
-    {
-        return $this->db->get('tb_wahana');
-    }
-
     public function getall($id = null)
     {
         $this->db->select('a.*, b.*, a.name as tiketonline_name, b.name as wahana_name');
@@ -41,11 +36,10 @@ class Konsumen_m extends CI_Model
             'ticket_total' => $data['ticket_total'],
             'reservationdate' => $data['reservationdate'],
             'ticket_type' => $data['ticket_type'],
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => date('Y-m-d H:i:s'),
         );
-        $this->db->set($param);
         $this->db->where('tiketonline_id', $data['tiketonline_id']);
-        $this->db->update('tb_tiketonline');
+        $this->db->update('tb_tiketonline', $param);
     }
 
     public function del($id)
