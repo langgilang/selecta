@@ -161,6 +161,15 @@
                     </a>
                 </ul>
               </li>
+              <li class="nav-header">SETTING</li>
+              <li class="nav-item">
+                <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>
+                    Logout
+                  </p>
+                </a>
+              </li>
             <?php } ?>
             <!-- END MENU KONSUMEN -->
 
