@@ -20,6 +20,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
+        <?php $this->view('konsumen/messages') ?>
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Data Pesanan Online</h3>
@@ -30,64 +31,53 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Barcode</th>
-                            <th>Foto KTP</th>
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Telephone</th>
                             <th>Wahana Pilihan</th>
-                            <th>Jumlah Tiket</th>
                             <th>Jenis Tiket</th>
+                            <th>Jumlah Tiket</th>
+                            <th>Sub Total</th>
                             <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($tiketonline as $w => $row) { ?>
+                        $total = 0;
+                        foreach ($semuatiketonline as $row) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td>
-                                    <?= $row->barcode; ?>
-                                    <a href="<?= site_url('konsumen/barcode_qrcode/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-default">
-                                        Generate Code <i class="fa fa-barcode"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <?php if ($row->image != null) { ?>
-                                        <img src="<?= base_url('uploads/tiketonline_ktp/' . $row->image); ?>" style="width: 100px;">
-                                    <?php } ?>
-                                </td>
                                 <td><?= $row->nik; ?></td>
-                                <td><?= $row->tiketonline_name; ?></td>
-                                <td><?= $row->telp; ?></td>
-                                <td><?= $row->wahana_name; ?></td>
-                                <td><?= $row->ticket_total; ?></td>
+                                <td><?= $row->tiketonline_name ?></td>
+                                <td><?= $row->telp ?></td>
+                                <td><?= $row->wahana_name ?> - Rp. <?= $row->price ?></td>
                                 <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
+                                <td><?= $row->ticket_total ?></td>
+                                <td>Rp. <?= $row->price * $row->ticket_total ?></td>
                                 <td class="text-center" width="160px">
-                                    <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id); ?>" class="btn btn-xs btn-primary">
+                                    <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-primary">
                                         <i class="fa fa-edit"></i> Update
                                     </a>
-                                    <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                    <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i> Delete
                                     </a>
                                 </td>
                             </tr>
                         <?php
-                        }
-                        ?>
+                            $total += $row->price * $row->ticket_total;
+                        endforeach; ?>
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>No</th>
-                            <th>Barcode</th>
-                            <th>Foto KTP</th>
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Telephone</th>
                             <th>Wahana Pilihan</th>
-                            <th>Jumlah Tiket</th>
                             <th>Jenis Tiket</th>
+                            <th>Jumlah Tiket</th>
+                            <th>Sub Total</th>
                             <th>#</th>
                         </tr>
                     </tfoot>
