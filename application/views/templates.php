@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/bootstrap-datepicker/boostrap-datepicker.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : null ?>">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -180,6 +180,15 @@
                     </a>
                 </ul>
               </li>
+              <li class="nav-header">SETTING</li>
+              <li class="nav-item">
+                <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>
+                    Logout
+                  </p>
+                </a>
+              </li>
             <?php } ?>
             <!-- END MENU KONSUMEN -->
 
@@ -275,6 +284,15 @@
         "lengthChange": false,
         "searching": false,
         "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+      $('#example3').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
         "info": true,
         "autoWidth": false,
         "responsive": true,
