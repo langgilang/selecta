@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : null ?>">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -265,6 +265,15 @@
         "lengthChange": false,
         "searching": false,
         "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+      $('#example3').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": false,
         "info": true,
         "autoWidth": false,
         "responsive": true,
