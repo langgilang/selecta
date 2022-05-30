@@ -8,11 +8,6 @@
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Tiket Offline</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
@@ -32,12 +27,20 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/summernote/summernote-bs4.min.css">
   <!-- DataTables -->
+<<<<<<< HEAD
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+=======
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/bootstrap-datepicker/boostrap-datepicker.css">
+>>>>>>> 2ea5ba66436f3aad3c75c2177bea3e3fe822b193
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : '' ?>">
@@ -180,6 +183,28 @@
                     Dashboard
                   </p>
                 </a>
+              </li>
+              <li class="nav-item <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' || $this->uri->segment(1) == 'tiketoffline_form_p' ? 'menu-open' : '' ?>">
+                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' || $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Pesan Tiket
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<?= site_url('tiketoffline_tampil_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Pesanan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= site_url('tiketoffline_form_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Pesan Tiket</p>
+                    </a>
+                </ul>
               </li>
             <?php } ?>
             <!-- END MENU PORTIR -->
