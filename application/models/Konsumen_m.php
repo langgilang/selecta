@@ -14,35 +14,23 @@ class Konsumen_m extends CI_Model
         return $this->db->get('tb_tiketonline as a');
     }
 
-    public function add($data)
+    public function add1($data)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
         $param = array(
-            'nik' => $data['nik'],
-            'name' => $data['name'],
-            'telp' => $data['telp'],
-            'wahana_id' => $data['wahana'],
             'ticket_total' => $data['ticket_total'],
             'reservationdate' => $data['reservationdate'],
-            'ticket_type' => $data['ticket_type'],
             'user_id' => $userlogin,
         );
         $this->db->insert('tb_tiketonline', $param);
     }
 
-    public function edit($data)
+    public function edit1($data)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
         $param = array(
-            'nik' => $data['nik'],
-            'name' => $data['name'],
-            'telp' => $data['telp'],
             'wahana_id' => $data['wahana'],
-            'ticket_total' => $data['ticket_total'],
-            'reservationdate' => $data['reservationdate'],
-            'ticket_type' => $data['ticket_type'],
             'updated_at' => date('Y-m-d H:i:s'),
-            'user_id' => $userlogin
         );
         $this->db->where('tiketonline_id', $data['tiketonline_id']);
         $this->db->update('tb_tiketonline', $param);

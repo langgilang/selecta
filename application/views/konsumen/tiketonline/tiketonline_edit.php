@@ -86,8 +86,8 @@
                                 <label>Jenis Tiket <font color="red">*</font></label>
                                 <select name="ticket_type" id="" class="form-control">
                                     <option value=""> - Pilih - </option>
-                                    <option value="1"> Perorangan </option>
-                                    <option value="2"> Rombongan </option>
+                                    <option value="1" <?= $row->ticket_type == '1' ? 'selected' : '' ?>> Perorangan </option>
+                                    <option value="2" <?= $row->ticket_type == '2' ? 'selected' : '' ?>> Rombongan </option>
                                 </select>
                             </div>
                         </div>

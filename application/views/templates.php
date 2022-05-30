@@ -27,14 +27,15 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/summernote/summernote-bs4.min.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/bootstrap-datepicker/boostrap-datepicker.css">
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : null ?>">
+<body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : '' ?>">
   <div class="wrapper">
 
     <!-- Preloader -->
@@ -102,6 +103,7 @@
 
             <!-- MENU MARKETING -->
             <?php if ($this->session->userdata('level') ==  1) { ?>
+
               <li class="nav-item">
                 <a href="<?= site_url('dashboard_m') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_m' || $this->uri->segment(1) == '' ? 'active' : '' ?>">
                   <i class=" nav-icon fas fa-tachometer-alt"></i>
@@ -110,6 +112,57 @@
                   </p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link ">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                    Tiket
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Pesanan</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Wahana
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Data Wahana</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Tambah Wahana</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-dot-circle nav-icon"></i>
+                          <p>Tambah Paket Wahana</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item">
+
+              </li>
+
             <?php } ?>
             <!-- END MENU MARKETING -->
 
@@ -149,6 +202,9 @@
             <!-- END MENU PORTIR -->
 
             <!-- MENU KONSUMEN -->
+            <?php
+            $uri = $this->uri->segment(2);
+            ?>
             <?php if ($this->session->userdata('level') ==  4) { ?>
               <li class="nav-item">
                 <a href="<?= site_url('dashboard_k') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_k' || $this->uri->segment(1) == '' ? 'active' : '' ?>">
@@ -158,7 +214,7 @@
                   </p>
                 </a>
               </li>
-              <li class="nav-item <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? 'menu-open' : '' ?>">
+              <li class="nav-item <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? 'menu-open' : null ?>">
                 <a href="#" class="nav-link <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
@@ -257,6 +313,8 @@
   <!-- <script src="<?= base_url('assets/') ?>dist/js/demo.js"></script> -->
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="<?= base_url('assets/') ?>dist/js/pages/dashboard.js"></script>
+  <!-- Select2 -->
+  <script src="<?= base_url('assets/') ?>plugins/select2/js/select2.full.min.js"></script>
   <!-- DataTables  & Plugins -->
   <script src="<?= base_url('assets/') ?>plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="<?= base_url('assets/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -279,6 +337,7 @@
         "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -288,6 +347,7 @@
         "autoWidth": false,
         "responsive": true,
       });
+
       $('#example3').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -297,11 +357,18 @@
         "autoWidth": false,
         "responsive": true,
       });
-    });
 
-    //Date picker
-    $('#reservationdate').datetimepicker({
-      format: 'L'
+      $('#reservationdate').datetimepicker({
+        format: 'L'
+      });
+
+      //Initialize Select2 Elements
+      $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
     });
   </script>
 </body>
