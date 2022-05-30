@@ -30,44 +30,73 @@ class Konsumen extends CI_Controller
     public function proses()
     {
         $post = $this->input->post(null, TRUE);
-        if (isset($_POST['add'])) {
-            $this->konsumen_m->add($post);
+        if (isset($_POST['add1'])) {
+            $this->konsumen_m->add1($post);
+            redirect('konsumen/tambah_wahana');
+        } else if (isset($_POST['edit1'])) {
+            $this->konsumen_m->edit1($post);
+            redirect('konsumen/tiketonline_wahana');
         } else if (isset($_POST['edit'])) {
             $this->konsumen_m->edit($post);
         }
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data berhasil disimpan');
-        }
-        redirect('konsumen/tampil_konsumen');
     }
 
-    public function add()
+    public function add1()
     {
         $wahana = $this->wahana_m->get();
         $data = array(
-            'page' => 'add',
+            'page' => 'add1',
             'header' => 'Pesan Tiket Online',
             'wahana' => $wahana
         );
         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_add', $data);
     }
 
-    public function edit($id)
+    public function tambah_wahana()
+    {
+        $wahana = $this->wahana_m->get();
+        $data = array(
+            'page' => 'add2',
+            'header' => 'Tambah Wahana',
+            'wahana' => $wahana
+
+        );
+        $this->template->load('templates', 'konsumen/tiketonline/tiketonline_wahana', $data);
+    }
+
+    public function edit1($id)
     {
         $query = $this->konsumen_m->getall($id);
         if ($query->num_rows() > 0) {
             $data = array(
-                'page' => 'edit',
-                'header' => 'Edit Pesanan Tiket Online',
+                'page' => 'edit1',
+                'header' => 'Tambah Wahana',
                 'row' => $query->row(),
                 'wahana' => $this->wahana_m->get()
             );
-            $this->template->load('templates', 'konsumen/tiketonline/tiketonline_edit', $data);
+            $this->template->load('templates', 'konsumen/tiketonline/tiketonline_wahana', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
-            echo "window.location='" . site_url('konsumen/tiketonline_tampil') . "';</script>";
+            echo "window.location='" . site_url('konsumen/add1') . "';</script>";
         }
     }
+
+    // public function edit($id)
+    // {
+    //     $query = $this->konsumen_m->getall($id);
+    //     if ($query->num_rows() > 0) {
+    //         $data = array(
+    //             'page' => 'edit',
+    //             'header' => 'Edit Pesanan Tiket Online',
+    //             'row' => $query->row(),
+    //             'wahana' => $this->wahana_m->get()
+    //         );
+    //         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_edit', $data);
+    //     } else {
+    //         echo "<script>alert('Data tidak ditemukan');";
+    //         echo "window.location='" . site_url('konsumen/tiketonline_tampil') . "';</script>";
+    //     }
+    // }
 
     public function del($id)
     {

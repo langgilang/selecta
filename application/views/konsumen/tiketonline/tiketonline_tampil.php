@@ -54,7 +54,7 @@
                                 <td><?= $row->wahana_name ?> - Rp. <?= $row->price ?></td>
                                 <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                 <td><?= $row->ticket_total ?></td>
-                                <td>Rp. <?= $row->price * $row->ticket_total ?></td>
+                                <td>Rp. <?= ($row->price * $row->ticket_total) + 45000 ?></td>
                                 <td class="text-center" width="160px">
                                     <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-primary">
                                         <i class="fa fa-edit"></i> Update

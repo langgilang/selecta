@@ -67,4 +67,4 @@ $route['tiketoffline_p'] = 'portir/tampil_portir';
 //ROUTE KONSUMEN
 $route['dashboard_k'] = 'konsumen/dashboard';
 $route['tampil'] = 'konsumen/tampil_konsumen';
-$route['form'] = 'konsumen/add';
+$route['form'] = 'konsumen/add1';
