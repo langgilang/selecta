@@ -39,7 +39,7 @@ class Portir extends CI_Controller
             'row' => $query->result()
         );
 
-        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_tampil', $data);
+        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_add', $data);
     }
     // guemoyyy elek kecotttttt
 
@@ -47,6 +47,8 @@ class Portir extends CI_Controller
     {
         $portir = new stdClass();
         $portir->tiketoffline_id = null;
+        $portir->barcode = null;
+        $portir->name_portir = null;
         $portir->name = null;
         $portir->ticket_total = null;
         $data = array(

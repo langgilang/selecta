@@ -31,13 +31,13 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label>Nama Customer <label color="red">*</label></label>
-                            <input type="hidden" name="tiketoffline_id" value="<?= $row->tiketoffline_id ?>">
-                            <input type="text" value="<?= $row->name ?>" class="form-control" name="name" placeholder="Masukkan Nama">
+                            <input type="hidden" name="tiketoffline_id" value="">
+                            <input type="text" value="" class="form-control" name="name" placeholder="Masukkan Nama">
                         </div>
 
                         <div class="form-group">
                             <label>Jumlah Tiket</label>
-                            <input type="number" value="<?= $row->ticket_total ?>" class="form-control" name="ticket_total" id="exampleInputEmail1" placeholder="Masukkan Jumlah Tiket">
+                            <input type="number" value="" class="form-control" name="ticket_total" id="exampleInputEmail1" placeholder="Masukkan Jumlah Tiket">
                         </div>
                         <div class="form-group">
                             <label>Date:</label>

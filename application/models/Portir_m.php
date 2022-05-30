@@ -6,11 +6,13 @@ class Portir_m extends CI_Model
     public function get($id = null)
     {
         // $query=$this->db->query("SELECT * FROM tb_tiketoffline");
-        $this->db->select('*');
+        $this->db->select('tb_tiketoffline.*, tb_wahana.name as wahana_name, tb_tiketoffline.name as tiketoffline_name');
         $this->db->from('tb_tiketoffline');
+        $this->db->join('tb_wahana', 'tb_wahana.wahana_id = tb_tiketoffline.wahana_id');
         if ($id != null) {
             $this->db->where('tiketoffline_id', $id);
         }
+        $this->db->order_by('barcode', 'asc');
         $query = $this->db->get();
         return $query;
     }
@@ -18,6 +20,7 @@ class Portir_m extends CI_Model
     public function add($data)
     {
         $param = array(
+            'name_portir' => $data['name_portir'],
             'name' => $data['name'],
             'ticket_total' => $data['ticket_total'],
         );
