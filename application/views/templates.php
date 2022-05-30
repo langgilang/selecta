@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -123,7 +121,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= site_url('tampilpesanan_m') ?>" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Pesanan</p>
                     </a>
@@ -137,7 +135,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="<?= site_url('marketing/tampil_wahana') ?>" class="nav-link">
                           <i class="far fa-dot-circle nav-icon"></i>
                           <p>Data Wahana</p>
                         </a>
@@ -145,13 +143,7 @@
                       <li class="nav-item">
                         <a href="#" class="nav-link">
                           <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Tambah Wahana</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-dot-circle nav-icon"></i>
-                          <p>Tambah Paket Wahana</p>
+                          <p>Data Paket Wahana</p>
                         </a>
                       </li>
                     </ul>
@@ -159,8 +151,14 @@
                 </ul>
               </li>
 
+              <li class="nav-header">SETTING</li>
               <li class="nav-item">
-
+                <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>
+                    Logout
+                  </p>
+                </a>
               </li>
 
             <?php } ?>
@@ -335,6 +333,9 @@
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
+        "paging": true,
+        "ordering": true,
+        "info": true,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
       }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 

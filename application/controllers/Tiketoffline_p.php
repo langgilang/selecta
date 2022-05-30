@@ -1,10 +1,6 @@
 <?php
 class Tiketoffline_p extends CI_Controller
 {
-
-
-
-
     public function proses()
     {
         if (isset($_POST['add'])) {

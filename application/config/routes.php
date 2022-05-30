@@ -59,6 +59,7 @@ $route['datawahana_m'] = 'wahana/tampil_wahana_marketing';
 $route['datatiket_m'] = 'tiket/tampil_marketing';
 $route['datakonsumen_m'] = 'konsumen/tampil_konsumen_marketing';
 $route['dataportir_m'] = 'portir/tampil_marketing';
+$route['tampilpesanan_m'] = 'marketing/tampil_pesananonline';
 
 // ROUTE PORTIR
 $route['dashboard_p'] = 'portir/dashboard';

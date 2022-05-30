@@ -41,7 +41,7 @@ class Konsumen extends CI_Controller
         }
     }
 
-    public function add1()
+    public function add()
     {
         $wahana = $this->wahana_m->get();
         $data = array(
@@ -52,19 +52,7 @@ class Konsumen extends CI_Controller
         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_add', $data);
     }
 
-    public function tambah_wahana()
-    {
-        $wahana = $this->wahana_m->get();
-        $data = array(
-            'page' => 'add2',
-            'header' => 'Tambah Wahana',
-            'wahana' => $wahana
-
-        );
-        $this->template->load('templates', 'konsumen/tiketonline/tiketonline_wahana', $data);
-    }
-
-    public function edit1($id)
+    public function edit($id)
     {
         $query = $this->konsumen_m->getall($id);
         if ($query->num_rows() > 0) {
