@@ -186,14 +186,24 @@
                   <li class="nav-item">
                     <a href="<?= site_url('tiketoffline_tampil_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Data Pesanan</p>
+                      <p>Add Order Ticket</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="<?= site_url('tiketoffline_form_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Pesan Tiket</p>
+                      <p>Data Order</p>
                     </a>
+                  </li>
+                  <li class="nav-header">SETTING</li>
+                  <li class="nav-item">
+                    <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                      <i class="fas fa-sign-out-alt nav-icon"></i>
+                      <p>
+                        Logout
+                      </p>
+                    </a>
+                  </li>
                 </ul>
               </li>
             <?php } ?>
