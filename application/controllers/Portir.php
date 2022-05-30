@@ -47,7 +47,6 @@ class Portir extends CI_Controller
     {
         $portir = new stdClass();
         $portir->tiketoffline_id = null;
-        $portir->barcode = null;
         $portir->name_portir = null;
         $portir->name = null;
         $portir->ticket_total = null;
@@ -57,7 +56,7 @@ class Portir extends CI_Controller
             'row' => $portir
         );
         // print_r($data);
-        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_form', $data);
+        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_tampil', $data);
     }
 
     public function proses()
