@@ -27,20 +27,12 @@
   <!-- summernote -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/summernote/summernote-bs4.min.css">
   <!-- DataTables -->
-<<<<<<< HEAD
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-=======
-  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-  <link rel="stylesheet" href="<?= base_url('assets/') ?>bower_components/bootstrap-datepicker/boostrap-datepicker.css">
->>>>>>> 2ea5ba66436f3aad3c75c2177bea3e3fe822b193
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : '' ?>">
