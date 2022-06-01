@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Pesan Tiket</h1>
+                <h1 class="m-0">Data Paket Wahana</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Pesan Tiket</li>
+                    <li class="breadcrumb-item active">Data Paket Wahana</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -23,11 +23,11 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Wahana Table
+                        Paket Wahana
                     </h3>
-                    <a href="<?= site_url('marketing/add_wahana') ?>" class="btn btn-sm btn-success float-right">
+                    <a href="<?= site_url('marketing/add_paket') ?>" class="btn btn-sm btn-success float-right">
                         <li class="fa fa-plus"></li>
-                        Add Wahana
+                        Tambah Paket
                     </a>
                 </div>
                 <div class="card-body">
@@ -35,8 +35,10 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Code</th>
-                                <th>Nama Wahana</th>
+                                <th>Kode Paket</th>
+                                <th>Nama Paket</th>
+                                <th>Created At</th>
+                                <th>Items</th>
                                 <th>Harga</th>
                                 <th>#</th>
                             </tr>
@@ -45,17 +47,19 @@
                             <?php
                             $no = 1;
                             $total = 0;
-                            foreach ($tampilwahana as $row) : ?>
+                            foreach ($tampilpaket as $row) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><?= $row->code; ?></td>
+                                    <td><?= $row->code_paket; ?></td>
                                     <td><?= $row->name; ?></td>
-                                    <td><?= $row->price; ?></td>
+                                    <td><?= $row->create_paket; ?></td>
+                                    <td><?= $row->wahana_item; ?> Items</td>
+                                    <td>Rp. <?= $row->price; ?></td>
                                     <td class="text-center" width="160px">
-                                        <a href="<?= site_url('marketing/edit_wahana/' . $row->wahana_id); ?>" class="btn btn-xs btn-primary">
+                                        <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-primary">
                                             <i class="fa fa-edit"></i> Update
                                         </a>
-                                        <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                        <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                             <i class="fa fa-trash"></i> Delete
                                         </a>
                                     </td>
@@ -66,8 +70,10 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Code</th>
-                                <th>Nama Wahana</th>
+                                <th>Kode Paket</th>
+                                <th>Nama Paket</th>
+                                <th>Created At</th>
+                                <th>Items</th>
                                 <th>Harga</th>
                                 <th>#</th>
                             </tr>

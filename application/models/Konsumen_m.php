@@ -14,7 +14,7 @@ class Konsumen_m extends CI_Model
         return $this->db->get('tb_tiketonline as a');
     }
 
-    public function add1($data)
+    public function add($data)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
         $param = array(
@@ -25,7 +25,7 @@ class Konsumen_m extends CI_Model
         $this->db->insert('tb_tiketonline', $param);
     }
 
-    public function edit1($data)
+    public function edit($data)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
         $param = array(

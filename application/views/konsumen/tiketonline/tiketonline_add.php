@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" name="<?= $page ?>" class="btn btn-primary float-right">Next</button>
+                        <button type="submit" name="add" class="btn btn-primary float-right">Submit</button>
                     </div>
                 </form>
             </div>

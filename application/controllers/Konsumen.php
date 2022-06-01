@@ -30,24 +30,23 @@ class Konsumen extends CI_Controller
     public function proses()
     {
         $post = $this->input->post(null, TRUE);
-        if (isset($_POST['add1'])) {
-            $this->konsumen_m->add1($post);
-            redirect('konsumen/tambah_wahana');
-        } else if (isset($_POST['edit1'])) {
-            $this->konsumen_m->edit1($post);
-            redirect('konsumen/tiketonline_wahana');
+        if (isset($_POST['add'])) {
+            $this->konsumen_m->add($post);
         } else if (isset($_POST['edit'])) {
             $this->konsumen_m->edit($post);
         }
+
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+        }
+        redirect('konsumen/tampil_konsumen');
     }
 
     public function add()
     {
-        $wahana = $this->wahana_m->get();
         $data = array(
-            'page' => 'add1',
+            'page' => 'add',
             'header' => 'Pesan Tiket Online',
-            'wahana' => $wahana
         );
         $this->template->load('templates', 'konsumen/tiketonline/tiketonline_add', $data);
     }

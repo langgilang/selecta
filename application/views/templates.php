@@ -31,6 +31,7 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- select wahana -->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed <?= $this->uri->segment(1) == 'form' ? 'sidebar-collapse' : '' ?>">
@@ -141,7 +142,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="<?= site_url('marketing/tampil_paket') ?>" class="nav-link">
                           <i class="far fa-dot-circle nav-icon"></i>
                           <p>Data Paket Wahana</p>
                         </a>
@@ -210,20 +211,17 @@
             <!-- END MENU PORTIR -->
 
             <!-- MENU KONSUMEN -->
-            <?php
-            $uri = $this->uri->segment(2);
-            ?>
             <?php if ($this->session->userdata('level') ==  4) { ?>
               <li class="nav-item">
-                <a href="<?= site_url('dashboard_k') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_k' || $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                <a href="" class="nav-link ">
                   <i class=" nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
                   </p>
                 </a>
               </li>
-              <li class="nav-item <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? 'menu-open' : null ?>">
-                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'tampil' || $this->uri->segment(1) == 'form' ? 'active' : '' ?>">
+              <li class="nav-item ">
+                <a href="#" class="nav-link ">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
                     Pesan Tiket
@@ -232,13 +230,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="<?= site_url('tampil') ?>" class="nav-link <?= $this->uri->segment(1) == 'tampil' ? 'active' : '' ?>">
+                    <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Data Pesanan</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="<?= site_url('form') ?>" class="nav-link <?= $this->uri->segment(1) == 'form' ? 'active' : '' ?>">
+                    <a href="<?= site_url('konsumen/add') ?>" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Pesan Tiket</p>
                     </a>
@@ -336,6 +334,7 @@
   <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
   <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
   <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
   <script>
     // table
     $(function() {

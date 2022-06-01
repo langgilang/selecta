@@ -22,29 +22,33 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">
-                        Taman Rekreasi Selecta Tiket Masuk
+                        Tambah Data Wahana
                     </h3>
                 </div>
-                <form action="<?= site_url('konsumen/proses'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= site_url('marketing/proses_edit') ?>" method="POST" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md 6">
-                                <div class="form-group ">
-                                    <input type="hidden" value="" name="tiketonline_id">
-                                    <label for="reservationdate">Tanggal Reservasi <font color="red">*</font></label>
-                                    <input type="date" value="" id="reservationdate" name="reservationdate" class="form-control" required>
-                                </div>
+                            <div class="form-group col-3">
+                                <label>Kode Wahana <font color="red">*</font></label>
+                                <input type="hidden" value="<?= $row->wahana_id ?>" id="wahana_id" name="wahana_id">
+                                <input type="text" value="<?= $row->code ?>" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" required>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group ">
-                                    <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
-                                    <input type="number" value="" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
-                                </div>
+                            <div class="form-group col-6">
+                                <label>Nama Wahana <font color="red">*</font></label>
+                                <input type="text" value="<?= $row->name ?>" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
+                            </div>
+                            <div class="form-group col-3">
+                                <label>Harga <font color="red">*</font></label>
+                                <input type="number" value="<?= $row->price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary float-right">Next</button>
+                        <!-- <div class="row">
+                            <div class="form-group col-12">
+                                <label>Gambar <font color="red">*</font></label>
+                                <input type="file" class="form-control" id="image" name="image">
+                            </div>
+                        </div> -->
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>
                     </div>
                 </form>
             </div>

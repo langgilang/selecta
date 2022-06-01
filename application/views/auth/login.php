@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/') ?>dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition login-page" style="margin-top: 130px;">
+<body class="hold-transition login-page" style="margin-top: 0px;">
     <div class="login-box">
         <div class="login-logo">
             <a href="../../index2.html"><b>Login</b> Selecta</a>
