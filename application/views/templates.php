@@ -375,10 +375,44 @@
       //Initialize Select2 Elements
       $('.select2').select2()
 
-      //Initialize Select2 Elements
-      $('.select2bs4').select2({
-        theme: 'bootstrap4'
-      })
+      //GET UPDATE
+      $('.update-record').on('click', function() {
+        var paket_id = $(this).data('paket_id');
+        var code = $(this).data('code');
+        var name = $(this).data('name');
+        var price = $(this).data('price');
+
+        $(".strings").val('');
+        $('#UpdateModal').modal('show');
+        $('[name="paket_id"]').val(paket_id);
+        $('[name="code"]').val(code);
+        $('[name="name"]').val(name);
+        $('[name="price"]').val(price);
+
+        //AJAX REQUEST TO GET SELECTED PRODUCT
+        $.ajax({
+          url: "<?php echo site_url('marketing/get_wahana_by_paket'); ?>",
+          method: "POST",
+          data: {
+            paket_id: paket_id
+          },
+          cache: false,
+          success: function(data) {
+            var item = data;
+            var val1 = item.replace("[", "");
+            var val2 = val1.replace("]", "");
+            var values = val2;
+            $.each(values.split(","), function(i, e) {
+              $(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
+              $(".strings").selectpicker('refresh');
+
+            });
+          }
+
+        });
+        return false;
+      });
+
     });
   </script>
 </body>

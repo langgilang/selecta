@@ -42,7 +42,7 @@ class Marketing extends CI_Controller
         $data = array(
             'header' => 'Data Paket',
             'tampilpaket' => $this->marketing_m->get_paket()->result(),
-            'tampilwahana' => $this->marketing_m->get_wahana()->result(),
+            'tampilwahana' => $this->marketing_m->get_wahana(),
         );
         $this->template->load('templates', 'marketing/datapaket/paket_tampil', $data);
     }
@@ -86,15 +86,30 @@ class Marketing extends CI_Controller
         $this->template->load('templates', 'marketing/datapaket/paket_add', $data);
     }
 
-    public function edit_paket()
-    {
-        $package_id = $this->input->post('package_id');
-        $data = $this->package_model->get_product_by_package($package_id)->result();
-        foreach ($data as $result) {
-            $value[] = (float) $result->product_id;
-        }
-        $this->template->load('templates', 'marketing/datapaket/paket_edit', $value);
-    }
+    // public function edit_paket($id)
+    // {
+    //     $query = $this->marketing_m->get_wahana_by_paket($id);
+    //     if ($query->num_rows() > 0) {
+    //         $data = array(
+    //             'header' => 'Edit Data Paket',
+    //             'row' => $query->row(),
+    //         );
+    //         $this->template->load('templates', 'marketing/datapaket/paket_edit', $data);
+    //     } else {
+    //         echo "<script>alert('Data tidak ditemukan');";
+    //         echo "window.location='" . site_url('marketing/edit_paket') . "';</script>";
+    //     }
+    // }
+
+    // public function edit_paket($id)
+    // {
+    //     $paket_id = $this->input->post('paket_id');
+    //     $data = $this->marketing_m->get_wahana_by_paket($paket_id)->result();
+    //     foreach ($data as $result) {
+    //         $value[] = (float) $result->wahana_id;
+    //     }
+    //     echo json_encode($value);
+    // }
 
     // KE HALAMAN TAMBAH PAKET
     public function proses_add_paket()

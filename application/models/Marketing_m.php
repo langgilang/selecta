@@ -12,22 +12,39 @@ class Marketing_m extends CI_Model
         return $this->db->get('tb_tiketonline as a')->result();
     }
 
-    public function get_wahana()
+    public function get_wahana($id = null)
     {
         $this->db->select('*');
+        if ($id != null) {
+            $this->db->where('wahana_id', $id);
+        }
         $this->db->from('tb_wahana');
         return $this->db->get();
     }
 
     public function get_paket()
     {
-        $this->db->select('p.*, p.code AS code_paket,p.created_at AS create_paket, COUNT(w.wahana_id) AS wahana_item');
-        $this->db->from('tb_paket AS p');
-        $this->db->join('tb_detail_paket AS dp', 'p.paket_id = dp.paket_id');
-        $this->db->join('tb_wahana AS w', 'dp.wahana_id = w.wahana_id');
+        $this->db->select('*, 
+        tb_paket.code AS code_paket, 
+        tb_paket.created_at AS create_paket, 
+        COUNT(tb_wahana.wahana_id) AS wahana_item,
+        tb_paket.name AS paket_name,');
+        $this->db->from('tb_paket');
+        $this->db->join('tb_detail_paket', 'paket_id = detail_paket_id');
+        $this->db->join('tb_wahana', 'detail_wahana_id = wahana_id');
         $this->db->group_by('paket_id');
         $query = $this->db->get();
         return $query;
+    }
+
+    public function get_wahana_by_paket($id)
+    {
+        $this->db->select('*, tb_wahana.name AS wname');
+        $this->db->from('tb_wahana');
+        $this->db->join('tb_detail_paket', 'detail_wahana_id = wahana_id');
+        $this->db->join('tb_paket', 'paket_id = detail_paket_id');
+        $this->db->where('paket_id', $id);
+        return $this->db->get();
     }
 
     public function add_wahana($data)
@@ -57,8 +74,8 @@ class Marketing_m extends CI_Model
         $result = array();
         foreach ($wahana as $a => $whn) {
             $result[] = array(
-                'paket_id'  => $paket_id,
-                'wahana_id' => $_POST['wahana'][$a]
+                'detail_paket_id'  => $paket_id,
+                'detail_wahana_id' => $_POST['wahana'][$a]
             );
         }
         //MULTIPLE INSERT TO DETAIL TABLE
