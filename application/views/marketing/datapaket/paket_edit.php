@@ -25,7 +25,7 @@
                         Edit Paket
                     </h3>
                 </div>
-                <form action="<?= site_url('marketing/proses_add_paket') ?>" method="POST">
+                <form action="<?= site_url('marketing/proses_edit_paket') ?>" method="POST">
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-3">
@@ -41,20 +41,24 @@
                                 <label>Harga <font color="red">*</font></label>
                                 <input type="number" value="<?= $row->price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
                             </div>
-
                             <div class="form-group col-12">
                                 <label>Wahana <font color="red">*</font></label>
                                 <select class="select2 select2bs4" id="wahana[]" name="wahana[]" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
                                     <option value="">- Pilih -</option>
-                                    <?php foreach ($tampilwahana as $data) { ?>
-                                        <option value="<?= $data->wahana_id; ?>" <?php if ($data->wahana_id == $row->wahana_id) {
-                                                                                        echo 'selected';
-                                                                                    } ?>><?php echo $data->name  ?></option>
-                                    <?php } ?>
+                                    <?php foreach ($tampilwahana as $result) {
+                                        $value[] = (float) $result->wahana_id;
+                                    ?>
+                                        <option value="<?= $result->wahana_id; ?>" <?= $result->wahana_id == $result->wahana_id ? "selected" : null ?>>
+                                            <?php echo $result->name  ?>
+                                        <?php } ?>
                                 </select>
                             </div>
-
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="<?= site_url('marketing/tampil_paket') ?>" class="btn btn-warning float-left">
+                            <li class="fa fa-undo"></li> Back
+                        </a>
                         <button type="submit" class="btn btn-primary float-right">Submit</button>
                     </div>
                 </form>

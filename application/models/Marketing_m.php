@@ -94,6 +94,33 @@ class Marketing_m extends CI_Model
         $this->db->update('tb_wahana', $param);
     }
 
+    public function edit_paket($paket_id, $data, $wahana)
+    {
+        $this->db->trans_start();
+        //UPDATE TO PACKAGE
+        $data  = array(
+            'code' => $data['code'],
+            'name' => $data['name'],
+            'price' => $data['price'],
+        );
+        $this->db->where('paket_id', $paket_id);
+        $this->db->update('tb_paket', $data);
+
+        //DELETE DETAIL PACKAGE
+        $this->db->delete('tb_detail_paket', array('detail_paket_id' => $paket_id));
+
+        $result = array();
+        foreach ($wahana as $key => $val) {
+            $result[] = array(
+                'detail_paket_id'      => $paket_id,
+                'detail_wahana_id'      => $_POST['wahana'][$key]
+            );
+        }
+        //MULTIPLE INSERT TO DETAIL TABLE
+        $this->db->insert_batch('tb_detail_paket', $result);
+        $this->db->trans_complete();
+    }
+
     public function del($id)
     {
         $this->db->where('wahana_id', $id);

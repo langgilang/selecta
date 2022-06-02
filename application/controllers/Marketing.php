@@ -90,21 +90,13 @@ class Marketing extends CI_Controller
     {
         $query = $this->marketing_m->get_wahana_by_paket($id);
         // $query = $this->marketing_m->get_wahana()->result();
-        $wahana = array();
-        foreach ($query as $a => $result) {
-            $wahana = $result;
-        }
 
         if ($query->num_rows() > 0) {
             $data = array(
                 'header' => 'Edit Data Paket',
-                'row' => $query->row(),
-                'wahana' => $wahana,
-                'tampilwahana' => $this->marketing_m->get_wahana()->result(),
+                'row' => $query->row()
             );
-            print_r($data);
             $this->template->load('templates', 'marketing/datapaket/paket_edit', $data);
-            return false;
         } else {
             echo "<script>alert('Data tidak ditemukan');";
             echo "window.location='" . site_url('marketing/edit_paket') . "';</script>";
@@ -137,6 +129,27 @@ class Marketing extends CI_Controller
         $this->marketing_m->add_paket($paket, $wahana);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Tambah data paket berhasil disimpan');
+        }
+        redirect('marketing/tampil_paket');
+    }
+
+    public function proses_edit_paket()
+    {
+        $paket_id = $this->input->post('paket_id', TRUE);
+        $code = $this->input->post('code', TRUE);
+        $name = $this->input->post('name', TRUE);
+        $price = $this->input->post('price', TRUE);
+        $wahana = $this->input->post('wahana', TRUE);
+
+        $data = array(
+            'code' => $code,
+            'name' => $name,
+            'price' => $price,
+        );
+
+        $this->marketing_m->edit_paket($paket_id, $data, $wahana);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Update data paket berhasil');
         }
         redirect('marketing/tampil_paket');
     }
