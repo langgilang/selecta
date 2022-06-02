@@ -179,7 +179,7 @@
                 <a href="#" class="nav-link <?= $this->uri->segment(1) == 'tiketoffline_tampil_p' || $this->uri->segment(1) == 'tiketoffline_form_p' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-chart-pie"></i>
                   <p>
-                    Pesan Tiket
+                    Pesan Tiket Offline
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
@@ -196,16 +196,24 @@
                       <p>Data Order</p>
                     </a>
                   </li>
-                  <li class="nav-header">SETTING</li>
-                  <li class="nav-item">
-                    <a href="<?= site_url('auth/logout') ?>" class="nav-link">
-                      <i class="fas fa-sign-out-alt nav-icon"></i>
-                      <p>
-                        Logout
-                      </p>
-                    </a>
-                  </li>
                 </ul>
+              </li>
+              <li class="nav-item">
+                <a href="<?= site_url('dashboard_p') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_p' || $this->uri->segment(1) == '' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-list-alt"></i>
+                  <p>
+                    Data Order Tiket Online
+                  </p>
+                </a>
+              </li>
+              <li class="nav-header">SETTING</li>
+              <li class="nav-item">
+                <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                  <i class="fas fa-sign-out-alt nav-icon"></i>
+                  <p>
+                    Logout
+                  </p>
+                </a>
               </li>
             <?php } ?>
             <!-- END MENU PORTIR -->

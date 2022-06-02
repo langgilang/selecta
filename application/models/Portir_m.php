@@ -12,9 +12,7 @@ class Portir_m extends CI_Model
         if ($id != null) {
             $this->db->where('tiketoffline_id', $id);
         }
-        $this->db->order_by('barcode', 'asc');
-        $query = $this->db->get();
-        return $query;
+        return $this->db->get();
     }
 
     public function add($data)

@@ -4,31 +4,19 @@ class Portir extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('portir_m');
-    }
-
-    public function dashboard()
-    {
         check_not_login();
         check_portir();
+        $this->load->model('portir_m');
+    }
+    // DASHBOARD PORTIR
+    public function dashboard()
+    {
         $data = array(
             'header' => 'Dashboard'
         );
         $this->template->load('templates', 'portir/dashboard/dashboard_tampil', $data);
-        // $this->load->helper('url');
     }
-
-    public function tampil_marketing()
-    {
-        check_not_login();
-        check_marketing();
-        $data = array(
-            'header' => 'Data Portir'
-        );
-
-        $this->template->load('templates', 'marketing/dataportir/dataportir_tampil', $data);
-    }
-
+    //TAMPIL MENU DATA TIKET OFFLINE 
     public function tampil_portir()
     {
         check_not_login();
@@ -45,15 +33,9 @@ class Portir extends CI_Controller
 
     public function add()
     {
-        $portir = new stdClass();
-        $portir->tiketoffline_id = null;
-        $portir->name_portir = null;
-        $portir->name = null;
-        $portir->ticket_total = null;
         $data = array(
             'page' => 'add',
-            'header' => 'Tambah Data Wahana',
-            'row' => $portir
+            'header' => 'Tambah Data Wahana'
         );
         // print_r($data);
         $this->template->load('templates', 'portir/tiketoffline/tiketoffline_tampil', $data);
