@@ -33,4 +33,14 @@ class Konsumen_m extends CI_Model
         );
         $this->db->insert('tb_tiketonline', $param);
     }
+
+    public function get_invoice($id = null)
+    {
+        $this->db->select('*');
+        if ($id != null) {
+            $this->db->where('tiketonline_id', $id);
+        }
+        $this->db->from('tb_tiketonline');
+        return $this->db->get();
+    }
 }

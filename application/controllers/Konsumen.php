@@ -62,4 +62,19 @@ class Konsumen extends CI_Controller
         }
         redirect('konsumen/tampil_konsumen');
     }
+
+    public function invoice($id)
+    {
+        $query = $this->konsumen_m->get_invoice($id);
+        if ($query->num_rows() > 0) {
+            $data = array(
+                'header' => 'Detail Pesanan Online',
+                'row' => $query->row(),
+            );
+            $this->template->load('templates', 'konsumen/tiketonline/tiketonline_detail', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "window.location='" . site_url('konsumen/tampil_konsumen') . "';</script>";
+        }
+    }
 }

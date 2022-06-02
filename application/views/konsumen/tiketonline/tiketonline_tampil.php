@@ -67,8 +67,8 @@
                                     <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i> Delete
                                     </a>
-                                    <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
-                                        <i class="fa fa-trash"></i> Delete
+                                    <a href="<?= site_url('konsumen/invoice/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-default">
+                                        <i class="fa fa-print"></i> Payment
                                     </a>
                                 </td>
                             </tr>
