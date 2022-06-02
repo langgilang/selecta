@@ -5,40 +5,32 @@ class Konsumen_m extends CI_Model
     public function getall($id = null)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
-        $this->db->select('a.*, b.*, a.name as tiketonline_name, b.name as wahana_name');
-        $this->db->join('tb_wahana as b', 'a.wahana_id=b.wahana_id  ');
-        if ($id != null) {
-            $this->db->where('tiketonline_id', $id);
-        }
+        $this->db->select('t.*, p.*, t.name AS username');
+        $this->db->join('tb_paket AS p', 't.paket_id = p.paket_id');
         $this->db->where('user_id', $userlogin);
-        return $this->db->get('tb_tiketonline as a');
+        return $this->db->get('tb_tiketonline as t');
     }
 
-    public function add($data)
+    public function get_paket()
     {
-        $userlogin = $this->fungsi->user_login()->user_id;
+        $this->db->select('*');
+        $this->db->from('tb_paket');
+        return $this->db->get();
+    }
+
+    public function add_pesanan_tiketonline($data)
+    {
+        $user = $this->fungsi->user_login()->user_id;
         $param = array(
-            'ticket_total' => $data['ticket_total'],
             'reservationdate' => $data['reservationdate'],
-            'user_id' => $userlogin,
+            'nik' => $data['nik'],
+            'name' => $data['name'],
+            'telp' => $data['telp'],
+            'ticket_type' => $data['ticket_type'],
+            'ticket_total' => $data['ticket_total'],
+            'paket_id' => $data['paket_id'],
+            'user_id' => $user
         );
         $this->db->insert('tb_tiketonline', $param);
-    }
-
-    public function edit($data)
-    {
-        $userlogin = $this->fungsi->user_login()->user_id;
-        $param = array(
-            'wahana_id' => $data['wahana'],
-            'updated_at' => date('Y-m-d H:i:s'),
-        );
-        $this->db->where('tiketonline_id', $data['tiketonline_id']);
-        $this->db->update('tb_tiketonline', $param);
-    }
-
-    public function del($id)
-    {
-        $this->db->where('tiketonline_id', $id);
-        $this->db->delete('tb_tiketonline');
     }
 }

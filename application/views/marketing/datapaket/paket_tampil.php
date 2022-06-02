@@ -56,9 +56,9 @@
                                     <td><?= $row->wahana_item; ?> Items</td>
                                     <td>Rp. <?= $row->price; ?></td>
                                     <td class="text-center" width="160px">
-                                        <!-- <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-default">
+                                        <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-default">
                                             <i class="fa fa-edit"></i> Update
-                                        </a> -->
+                                        </a>
                                         <!-- <a href="#" class="btn btn-xs btn-default update-record" package_id="<?= $row->paket_id; ?>">
                                             <li class="fa fa-edit"></li> Edit
                                         </a> -->

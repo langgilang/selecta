@@ -46,7 +46,7 @@
                                 <label>Wahana <font color="red">*</font></label>
                                 <select class="select2 select2bs4" id="wahana[]" name="wahana[]" multiple="" data-placeholder="Select a State" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
                                     <?php foreach ($tampilwahana as $data) { ?>
-                                        <option value="<?= $data->wahana_id ?>"><?= $data->name ?> - <?= $data->price ?> </option>
+                                        <option value="<?= $data->wahana_id; ?>"><?= $data->name ?> - <?= $data->price ?> </option>
                                     <?php } ?>
                                 </select>
                             </div>

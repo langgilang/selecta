@@ -24,6 +24,9 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Data Pesanan Online</h3>
+                <a href="<?= site_url('konsumen/add/') ?>" class="btn btn-sm btn-success float-right">
+                    <i class="fa fa-plus"></i> Tambah Pesanan
+                </a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -34,8 +37,8 @@
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Telephone</th>
-                            <th>Wahana Pilihan</th>
                             <th>Jenis Tiket</th>
+                            <th>Paket Pilihan</th>
                             <th>Jumlah Tiket</th>
                             <th>Sub Total</th>
                             <th>#</th>
@@ -49,15 +52,20 @@
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $row->nik; ?></td>
-                                <td><?= $row->tiketonline_name ?></td>
+                                <td><?= $row->username; ?></td>
                                 <td><?= $row->telp ?></td>
-                                <td><?= $row->wahana_name ?> - Rp. <?= $row->price ?></td>
                                 <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
+                                <td><?= $row->name; ?></td>
                                 <td><?= $row->ticket_total ?></td>
-                                <td>Rp. <?= ($row->price * $row->ticket_total) + 45000 ?></td>
+                                <td>Rp. <?= ($row->price * $row->ticket_total) + 45000 ?>
+                                    <font color="red"> (Sudah include tiket masuk)</font>
+                                </td>
                                 <td class="text-center" width="160px">
                                     <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-primary">
                                         <i class="fa fa-edit"></i> Update
+                                    </a>
+                                    <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
+                                        <i class="fa fa-trash"></i> Delete
                                     </a>
                                     <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                         <i class="fa fa-trash"></i> Delete
@@ -74,8 +82,8 @@
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Telephone</th>
-                            <th>Wahana Pilihan</th>
                             <th>Jenis Tiket</th>
+                            <th>Paket Pilihan</th>
                             <th>Jumlah Tiket</th>
                             <th>Sub Total</th>
                             <th>#</th>
