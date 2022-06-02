@@ -102,7 +102,7 @@ class Marketing_m extends CI_Model
 
     public function del_paket($id)
     {
-        $this->db->delete('tb_detail_paket', array('paket_id' => $id));
+        $this->db->delete('tb_detail_paket', array('detail_paket_id' => $id));
         $this->db->delete('tb_paket', array('paket_id' => $id));
     }
 }
