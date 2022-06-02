@@ -89,7 +89,7 @@ class Marketing extends CI_Controller
     public function edit_paket($id)
     {
         $query = $this->marketing_m->get_wahana_by_paket($id);
-
+        // $query = $this->marketing_m->get_wahana()->result();
         $wahana = array();
         foreach ($query as $a => $result) {
             $wahana = $result;
@@ -99,8 +99,10 @@ class Marketing extends CI_Controller
             $data = array(
                 'header' => 'Edit Data Paket',
                 'row' => $query->row(),
-                'wahana' => $wahana
+                'wahana' => $wahana,
+                'tampilwahana' => $this->marketing_m->get_wahana()->result(),
             );
+            print_r($data);
             $this->template->load('templates', 'marketing/datapaket/paket_edit', $data);
             return false;
         } else {

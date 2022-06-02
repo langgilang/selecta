@@ -59,9 +59,10 @@
                                         <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-default">
                                             <i class="fa fa-edit"></i> Update
                                         </a>
+                                        <!-- iki page -->
                                         <!-- <a href="#" class="btn btn-xs btn-default update-record" package_id="<?= $row->paket_id; ?>">
                                             <li class="fa fa-edit"></li> Edit
-                                        </a> -->
+                                        </a>  -->
                                         <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                             <i class="fa fa-trash"></i> Delete
                                         </a>
