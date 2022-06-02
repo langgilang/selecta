@@ -39,7 +39,7 @@ class Marketing_m extends CI_Model
 
     public function get_wahana_by_paket($id)
     {
-        $this->db->select('*, tb_wahana.name AS wname');
+        $this->db->select('*');
         $this->db->from('tb_wahana');
         $this->db->join('tb_detail_paket', 'detail_wahana_id = wahana_id');
         $this->db->join('tb_paket', 'paket_id = detail_paket_id');
@@ -102,7 +102,7 @@ class Marketing_m extends CI_Model
 
     public function del_paket($id)
     {
-        $this->db->delete('tb_detail_paket', array('paket_id' => $id));
+        $this->db->delete('tb_detail_paket', array('detail_paket_id' => $id));
         $this->db->delete('tb_paket', array('paket_id' => $id));
     }
 }

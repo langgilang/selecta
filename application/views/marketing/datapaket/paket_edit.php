@@ -46,10 +46,8 @@
                                 <label>Wahana <font color="red">*</font></label>
                                 <select class="select2 select2bs4" id="wahana[]" name="wahana[]" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
                                     <option value="">- Pilih -</option>
-                                    <?php foreach ($row as $data) {
-                                        $value[] = (float) $data->wahana_id;
-                                    ?>
-                                        <option value="<?php echo $data->wahana_id; ?>"></option>
+                                    <?php foreach ($wahana as $data) { ?>
+                                        <option value="<?= $data->wahana_id; ?>"></option>
                                     <?php } ?>
                                 </select>
                             </div>

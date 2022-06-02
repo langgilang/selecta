@@ -221,26 +221,12 @@
                 </a>
               </li>
               <li class="nav-item ">
-                <a href="#" class="nav-link ">
-                  <i class="nav-icon fas fa-chart-pie"></i>
+                <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link ">
+                  <i class="nav-icon fas fa-book"></i>
                   <p>
                     Pesan Tiket
-                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Data Pesanan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="<?= site_url('konsumen/add') ?>" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Pesan Tiket</p>
-                    </a>
-                </ul>
               </li>
               <li class="nav-header">SETTING</li>
               <li class="nav-item">
@@ -270,10 +256,9 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-      <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-      All rights reserved.
+      <strong>Copyright &copy; 2022 <a href="#">Selecta</a>.</strong>
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <b>Version</b> 1.0.0
       </div>
     </footer>
 
@@ -374,6 +359,11 @@
 
       //Initialize Select2 Elements
       $('.select2').select2()
+
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
 
       //GET UPDATE
       $('.update-record').on('click', function() {

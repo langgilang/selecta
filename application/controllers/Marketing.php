@@ -86,20 +86,28 @@ class Marketing extends CI_Controller
         $this->template->load('templates', 'marketing/datapaket/paket_add', $data);
     }
 
-    // public function edit_paket($id)
-    // {
-    //     $query = $this->marketing_m->get_wahana_by_paket($id);
-    //     if ($query->num_rows() > 0) {
-    //         $data = array(
-    //             'header' => 'Edit Data Paket',
-    //             'row' => $query->row(),
-    //         );
-    //         $this->template->load('templates', 'marketing/datapaket/paket_edit', $data);
-    //     } else {
-    //         echo "<script>alert('Data tidak ditemukan');";
-    //         echo "window.location='" . site_url('marketing/edit_paket') . "';</script>";
-    //     }
-    // }
+    public function edit_paket($id)
+    {
+        $query = $this->marketing_m->get_wahana_by_paket($id);
+
+        $wahana = array();
+        foreach ($query as $a => $result) {
+            $wahana = $result;
+        }
+
+        if ($query->num_rows() > 0) {
+            $data = array(
+                'header' => 'Edit Data Paket',
+                'row' => $query->row(),
+                'wahana' => $wahana
+            );
+            $this->template->load('templates', 'marketing/datapaket/paket_edit', $data);
+            return false;
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "window.location='" . site_url('marketing/edit_paket') . "';</script>";
+        }
+    }
 
     // public function edit_paket($id)
     // {
