@@ -48,9 +48,9 @@
                                     <?php foreach ($tampilwahana as $result) {
                                         $value[] = (float) $result->wahana_id;
                                     ?>
-                                        <option value="<?= $result->wahana_id; ?>" <?= $result->wahana_id == $result->wahana_id ? "selected" : null ?>>
-                                            <?php echo $result->name  ?>
-                                        <?php } ?>
+                                        <option value="<?= $result->wahana_id; ?>" <?= $result->wahana_id == $result->wahana_id ? "selected" : '' ?>>
+                                            <?php echo $result->wahana_name  ?></option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

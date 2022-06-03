@@ -28,7 +28,8 @@ class Marketing_m extends CI_Model
         tb_paket.code AS code_paket, 
         tb_paket.created_at AS create_paket, 
         COUNT(tb_wahana.wahana_id) AS wahana_item,
-        tb_paket.name AS paket_name,');
+        tb_paket.name AS paket_name,
+        tb_paket.price AS paket_price');
         $this->db->from('tb_paket');
         $this->db->join('tb_detail_paket', 'paket_id = detail_paket_id');
         $this->db->join('tb_wahana', 'detail_wahana_id = wahana_id');
@@ -40,6 +41,16 @@ class Marketing_m extends CI_Model
     public function get_wahana_by_paket($id)
     {
         $this->db->select('*');
+        $this->db->from('tb_wahana');
+        $this->db->join('tb_detail_paket', 'detail_wahana_id = wahana_id');
+        $this->db->join('tb_paket', 'paket_id = detail_paket_id');
+        $this->db->where('paket_id', $id);
+        return $this->db->get();
+    }
+
+    public function get_detail($id)
+    {
+        $this->db->select('tb_wahana.name AS wahana_name, wahana_id');
         $this->db->from('tb_wahana');
         $this->db->join('tb_detail_paket', 'detail_wahana_id = wahana_id');
         $this->db->join('tb_paket', 'paket_id = detail_paket_id');
