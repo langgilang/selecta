@@ -14,10 +14,11 @@ class Portir extends CI_Controller
         $data = array(
             'header' => 'Dashboard'
         );
-        $this->template->load('templates', 'portir/dashboard/dashboard_tampil', $data);
+        $this->load->view('portir/dashboard/dashboard_tampil', $data);
     }
+
     //TAMPIL MENU DATA TIKET OFFLINE 
-    public function tampil_portir()
+    public function tampil_tiketoffline()
     {
         check_not_login();
         check_portir();
@@ -27,9 +28,14 @@ class Portir extends CI_Controller
             'row' => $query->result()
         );
 
-        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_add', $data);
+        $this->load->view('portir/tiketoffline/tiketoffline_tampil', $data);
     }
-    // guemoyyy elek kecotttttt
+
+    public function tampil_tiketonline()
+    {
+        $this->load->view('portir/tiketonline/tiketonline_tampil');
+    }
+
 
     public function add()
     {
@@ -38,7 +44,7 @@ class Portir extends CI_Controller
             'header' => 'Tambah Data Wahana'
         );
         // print_r($data);
-        $this->template->load('templates', 'portir/tiketoffline/tiketoffline_tampil', $data);
+        $this->load->view('portir/tiketoffline/tiketoffline_add', $data);
     }
 
     public function proses()
@@ -53,7 +59,7 @@ class Portir extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('portir/tampil_portir');
+        redirect('portir/tampil_tiketoffline');
     }
 
     public function edit($id = null)
@@ -66,10 +72,10 @@ class Portir extends CI_Controller
                 'header' => 'Edit Data Tiket Offline',
                 'row' => $portir
             );
-            $this->template->load('templates', 'portir/tiketoffline/tiketoffline_form', $data);
+            $this->load->view('portir/tiketoffline/tiketoffline_form', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
-            redirect('portir/tampil_portir');
+            redirect('portir/tampil_tiketoffline');
         }
     }
     public function del($id)

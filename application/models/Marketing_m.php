@@ -4,10 +4,10 @@ class Marketing_m extends CI_Model
 {
     public function get_pesananonline($id = null)
     {
-        $this->db->select('a.*, b.*, a.name as tiketonline_name, b.name as wahana_name');
-        $this->db->join('tb_wahana as b', 'a.wahana_id=b.wahana_id  ');
+        $this->db->select('a.*, b.*, a.name as tiketonline_name, b.name as paket_name');
+        $this->db->join('tb_paket as b', 'a.paket_id = b.paket_id  ');
         if ($id != null) {
-            $this->db->where('tiketonline_id', $id);
+            $this->db->where('a.tiketonline_id', $id);
         }
         return $this->db->get('tb_tiketonline as a')->result();
     }
@@ -107,7 +107,6 @@ class Marketing_m extends CI_Model
 
     public function edit_paket($paket_id, $data, $wahana)
     {
-        $this->db->trans_start();
         //UPDATE TO PACKAGE
         $data  = array(
             'code' => $data['code'],
@@ -129,7 +128,6 @@ class Marketing_m extends CI_Model
         }
         //MULTIPLE INSERT TO DETAIL TABLE
         $this->db->insert_batch('tb_detail_paket', $result);
-        $this->db->trans_complete();
     }
 
     public function del($id)

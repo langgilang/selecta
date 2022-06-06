@@ -52,21 +52,3 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-// ROUTE MARKETING
-$route['dashboard_m'] = 'marketing/dashboard';
-$route['datawahana_m'] = 'wahana/tampil_wahana_marketing';
-$route['datatiket_m'] = 'tiket/tampil_marketing';
-$route['datakonsumen_m'] = 'konsumen/tampil_konsumen_marketing';
-$route['dataportir_m'] = 'portir/tampil_marketing';
-$route['tampilpesanan_m'] = 'marketing/tampil_pesananonline';
-
-// ROUTE PORTIR
-$route['dashboard_p'] = 'portir/dashboard';
-$route['tiketoffline_tampil_p'] = 'portir/tampil_portir';
-$route['tiketoffline_form_p'] = 'portir/add';
-
-//ROUTE KONSUMEN
-$route['dashboard_k'] = 'konsumen/dashboard';
-$route['tampil'] = 'konsumen/tampil_konsumen';
-$route['form'] = 'konsumen/add1';

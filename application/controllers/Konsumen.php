@@ -15,7 +15,7 @@ class Konsumen extends CI_Controller
         $data = array(
             'header' => 'Dashboard'
         );
-        $this->template->load('templates', 'konsumen/dashboard/dashboard_tampil', $data);
+        $this->load->view('konsumen/dashboard/dashboard_tampil', $data);
     }
 
     public function tampil_konsumen()
@@ -25,7 +25,7 @@ class Konsumen extends CI_Controller
             'header' => 'Pesan Tiket Online',
             'semuatiketonline' => $query->result(),
         ];
-        $this->template->load('templates', 'konsumen/tiketonline/tiketonline_tampil', $data);
+        $this->load->view('konsumen/tiketonline/tiketonline_tampil', $data);
     }
 
     public function add()
@@ -34,7 +34,13 @@ class Konsumen extends CI_Controller
             'header' => 'Tambah Data Paket',
             'tampilpaket' => $this->konsumen_m->get_paket()->result(),
         );
-        $this->template->load('templates', 'konsumen/tiketonline/tiketonline_add', $data);
+        $this->load->view('konsumen/tiketonline/tiketonline_add', $data);
+    }
+
+    public function edit($id)
+    {
+        echo "halaman edit";
+        // $this->load->view('konsumen/tiketonline/tiketonline_edit');
     }
 
     public function proses()
@@ -71,7 +77,7 @@ class Konsumen extends CI_Controller
                 'header' => 'Detail Pesanan Online',
                 'row' => $query->row(),
             );
-            $this->template->load('templates', 'konsumen/tiketonline/tiketonline_detail', $data);
+            $this->load->view('konsumen/tiketonline/tiketonline_detail', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
             echo "window.location='" . site_url('konsumen/tampil_konsumen') . "';</script>";
