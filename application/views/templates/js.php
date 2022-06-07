@@ -1,6 +1,5 @@
 <!-- jQuery -->
-<!-- <script src="<?= base_url('assets/') ?>plugins/jquery/jquery.min.js"></script> -->
-<script src="<?= base_url('assets/') ?>plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="<?= base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -13,9 +12,7 @@
 <script src="<?= base_url('assets/') ?>plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
 <script src="<?= base_url('assets/') ?>plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?= base_url('assets/') ?>plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?= base_url('assets/') ?>plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+
 <!-- jQuery Knob Chart -->
 <script src="<?= base_url('assets/') ?>plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
