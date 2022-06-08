@@ -54,13 +54,27 @@
                                         </label>
                                         <select class="select2 select2bs4" multiple="multiple" id="wahana[]" name="wahana[]" data-placeholder="Select Wahana" style="width: 100%;">
                                             <option value="">- Pilih -</option>
-                                            <?php foreach ($tampilselect as $result) {
+                                            <?php 
+                                            foreach ($tampilwahana as $v) {
                                             ?>
-                                                <option value="<?= $result->wahana_id; ?>" <?= $result->wahana_id == $result->wahana_id ? "selected" : '' ?>>
-                                                    <?php echo $result->wahana_name  ?></option>
-                                                <option value="<?= $result->wahana_id; ?>" <?= $result->wahana_id != $result->wahana_id ?>>
-                                                    <?php echo $result->wahana_name  ?></option>
-                                            <?php } ?>
+                                                <option 
+                                                    value="<?= $v->wahana_id ?>" 
+                                                    <?php
+                                                        foreach ($tampilselect as $r) {
+                                                            if ($v->wahana_id == $r->wahana_id)
+                                                            {
+                                                    ?>
+                                                                selected
+                                                    <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                >
+                                                    <?= $v->name ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>

@@ -96,7 +96,10 @@ class Marketing extends CI_Controller
                 'header' => 'Edit Data Paket',
                 'row' => $query->row(),
                 'tampilselect' => $this->marketing_m->get_detail($id)->result(),
+                'tampilwahana' => $this->marketing_m->get_wahana()->result(),
             );
+            // print_r($data);
+            // die();
             $this->load->view('marketing/datapaket/paket_edit', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
