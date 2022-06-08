@@ -63,12 +63,12 @@
                                             <td><?= $row->wahana_item; ?> Items</td>
                                             <td>Rp. <?= $row->paket_price; ?></td>
                                             <td class="text-center" width="160px">
-                                                <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-primary">
+                                                <!-- <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-primary">
                                                     <i class="fa fa-edit"></i> Update
-                                                </a>
-                                                <!-- <a href="#" class="btn btn-xs btn-default update-record" data-paket_id="<?= $row->paket_id; ?>" data-paket_name="<?= $row->paket_name; ?>">
-                                                    <li class="fa fa-edit"></li> Edit
                                                 </a> -->
+                                                <a href="#" class="btn btn-xs btn-default update-record" data-paket_id="<?= $row->paket_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-code="<?= $row->code_paket; ?>" data-price="<?= $row->paket_price; ?>">
+                                                    <li class="fa fa-edit"></li> Edit
+                                                </a>
                                                 <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
@@ -167,7 +167,7 @@
         $('.update-record').on('click', function() {
             var paket_id = $(this).data('paket_id');
             var code = $(this).data('code');
-            var name = $(this).data('name');
+            var name = $(this).data('paket_name');
             var price = $(this).data('price');
             $(".strings").val('');
             $('#UpdateModal').modal('show');
@@ -191,9 +191,9 @@
                     var val1 = item.toString().replace("[", "");
                     var val2 = val1.toString().replace("]", "");
                     var values = val2;
-                    $.each(values.split(","), function(i, e) {
+                    $.each(item, function(i, e) {
                         $(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
-                        $('.strings').select2('refresh');
+                        // $('.strings').select2('refresh');
                     });
                 }
             });
