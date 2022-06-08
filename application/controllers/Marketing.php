@@ -107,6 +107,22 @@ class Marketing extends CI_Controller
         }
     }
 
+    // KE HALAMAN EDIT WAHANA
+    public function edit_wahana($id)
+    {
+        $query = $this->marketing_m->get_wahana($id);
+        if ($query->num_rows() > 0) {
+            $data = array(
+                'header' => 'Edit Data Wahana',
+                'row' => $query->row(),
+            );
+            $this->template->load('templates', 'marketing/datawahana/wahana_edit', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "window.location='" . site_url('marketing/edit_wahana') . "';</script>";
+        }
+    }
+
     // KE HALAMAN TAMBAH PAKET
     public function proses_add_paket()
     {
@@ -146,22 +162,6 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('success', 'Update data paket berhasil');
         }
         redirect('marketing/tampil_paket');
-    }
-
-    // KE HALAMAN EDIT WAHANA
-    public function edit_wahana($id)
-    {
-        $query = $this->marketing_m->get_wahana($id);
-        if ($query->num_rows() > 0) {
-            $data = array(
-                'header' => 'Edit Data Wahana',
-                'row' => $query->row(),
-            );
-            $this->template->load('templates', 'marketing/datawahana/wahana_edit', $data);
-        } else {
-            echo "<script>alert('Data tidak ditemukan');";
-            echo "window.location='" . site_url('marketing/edit_wahana') . "';</script>";
-        }
     }
 
     // PROSES SIMPAN
@@ -204,5 +204,15 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
         redirect('marketing/tampil_wahana');
+    }
+
+    function get_wahana_by_paket()
+    {
+        $paket_id = $this->input->post('paket_id');
+        $data = $this->marketing_m->get_wahana_by_paket($paket_id)->result();
+        foreach ($data as $result) {
+            $value[] = (float) $result->wahana_id;
+        }
+        echo json_encode($value);
     }
 }

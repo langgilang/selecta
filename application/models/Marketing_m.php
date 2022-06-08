@@ -38,17 +38,17 @@ class Marketing_m extends CI_Model
         return $query;
     }
 
-    public function get_wahana_by_paket($id)
+    public function get_wahana_by_paket($paket_id)
     {
         $this->db->select('*');
         $this->db->from('tb_wahana');
         $this->db->join('tb_detail_paket', 'detail_wahana_id = wahana_id');
         $this->db->join('tb_paket', 'paket_id = detail_paket_id');
-        $this->db->where('paket_id', $id);
+        $this->db->where('paket_id', $paket_id);
         return $this->db->get();
     }
 
-    public function get_detail($id)
+    public function get_wahanaselect($id)
     {
         $this->db->select('tb_wahana.name AS wahana_name, wahana_id');
         $this->db->from('tb_wahana');

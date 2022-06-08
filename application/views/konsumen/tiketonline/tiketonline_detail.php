@@ -35,6 +35,9 @@
                             <h4>
                                 <i class="fas fa-globe"></i> Detail Pesanan Tiket Online.
                                 <!-- <small class="float-right">Date: 2/10/2014</small> -->
+                                <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="btn btn-sm btn-warning float-right">
+                                    <i class="fas fa-undo"></i> Back
+                                </a>
                             </h4>
                         </div>
                         <!-- /.col -->
@@ -74,21 +77,29 @@
                                         <th>Jumlah Paket</th>
                                         <th>Jenis Tiket</th>
                                         <th>Jenis Paket</th>
+                                        <th>Harga Paket</th>
                                         <th>Detail Paket</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>4</td>
-                                        <td>Perorangan</td>
-                                        <td>Paket Terusan</td>
-                                        <td>Flying Fox, Roller Coaster, Bianglala</td>
-                                        <td>Rp. 500000</td>
+                                        <td><?= $row->ticket_total; ?></td>
+                                        <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan";; ?></td>
+                                        <td><?= $row->paket_name; ?></td>
+                                        <td>Rp. <?= $row->paket_price; ?></td>
+
+                                        <td>
+                                            <?php foreach ($getwahana as $w) { ?>
+                                                <p>- <?= $w->wahana_name ?> </p>
+                                            <?php } ?>
+                                        </td>
+                                        <td>Rp. <?= $row->paket_price * $row->ticket_total ?> </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
@@ -109,15 +120,15 @@
                                 <table class="table">
                                     <tr>
                                         <th style="width:50%">Subtotal:</th>
-                                        <td>Rp. 500000</td>
+                                        <td>Rp. <?= $row->paket_price * $row->ticket_total ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Diskon</th>
-                                        <td>Rp. 0</td>
+                                        <th>Tiket Masuk</th>
+                                        <td>Rp. <?= $row->ticket_total * 45000 ?></td>
                                     </tr>
                                     <tr>
                                         <th>Total:</th>
-                                        <td>Rp. 500000</td>
+                                        <td>Rp. <?= (($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000)) ?> </td>
                                     </tr>
                                 </table>
                             </div>
@@ -131,7 +142,7 @@
                     <div class="row no-print">
                         <div class="col-12">
                             <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                            <a id="pay-button" class="btn btn-warning float-right">
+                            <a href="<?= site_url('snap') ?>" id="pay-button" class="btn btn-success float-right">
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
@@ -147,5 +158,55 @@
     <?php $this->load->view('templates/footer') ?>
 
 </div>
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-2628sDdKgoXg19is"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $('#pay-button').click(function(event) {
+        event.preventDefault();
+        $(this).attr("disabled", "disabled");
+
+        $.ajax({
+            url: '<?= site_url() ?>/snap/token',
+            cache: false,
+
+            success: function(data) {
+                //location = data;
+
+                console.log('token = ' + data);
+
+                var resultType = document.getElementById('result-type');
+                var resultData = document.getElementById('result-data');
+
+                function changeResult(type, data) {
+                    $("#result-type").val(type);
+                    $("#result-data").val(JSON.stringify(data));
+                    //resultType.innerHTML = type;
+                    //resultData.innerHTML = JSON.stringify(data);
+                }
+
+                snap.pay(data, {
+
+                    onSuccess: function(result) {
+                        changeResult('success', result);
+                        console.log(result.status_message);
+                        console.log(result);
+                        $("#payment-form").submit();
+                    },
+                    onPending: function(result) {
+                        changeResult('pending', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                    },
+                    onError: function(result) {
+                        changeResult('error', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                    }
+                });
+            }
+        });
+    });
+</script>
 
 <?php $this->load->view('templates/js') ?>

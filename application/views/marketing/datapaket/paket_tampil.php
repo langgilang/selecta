@@ -66,10 +66,9 @@
                                                 <a href="<?= site_url('marketing/edit_paket/') . $row->paket_id ?>" class="btn btn-xs btn-primary">
                                                     <i class="fa fa-edit"></i> Update
                                                 </a>
-                                                <!-- iki page -->
-                                                <!-- <a href="#" class="btn btn-xs btn-default update-record" package_id="<?= $row->paket_id; ?>">
-                                            <li class="fa fa-edit"></li> Edit
-                                        </a>  -->
+                                                <!-- <a href="#" class="btn btn-xs btn-default update-record" data-paket_id="<?= $row->paket_id; ?>" data-paket_name="<?= $row->paket_name; ?>">
+                                                    <li class="fa fa-edit"></li> Edit
+                                                </a> -->
                                                 <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
@@ -97,8 +96,110 @@
         </section><!-- /.content -->
     </div>
 
+
+    <!-- Modal Update Package-->
+    <form action="<?php echo site_url('package/update'); ?>" method="post">
+        <div class="modal fade" id="UpdateModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Paket </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Kode Paket <font color="red">*</font></label>
+                                <input type="hidden" id="paket_id" name="paket_id">
+                                <input type="text" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label>Nama Paket <font color="red">*</font></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Harga <font color="red">*</font></label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label>Wahana <font color="red">*</font></label>
+                                <select class="select2 select2bs4 strings" id="wahana[]" name="wahana[]" multiple data-placeholder="Select a State" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                    <?php foreach ($tampilwahana->result() as $data) { ?>
+                                        <option value="<?= $data->wahana_id ?>"><?= $data->name ?> - <?= $data->price ?> </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </form>
+
     <?php $this->load->view('templates/footer') ?>
 
 </div>
+
+<script src="<?= base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.select2').select2();
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        });
+
+        //GET UPDATE 
+        $('.update-record').on('click', function() {
+            var paket_id = $(this).data('paket_id');
+            var code = $(this).data('code');
+            var name = $(this).data('name');
+            var price = $(this).data('price');
+            $(".strings").val('');
+            $('#UpdateModal').modal('show');
+            $('[name="paket_id"]').val(paket_id);
+            $('[name="code"]').val(code);
+            $('[name="name"]').val(name);
+            $('[name="price"]').val(price);
+
+            //AJAX REQUEST TO GET SELECTED PRODUCT
+            $.ajax({
+                url: "<?php echo site_url('marketing/get_wahana_by_paket'); ?>",
+                method: "POST",
+                dataType: 'json',
+                data: {
+                    paket_id: paket_id
+                },
+                cache: false,
+                success: function(data) {
+                    console.log(data);
+                    var item = data;
+                    var val1 = item.toString().replace("[", "");
+                    var val2 = val1.toString().replace("]", "");
+                    var values = val2;
+                    $.each(values.split(","), function(i, e) {
+                        $(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
+                        $('.strings').select2('refresh');
+                    });
+                }
+            });
+            return false;
+        });
+    });
+</script>
 
 <?php $this->load->view('templates/js') ?>

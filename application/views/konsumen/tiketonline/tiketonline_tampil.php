@@ -46,6 +46,7 @@
                                     <th>Telephone</th>
                                     <th>Jenis Tiket</th>
                                     <th>Paket Pilihan</th>
+                                    <th>Harga Paket</th>
                                     <th>Jumlah Tiket</th>
                                     <th>Sub Total</th>
                                     <th>#</th>
@@ -63,6 +64,7 @@
                                         <td><?= $row->telp ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->name; ?></td>
+                                        <td>Rp. <?= $row->price; ?></td>
                                         <td><?= $row->ticket_total ?></td>
                                         <td>Rp. <?= ($row->price * $row->ticket_total) ?>
                                         </td>
@@ -90,6 +92,7 @@
                                     <th>Telephone</th>
                                     <th>Jenis Tiket</th>
                                     <th>Paket Pilihan</th>
+                                    <th>Harga Paket</th>
                                     <th>Jumlah Tiket</th>
                                     <th>Sub Total</th>
                                     <th>#</th>
