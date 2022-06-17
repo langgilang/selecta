@@ -59,7 +59,7 @@
                                 foreach ($semuatiketonline as $row) : ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
-                                        <td><?= $row->nik; ?></td>
+                                        <td><?= $row->order_key; ?></td>
                                         <td><?= $row->username; ?></td>
                                         <td><?= $row->telp ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>

@@ -46,15 +46,17 @@ class Konsumen extends CI_Controller
 
     public function proses()
     {
-        $reservationdate = $this->input->post('reservationdate', TRUE);
         $nik = $this->input->post('nik', TRUE);
         $name = $this->input->post('name', TRUE);
         $telp = $this->input->post('telp', TRUE);
+        $order_key = $this->konsumen_m->order_key();
         $ticket_type = $this->input->post('ticket_type', TRUE);
         $ticket_total = $this->input->post('ticket_total', TRUE);
+        $reservationdate = $this->input->post('reservationdate', TRUE);
         $paket_id = $this->input->post('paket_id', TRUE);
 
         $data = array(
+            'order_key' => $order_key,
             'reservationdate' => $reservationdate,
             'nik' => $nik,
             'name' => $name,

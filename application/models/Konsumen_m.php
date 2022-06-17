@@ -31,7 +31,7 @@ class Konsumen_m extends CI_Model
         } else {
             $no = "0001";
         }
-        $order_id = "TKT/ON/" . date('ymd' . $no);
+        $order_id = "ON" . date('ymd' . $no);
         return $order_id;
     }
 
@@ -39,6 +39,7 @@ class Konsumen_m extends CI_Model
     {
         $user = $this->fungsi->user_login()->user_id;
         $param = array(
+            'order_key' => $data['order_key'],
             'reservationdate' => $data['reservationdate'],
             'nik' => $data['nik'],
             'name' => $data['name'],
