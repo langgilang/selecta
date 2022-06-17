@@ -18,6 +18,23 @@ class Konsumen_m extends CI_Model
         return $this->db->get();
     }
 
+    public function order_key()
+    {
+        $sql = "SELECT MAX(MID(order_key,9,4)) AS order_number 
+                FROM tb_tiketonline 
+                WHERE MID(order_key,3,6) = DATE_FORMAT(CURDATE(), '%y%m%d')";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $n = ((int)$row->order_number) + 1;
+            $no = sprintf("%'.04d", $n);
+        } else {
+            $no = "0001";
+        }
+        $order_id = "TKT/ON/" . date('ymd' . $no);
+        return $order_id;
+    }
+
     public function add_pesanan_tiketonline($data)
     {
         $user = $this->fungsi->user_login()->user_id;
@@ -51,5 +68,11 @@ class Konsumen_m extends CI_Model
         }
         $this->db->from('tb_paket');
         return $this->db->get();
+    }
+
+    public function del($id)
+    {
+        $this->db->where('tiketonline_id', $id);
+        $this->db->delete('tb_tiketonline');
     }
 }

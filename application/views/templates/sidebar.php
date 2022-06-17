@@ -18,7 +18,7 @@
         </div>
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        <!-- <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
@@ -27,7 +27,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -155,6 +155,7 @@
 
                 <!-- MENU KONSUMEN -->
                 <?php if ($this->session->userdata('level') ==  4) { ?>
+                    <li class="nav-header">DATA</li>
                     <li class="nav-item">
                         <a href="<?= site_url('konsumen/dashboard') ?>" class="nav-link ">
                             <i class=" nav-icon fas fa-tachometer-alt"></i>

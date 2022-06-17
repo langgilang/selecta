@@ -191,7 +191,7 @@
                     var val1 = item.toString().replace("[", "");
                     var val2 = val1.toString().replace("]", "");
                     var values = val2;
-                    $.each(item, function(i, e) {
+                    $.each(values.split(","), function(i, e) {
                         $(".strings option[value='" + e + "']").prop("selected", true).trigger('change');
                         // $('.strings').select2('refresh');
                     });

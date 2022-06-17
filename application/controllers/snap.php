@@ -1,5 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
 class Snap extends CI_Controller
 {
 
@@ -27,6 +28,8 @@ class Snap extends CI_Controller
 		$this->load->library('midtrans');
 		$this->midtrans->config($params);
 		$this->load->helper('url');
+		$this->load->model('konsumen_m');
+		$this->load->model('midtrans_m');
 	}
 
 	public function index()
@@ -37,61 +40,68 @@ class Snap extends CI_Controller
 	public function token()
 	{
 
+		$total = $this->input->get('total');
+		$order_name = $this->input->get('order_name');
+		$telp = $this->input->get('telp');
+		$email = $this->input->get('email');
+		$tiketonline_id = $this->input->get('tiketonline_id');
+		$paket_price = $this->input->get('paket_price');
+		$ticket_total = $this->input->get('ticket_total');
+		$paket_name = $this->input->get('paket_name');
+
 		// Required
 		$transaction_details = array(
 			'order_id' => rand(),
-			'gross_amount' => 94000, // no decimal allowed for creditcard
+			'gross_amount' => $total  // no decimal allowed for creditcard
 		);
+
 
 		// Optional
 		$item1_details = array(
-			'id' => 'a1',
-			'price' => 18000,
-			'quantity' => 3,
-			'name' => "Apple"
+			'id' => $tiketonline_id,
+			'price' => $paket_price,
+			'quantity' => $ticket_total,
+			'name' => $paket_name
 		);
 
 		// Optional
 		$item2_details = array(
-			'id' => 'a2',
-			'price' => 20000,
-			'quantity' => 2,
-			'name' => "Orange"
+			'id' => $tiketonline_id,
+			'price' => 45000,
+			'quantity' => $ticket_total,
+			'name' => "Tiket Masuk"
 		);
 
-		// Optional
+		// // Optional
 		$item_details = array($item1_details, $item2_details);
 
-		// Optional
-		$billing_address = array(
-			'first_name'    => "Andri",
-			'last_name'     => "Litani",
-			'address'       => "Mangga 20",
-			'city'          => "Jakarta",
-			'postal_code'   => "16602",
-			'phone'         => "081122334455",
-			'country_code'  => 'IDN'
-		);
+		// // Optional
+		// $billing_address = array(
+		// 	'first_name'    => "Andri",
+		// 	'last_name'     => "Litani",
+		// 	'address'       => "Mangga 20",
+		// 	'city'          => "Jakarta",
+		// 	'postal_code'   => "16602",
+		// 	'phone'         => "081122334455",
+		// 	'country_code'  => 'IDN'
+		// );
 
-		// Optional
-		$shipping_address = array(
-			'first_name'    => "Obet",
-			'last_name'     => "Supriadi",
-			'address'       => "Manggis 90",
-			'city'          => "Jakarta",
-			'postal_code'   => "16601",
-			'phone'         => "08113366345",
-			'country_code'  => 'IDN'
-		);
+		// // Optional
+		// $shipping_address = array(
+		// 	'first_name'    => "Obet",
+		// 	'last_name'     => "Supriadi",
+		// 	'address'       => "Manggis 90",
+		// 	'city'          => "Jakarta",
+		// 	'postal_code'   => "16601",
+		// 	'phone'         => "08113366345",
+		// 	'country_code'  => 'IDN'
+		// );
 
 		// Optional
 		$customer_details = array(
-			'first_name'    => "Andri",
-			'last_name'     => "Litani",
-			'email'         => "andri@litani.com",
-			'phone'         => "081122334455",
-			'billing_address'  => $billing_address,
-			'shipping_address' => $shipping_address
+			'first_name'    => $order_name,
+			'email'         => $email,
+			'phone'         => $telp
 		);
 
 		// Data yang akan dikirim untuk request redirect_url.
@@ -102,8 +112,8 @@ class Snap extends CI_Controller
 		$time = time();
 		$custom_expiry = array(
 			'start_time' => date("Y-m-d H:i:s O", $time),
-			'unit' => 'minute',
-			'duration'  => 2
+			'unit' => 'day',
+			'duration'  => 1
 		);
 
 		$transaction_data = array(
@@ -122,9 +132,24 @@ class Snap extends CI_Controller
 
 	public function finish()
 	{
-		$result = json_decode($this->input->post('result_data'));
-		echo 'RESULT <br><pre>';
-		var_dump($result);
-		echo '</pre>';
+		$result = json_decode($this->input->post('result_data'), TRUE);
+		// echo '<pre>';
+		// var_dump($result);
+		// echo '</pre>';
+		$data = array(
+			'order_id' => $result['order_id'],
+			'gross_amount' => $result['gross_amount'],
+			'payment_type' => $result['payment_type'],
+			'transaction_time' => $result['transaction_time'],
+			'bank' => $result['va_numbers'][0]['bank'],
+			'va_number' => $result['va_numbers'][0]['va_number'],
+			'pdf_url' => $result['pdf_url'],
+			'status_code' => $result['status_code'],
+		);
+		$this->midtrans_m->add($data);
+		if ($this->db->affected_rows() > 0) {
+			$this->session->set_flashdata('success', 'Transaksi Berhasil');
+		}
+		redirect('konsumen/tampil_konsumen');
 	}
 }

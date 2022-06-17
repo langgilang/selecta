@@ -95,7 +95,7 @@ class Marketing extends CI_Controller
             $data = array(
                 'header' => 'Edit Data Paket',
                 'row' => $query->row(),
-                'tampilselect' => $this->marketing_m->get_detail($id)->result(),
+                'tampilselect' => $this->marketing_m->get_wahanaselect($id)->result(),
                 'tampilwahana' => $this->marketing_m->get_wahana()->result(),
             );
             // print_r($data);
@@ -116,7 +116,7 @@ class Marketing extends CI_Controller
                 'header' => 'Edit Data Wahana',
                 'row' => $query->row(),
             );
-            $this->template->load('templates', 'marketing/datawahana/wahana_edit', $data);
+            $this->load->view('marketing/datawahana/wahana_edit', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
             echo "window.location='" . site_url('marketing/edit_wahana') . "';</script>";
