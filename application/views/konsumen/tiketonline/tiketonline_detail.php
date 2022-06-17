@@ -27,7 +27,6 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
                 <div class="invoice p-3 mb-3">
                     <!-- title row -->
                     <div class="row">
@@ -84,7 +83,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><?= $row->ticket_total; ?></td>
+                                        <td><?= $row->ticket_total; ?>x</td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan";; ?></td>
                                         <td><?= $row->paket_name; ?></td>
                                         <td>Rp. <?= $row->paket_price; ?></td>
@@ -94,7 +93,10 @@
                                                 <p>- <?= $w->wahana_name ?> </p>
                                             <?php } ?>
                                         </td>
-                                        <td>Rp. <?= $row->paket_price * $row->ticket_total ?> </td>
+                                        <td>Rp. <?=
+                                                $subtotal = $row->paket_price * $row->ticket_total;
+                                                $subtotal ?>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -105,13 +107,7 @@
                     <!-- /.row -->
 
                     <div class="row">
-                        <!-- accepted payments column -->
                         <div class="col-6">
-                            <!-- <p class="lead">Payment Methods:</p>
-                    <img src="<?= base_url('assets/') ?>dist/img/credit/visa.png" alt="Visa">
-                    <img src="<?= base_url('assets/') ?>dist/img/credit/mastercard.png" alt="Mastercard">
-                    <img src="<?= base_url('assets/') ?>dist/img/credit/american-express.png" alt="American Express">
-                    <img src="<?= base_url('assets/') ?>dist/img/credit/paypal2.png" alt="Paypal"> -->
                         </div>
                         <!-- /.col -->
                         <div class="col-6">
@@ -120,15 +116,23 @@
                                 <table class="table">
                                     <tr>
                                         <th style="width:50%">Subtotal:</th>
-                                        <td>Rp. <?= $row->paket_price * $row->ticket_total ?></td>
+                                        <td>Rp. <?=
+                                                $subtotal = $row->paket_price * $row->ticket_total;
+                                                $subtotal ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Tiket Masuk</th>
-                                        <td>Rp. <?= $row->ticket_total * 45000 ?></td>
+                                        <th>Tiket Masuk <font color="red">(<?= $row->ticket_total ?>x)</font>
+                                        </th>
+                                        <td>Rp. <?= $tiketmasuk = $row->ticket_total * 45000;
+                                                $tiketmasuk; ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Total:</th>
-                                        <td>Rp. <?= (($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000)) ?> </td>
+                                        <td>Rp. <?=
+                                                $total = (($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000));
+                                                $total; ?>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -142,14 +146,13 @@
                     <div class="row no-print">
                         <div class="col-12">
                             <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                            <a href="<?= site_url('snap') ?>" id="pay-button" class="btn btn-success float-right">
+                            <a href="" id="pay-button" class="btn btn-success float-right" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-total="<?= $total; ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-ticket_total="<?= $row->ticket_total; ?>" data-paket_price="<?= $row->paket_price; ?>">
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
                         </div>
                     </div>
                 </div>
-                <!-- /.invoice -->
 
             </div><!-- /.container-fluid -->
         </section>
@@ -158,17 +161,43 @@
     <?php $this->load->view('templates/footer') ?>
 
 </div>
+
+<form id="payment-form" method="post" action="<?= site_url() ?>/snap/finish">
+    <input type="hidden" name="result_type" id="result-type" value="">
+    </div>
+    <input type="hidden" name="result_data" id="result-data" value="">
+    </div>
+</form>
+
 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-2628sDdKgoXg19is"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <script type="text/javascript">
     $('#pay-button').click(function(event) {
+        var total = $(this).data('total');
+        var order_name = $(this).data('order_name');
+        var telp = $(this).data('telp');
+        var email = $(this).data('email');
+        var tiketonline_id = $(this).data('tiketonline_id');
+        var paket_name = $(this).data('paket_name');
+        var ticket_total = $(this).data('ticket_total');
+        var paket_price = $(this).data('paket_price');
         event.preventDefault();
         $(this).attr("disabled", "disabled");
 
         $.ajax({
-            url: '<?= site_url() ?>/snap/token',
+            url: '<?= site_url() ?>snap/token',
             cache: false,
+            data: {
+                total: total,
+                order_name: order_name,
+                telp: telp,
+                email: email,
+                tiketonline_id: tiketonline_id,
+                paket_name: paket_name,
+                ticket_total: ticket_total,
+                paket_price: paket_price
+            },
 
             success: function(data) {
                 //location = data;

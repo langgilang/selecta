@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
+                                    <th>Order Id</th>
                                     <th>Nama</th>
                                     <th>Telephone</th>
                                     <th>Jenis Tiket</th>
@@ -65,7 +65,7 @@
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->name; ?></td>
                                         <td>Rp. <?= $row->price; ?></td>
-                                        <td><?= $row->ticket_total ?></td>
+                                        <td><?= $row->ticket_total ?>x</td>
                                         <td>Rp. <?= ($row->price * $row->ticket_total) ?>
                                         </td>
                                         <td class="text-center" width="160px">
@@ -87,7 +87,7 @@
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
+                                    <th>Order Id</th>
                                     <th>Nama</th>
                                     <th>Telephone</th>
                                     <th>Jenis Tiket</th>

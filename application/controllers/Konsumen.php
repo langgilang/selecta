@@ -33,6 +33,7 @@ class Konsumen extends CI_Controller
         $data = array(
             'header' => 'Tambah Data Paket',
             'tampilpaket' => $this->konsumen_m->get_paket()->result(),
+            'order_key' => $this->konsumen_m->order_key()
         );
         $this->load->view('konsumen/tiketonline/tiketonline_add', $data);
     }
@@ -83,5 +84,14 @@ class Konsumen extends CI_Controller
             echo "<script>alert('Data tidak ditemukan');";
             echo "window.location='" . site_url('konsumen/tampil_konsumen') . "';</script>";
         }
+    }
+
+    public function del($id)
+    {
+        $this->konsumen_m->del($id);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data pesanan berhasil dihapus');
+        }
+        redirect('konsumen/tampil_konsumen');
     }
 }

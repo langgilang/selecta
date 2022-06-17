@@ -26,28 +26,6 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <div class="alert callout callout-info">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="fas fa-info"></i> Note:</h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                Use one select visit date
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                No Reservation need
-                            </div>
-                            <div class="col-md-6" style="align-items: right;">
-                                Rp. 45.000
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                Non-Refundable
-                            </div>
-                        </div>
-                    </div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -57,6 +35,13 @@
                         <form action="<?= site_url('konsumen/proses'); ?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-md 3">
+                                        <div class="form-group ">
+                                            <input type="hidden" value="" name="tiketonline_id">
+                                            <label for="order_key">Order Id <font color="red">*</font></label>
+                                            <input type="text" value="<?= $order_key ?>" id="order_key" name="order_key" class="form-control" disabled>
+                                        </div>
+                                    </div>
                                     <div class="col-md 3">
                                         <div class="form-group ">
                                             <input type="hidden" value="" name="tiketonline_id">
@@ -76,16 +61,16 @@
                                             <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda " required>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md 3">
                                         <div class="form-group ">
                                             <label for="telp">Telephone <font color="red">*</font></label>
                                             <input type="text" value="" id="telp" name="telp" class="form-control" placeholder="Masukkan Telephone " required>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group ">
                                             <label for="ticket_type">Jenis Tiket <font color="red">*</font></label>
                                             <select name="ticket_type" id="ticket_type" class="form-control">
@@ -95,13 +80,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group ">
                                             <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
                                             <input type="number" value="" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="paket_id">Jenis Paket <font color="red">*</font></label>
                                             <select name="paket_id" id="paket_id" class="form-control">
