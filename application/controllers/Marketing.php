@@ -127,7 +127,7 @@ class Marketing extends CI_Controller
     public function proses_add_paket()
     {
         $code = $this->input->post('code', TRUE);
-        $name = $this->input->post('name', TRUE);
+        $name  = $this->input->post('name', TRUE);
         $price = $this->input->post('price', TRUE);
         $wahana = $this->input->post('wahana', TRUE);
 

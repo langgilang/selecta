@@ -120,7 +120,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= site_url('portir/tampil_portir') ?>" class="nav-link">
+                                <a href="<?= site_url('portir/tampil_tiketoffline') ?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Data Order</p>
                                 </a>
