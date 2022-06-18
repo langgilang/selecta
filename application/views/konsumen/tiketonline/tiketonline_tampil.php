@@ -28,15 +28,25 @@
         <section class="content">
             <div class="container-fluid">
                 <?php $this->view('konsumen/messages') ?>
+                <a href="<?= site_url('konsumen/add') ?>" class="btn btn-md btn-success">
+                    <i class="fa fa-plus"></i> Tambah Pesanan
+                </a><br>&nbsp;
+                <!-- tabel pesanan -->
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Data Pesanan Online</h3>
-                        <a href="<?= site_url('konsumen/add/') ?>" class="btn btn-sm btn-success float-right">
-                            <i class="fa fa-plus"></i> Tambah Pesanan
-                        </a>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -67,6 +77,18 @@
                                         <td>Rp. <?= $row->price; ?></td>
                                         <td><?= $row->ticket_total ?>x</td>
                                         <td>Rp. <?= ($row->price * $row->ticket_total) ?>
+                                            <!-- <td><?php
+                                                        if ($row->status_code == "200") {
+                                                        ?>
+                                                <label class="badge bg-success">Success</label>
+                                            <?php
+                                                        } else {
+                                            ?>
+                                                <label class="badge bg-warning">Pending</label>
+                                            <?php
+                                                        }
+                                            ?>
+                                        </td> -->
                                         </td>
                                         <td class="text-center" width="160px">
                                             <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-primary">
@@ -102,6 +124,89 @@
                     </div>
                     <!-- /.card-body -->
                 </div>
+                <!-- end tabel pesanan -->
+
+                <!-- tabel transaksi -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Transaksi</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Order Id</th>
+                                    <th>Total Pembayaran</th>
+                                    <th>Type Pembayaran</th>
+                                    <th>Tanggal Transaksi</th>
+                                    <th>Bank</th>
+                                    <th>VA Number</th>
+                                    <th>Status</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $total = 0;
+                                foreach ($transaksi as $row) : ?>
+                                    <tr>
+                                        <td><?= $no++; ?></td>
+                                        <td><?= $row->order_id; ?></td>
+                                        <td>Rp. <?= $row->gross_amount; ?></td>
+                                        <td><?= $row->payment_type ?></td>
+                                        <td><?= $row->transaction_time ?></td>
+                                        <td><?= $row->bank; ?></td>
+                                        <td><?= $row->va_number; ?></td>
+                                        <td><?php
+                                            if ($row->status_code == "200") {
+                                            ?>
+                                                <label class="badge bg-success">Success</label>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <label class="badge bg-warning">Pending</label>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?= $row->pdf_url; ?>" target="_blank" class="btn btn-success btn-sm">Download</a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                endforeach; ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Order Id</th>
+                                    <th>Total Pembayaran</th>
+                                    <th>Type Pembayaran</th>
+                                    <th>Tanggal Transaksi</th>
+                                    <th>Bank</th>
+                                    <th>VA Number</th>
+                                    <th>Status</th>
+                                    <th>#</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- end tabel transaksi -->
+                <br>
                 <!-- /.card -->
             </div><!-- /.container-fluid -->
         </section>

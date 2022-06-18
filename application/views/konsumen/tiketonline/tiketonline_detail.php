@@ -59,7 +59,7 @@
                         <div class="col-sm-4 invoice-col">
                             <!-- <b>Invoice #007612</b><br> -->
                             <br>
-                            <b>Order ID:</b><br>
+                            <b>Order ID:</b> <?= $row->order_key; ?><br>
                             <b>Order Date:</b> <?= date('D-m-Y') ?><br>
                             <b>Account:</b> <?= $this->fungsi->user_login()->user_id ?>
                         </div>
@@ -146,7 +146,7 @@
                     <div class="row no-print">
                         <div class="col-12">
                             <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                            <a href="" id="pay-button" class="btn btn-success float-right" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-total="<?= $total; ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-ticket_total="<?= $row->ticket_total; ?>" data-paket_price="<?= $row->paket_price; ?>">
+                            <a href="" id="pay-button" class="btn btn-success float-right" data-order_key="<?= $row->order_key; ?>" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-total="<?= $total; ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-ticket_total="<?= $row->ticket_total; ?>" data-paket_price="<?= $row->paket_price; ?>">
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
@@ -175,6 +175,7 @@
 <script type="text/javascript">
     $('#pay-button').click(function(event) {
         var total = $(this).data('total');
+        var order_key = $(this).data('order_key');
         var order_name = $(this).data('order_name');
         var telp = $(this).data('telp');
         var email = $(this).data('email');
@@ -190,6 +191,7 @@
             cache: false,
             data: {
                 total: total,
+                order_key: order_key,
                 order_name: order_name,
                 telp: telp,
                 email: email,

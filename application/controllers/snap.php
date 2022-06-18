@@ -41,6 +41,7 @@ class Snap extends CI_Controller
 	{
 
 		$total = $this->input->get('total');
+		$order_key = $this->input->get('order_key');
 		$order_name = $this->input->get('order_name');
 		$telp = $this->input->get('telp');
 		$email = $this->input->get('email');
@@ -51,7 +52,7 @@ class Snap extends CI_Controller
 
 		// Required
 		$transaction_details = array(
-			'order_id' => rand(),
+			'order_id' => $order_key,
 			'gross_amount' => $total  // no decimal allowed for creditcard
 		);
 

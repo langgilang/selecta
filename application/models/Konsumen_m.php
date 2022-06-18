@@ -5,10 +5,16 @@ class Konsumen_m extends CI_Model
     public function getall($id = null)
     {
         $userlogin = $this->fungsi->user_login()->user_id;
-        $this->db->select('t.*, p.*, t.name AS username');
+        $this->db->select('t.*, p.*, t.name AS username,');
         $this->db->join('tb_paket AS p', 't.paket_id = p.paket_id');
         $this->db->where('user_id', $userlogin);
         return $this->db->get('tb_tiketonline as t');
+    }
+
+    public function get_transaksi()
+    {
+        $this->db->select('*');
+        return $this->db->get('tb_transaksi');
     }
 
     public function get_paket()
