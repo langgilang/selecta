@@ -29,7 +29,7 @@ class Marketing_m extends CI_Model
         tb_paket.created_at AS create_paket, 
         COUNT(tb_wahana.wahana_id) AS wahana_item,
         tb_paket.name AS paket_name,
-        tb_paket.price AS paket_price');
+        SUM(tb_wahana.price) AS wahana_price');
         $this->db->from('tb_paket');
         $this->db->join('tb_detail_paket', 'paket_id = detail_paket_id');
         $this->db->join('tb_wahana', 'detail_wahana_id = wahana_id');
@@ -72,9 +72,9 @@ class Marketing_m extends CI_Model
     {
         // INSERT PAKET
         $param = array(
-            'code' => $paket['code'],
-            'name' => $paket['name'],
-            'price' => $paket['price'],
+            'code' => $paket['add_code'],
+            'name' => $paket['add_name'],
+            'diskon' => $paket['add_diskon'],
         );
         $this->db->insert('tb_paket', $param);
         // END INSERT PAKET
@@ -86,7 +86,7 @@ class Marketing_m extends CI_Model
         foreach ($wahana as $a => $whn) {
             $result[] = array(
                 'detail_paket_id'  => $paket_id,
-                'detail_wahana_id' => $_POST['wahana'][$a]
+                'detail_wahana_id' => $_POST['add_wahana'][$a]
             );
         }
         //MULTIPLE INSERT TO DETAIL TABLE

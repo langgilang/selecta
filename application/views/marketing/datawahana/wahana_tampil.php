@@ -59,26 +59,17 @@
                                             <td><?= $row->name; ?></td>
                                             <td><?= $row->price; ?></td>
                                             <td class="text-center" width="160px">
-                                                <a href="<?= site_url('marketing/edit_wahana/' . $row->wahana_id); ?>" class="btn btn-xs btn-primary">
-                                                    <i class="fa fa-edit"></i> Update
+                                                <a href="<?= site_url('marketing/edit_wahana/' . $row->wahana_id); ?>" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-xs btn-danger">
-                                                    <i class="fa fa-trash"></i> Delete
+                                                <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-trash-alt"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                     <?php
                                     endforeach; ?>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Code</th>
-                                        <th>Nama Wahana</th>
-                                        <th>Harga</th>
-                                        <th>#</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

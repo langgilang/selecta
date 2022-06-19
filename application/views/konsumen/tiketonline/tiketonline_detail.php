@@ -86,7 +86,7 @@
                                         <td><?= $row->ticket_total; ?>x</td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan";; ?></td>
                                         <td><?= $row->paket_name; ?></td>
-                                        <td>Rp. <?= $row->paket_price; ?></td>
+                                        <td>Rp. <?= number_format($row->paket_price); ?></td>
 
                                         <td>
                                             <?php foreach ($getwahana as $w) { ?>
@@ -94,7 +94,7 @@
                                             <?php } ?>
                                         </td>
                                         <td>Rp. <?=
-                                                $subtotal = $row->paket_price * $row->ticket_total;
+                                                $subtotal = ($row->paket_price * $row->ticket_total);
                                                 $subtotal ?>
                                         </td>
                                     </tr>
@@ -117,20 +117,20 @@
                                     <tr>
                                         <th style="width:50%">Subtotal:</th>
                                         <td>Rp. <?=
-                                                $subtotal = $row->paket_price * $row->ticket_total;
+                                                $subtotal = ($row->paket_price * $row->ticket_total);
                                                 $subtotal ?></td>
                                     </tr>
                                     <tr>
                                         <th>Tiket Masuk <font color="red">(<?= $row->ticket_total ?>x)</font>
                                         </th>
-                                        <td>Rp. <?= $tiketmasuk = $row->ticket_total * 45000;
+                                        <td>Rp. <?= $tiketmasuk = ($row->ticket_total * 45000);
                                                 $tiketmasuk; ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Total:</th>
                                         <td>Rp. <?=
-                                                $total = (($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000));
+                                                $total = ($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000);
                                                 $total; ?>
                                         </td>
                                     </tr>

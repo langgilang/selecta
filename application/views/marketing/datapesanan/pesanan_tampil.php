@@ -70,19 +70,6 @@
                                     $total += $row->price * $row->ticket_total;
                                 endforeach; ?>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>NIK</th>
-                                    <th>Nama</th>
-                                    <th>Telephone</th>
-                                    <th>Wahana Pilihan</th>
-                                    <th>Jenis Tiket</th>
-                                    <th>Jumlah Tiket</th>
-                                    <th>Sub Total</th>
-                                    <th>#</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

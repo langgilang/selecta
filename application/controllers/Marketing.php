@@ -42,7 +42,7 @@ class Marketing extends CI_Controller
         $data = array(
             'header' => 'Data Paket',
             'tampilpaket' => $this->marketing_m->get_paket()->result(),
-            'tampilwahana' => $this->marketing_m->get_wahana(),
+            'tampilwahana' => $this->marketing_m->get_wahana()->result(),
         );
         $this->load->view('marketing/datapaket/paket_tampil', $data);
     }
@@ -77,14 +77,14 @@ class Marketing extends CI_Controller
     }
 
     // KE HALAMAN ADD PAKET
-    public function add_paket()
-    {
-        $data = array(
-            'header' => 'Tambah Data Paket',
-            'tampilwahana' => $this->marketing_m->get_wahana()->result(),
-        );
-        $this->load->view('marketing/datapaket/paket_add', $data);
-    }
+    // public function add_paket()
+    // {
+    //     $data = array(
+    //         'header' => 'Tambah Data Paket',
+    //         'tampilwahana' => $this->marketing_m->get_wahana()->result(),
+    //     );
+    //     $this->load->view('marketing/datapaket/paket_add', $data);
+    // }
 
     public function edit_paket($id)
     {
@@ -126,15 +126,15 @@ class Marketing extends CI_Controller
     // KE HALAMAN TAMBAH PAKET
     public function proses_add_paket()
     {
-        $code = $this->input->post('code', TRUE);
-        $name  = $this->input->post('name', TRUE);
-        $price = $this->input->post('price', TRUE);
-        $wahana = $this->input->post('wahana', TRUE);
+        $code = $this->input->post('add_code', TRUE);
+        $name  = $this->input->post('add_name', TRUE);
+        $diskon = $this->input->post('add_diskon', TRUE);
+        $wahana = $this->input->post('add_wahana', TRUE);
 
         $paket = array(
-            'code' => $code,
-            'name' => $name,
-            'price' => $price,
+            'add_code' => $code,
+            'add_name' => $name,
+            'add_diskon' => $diskon,
         );
         $this->marketing_m->add_paket($paket, $wahana);
         if ($this->db->affected_rows() > 0) {

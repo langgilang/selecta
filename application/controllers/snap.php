@@ -142,10 +142,10 @@ class Snap extends CI_Controller
 			'gross_amount' => $result['gross_amount'],
 			'payment_type' => $result['payment_type'],
 			'transaction_time' => $result['transaction_time'],
+			'transaction_status' => $result['transaction_status'],
 			'bank' => $result['va_numbers'][0]['bank'],
 			'va_number' => $result['va_numbers'][0]['va_number'],
 			'pdf_url' => $result['pdf_url'],
-			'status_code' => $result['status_code'],
 		);
 		$this->midtrans_m->add($data);
 		if ($this->db->affected_rows() > 0) {

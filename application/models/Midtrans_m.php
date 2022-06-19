@@ -9,10 +9,10 @@ class Midtrans_m extends CI_Model
             'gross_amount' => $data['gross_amount'],
             'payment_type' => $data['payment_type'],
             'transaction_time' => $data['transaction_time'],
+            'transaction_status' => $data['transaction_status'],
             'bank' => $data['bank'],
             'va_number' => $data['va_number'],
             'pdf_url' => $data['pdf_url'],
-            'status_code' => $data['status_code'],
         );
         $this->db->insert('tb_transaksi', $param);
     }
