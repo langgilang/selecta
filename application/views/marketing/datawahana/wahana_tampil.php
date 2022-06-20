@@ -89,7 +89,7 @@
 
 </div>
 <!-- modal tambah data -->
-<form action="<?= site_url('marketing/proses_add') ?>" method="post">
+<form action="<?= site_url('marketing/proses_add') ?>" method="post" enctype="multipart/form-data">
     <div class="modal fade" id="addWahana" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -117,6 +117,12 @@
                         <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
                         <div class="col-sm-5">
                             <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Image <font color="red">*</font></label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" id="image" name="image">
                         </div>
                     </div>
                 </div>

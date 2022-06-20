@@ -42,15 +42,24 @@
                     $uri2 = $this->uri->segment(2);
                     $uri3 = $this->uri->segment(3);
                     ?>
-                    <li class="nav-header">WEBSITE</li>
+                    <!-- <li class="nav-header">WEBSITE</li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="<?= site_url('marketing/landingpage') ?>" class="nav-link">
                             <i class="fab fa-page4 nav-icon"></i>
                             <p>
-                                Landing Page
+                                Check Website
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="<?= site_url('paralax/setting') ?>" class="nav-link">
+                            <i class="nav-icon fa fa-edit"></i>
+                            <p>
+                                Setting Website
+                            </p>
+                        </a>
+                    </li> -->
 
                     <li class="nav-header">MASTER DATA</li>
                     <li class="nav-item">

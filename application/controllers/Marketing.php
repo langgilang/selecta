@@ -169,17 +169,33 @@ class Marketing extends CI_Controller
         redirect('marketing/tampil_paket');
     }
 
-    // PROSES SIMPAN
+    // PROSES SIMPAN WAHANA
     public function proses_add()
     {
         $code = $this->input->post('code', TRUE);
         $name = $this->input->post('name', TRUE);
         $price = $this->input->post('price', TRUE);
+        $image = $_FILES['image'];
+        if ($image = null) {
+            # code...
+        } else {
+            $config['upload_path'] = './uploads/foto_wahana';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('image')) {
+                echo 'Upload Gagal';
+                die();
+            } else {
+                $image = $this->upload->data('file_name');
+            }
+        }
+
 
         $data = array(
             'code' => $code,
             'name' => $name,
             'price' => $price,
+            'image' => $image
         );
 
         $this->marketing_m->add_wahana($data);
@@ -219,5 +235,31 @@ class Marketing extends CI_Controller
             $value[] = (float) $result->wahana_id;
         }
         echo json_encode($value);
+    }
+
+    public function editwahana_active($id)
+    {
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('paket_id', $id);
+        $this->db->update('tb_paket', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Paket Telah Active');
+        }
+        redirect('marketing/tampil_paket');
+    }
+
+    public function editwahana_inactive($id)
+    {
+        $data = array(
+            'status' => 2
+        );
+        $this->db->where('paket_id', $id);
+        $this->db->update('tb_paket', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Paket Telah Inactive');
+        }
+        redirect('marketing/tampil_paket');
     }
 }
