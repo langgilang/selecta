@@ -19,6 +19,7 @@ class Marketing_m extends CI_Model
             $this->db->where('wahana_id', $id);
         }
         $this->db->from('tb_wahana');
+        $this->db->order_by('code');
         return $this->db->get();
     }
 
@@ -111,7 +112,7 @@ class Marketing_m extends CI_Model
         $data  = array(
             'code' => $data['code'],
             'name' => $data['name'],
-            'price' => $data['price'],
+            'diskon' => $data['diskon'],
         );
         $this->db->where('paket_id', $paket_id);
         $this->db->update('tb_paket', $data);
@@ -140,5 +141,17 @@ class Marketing_m extends CI_Model
     {
         $this->db->delete('tb_detail_paket', array('detail_paket_id' => $id));
         $this->db->delete('tb_paket', array('paket_id' => $id));
+    }
+
+    public function check_code($code, $id = null)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_paket');
+        $this->db->where('code', $code);
+        if ($id != null) {
+            $this->db->where('paket_id !=', $id);
+        }
+        $query = $this->db->get();
+        return $query;
     }
 }

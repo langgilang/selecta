@@ -28,9 +28,13 @@
         <section class="content">
             <div class="container-fluid">
                 <?php $this->view('konsumen/messages') ?>
-                <a href="<?= site_url('konsumen/add') ?>" class="btn btn-sm btn-success">
+                <!-- <a href="<?= site_url('konsumen/add') ?>" class="btn btn-sm btn-success">
                     <i class="fa fa-plus-circle"></i> Tambah Pesanan
-                </a><br>&nbsp;
+                </a><br>&nbsp; -->
+                <button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#modal-xl">
+                    <i class="fa fa-plus-circle"></i> Tambah Pesanan
+                </button><br>&nbsp;
+
                 <!-- tabel pesanan -->
                 <div class="card">
                     <div class="card-header">
@@ -192,6 +196,93 @@
             </div><!-- /.container-fluid -->
         </section>
     </div>
+
+    <!-- modal add pesanan online -->
+    <form action="" method="post">
+        <div class="modal fade" id="modal-xl">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Extra Large Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <input type="hidden" value="" name="tiketonline_id">
+                                    <label for="order_key">Order Id <font color="red">*</font></label>
+                                    <input type="text" value="<?= $order_key ?>" id="order_key" name="order_key" class="form-control" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <input type="hidden" value="" name="tiketonline_id">
+                                    <label for="reservationdate">Tanggal Reservasi <font color="red">*</font></label>
+                                    <input type="date" value="" id="reservationdate" name="reservationdate" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md 3">
+                                <div class="form-group">
+                                    <label for="nik">NIK <font color="red">*</font></label>
+                                    <input type="text" value="" id="nik" name="nik" class="form-control" placeholder="Masukkan Nik " required>
+                                </div>
+                            </div>
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <label for="name">Nama <font color="red">*</font></label>
+                                    <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda " required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <label for="telp">Telephone <font color="red">*</font></label>
+                                    <input type="text" value="" id="telp" name="telp" class="form-control" placeholder="Masukkan Telephone " required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label for="ticket_type">Jenis Tiket <font color="red">*</font></label>
+                                    <select name="ticket_type" id="ticket_type" class="form-control">
+                                        <option value="">-- Pilih --</option>
+                                        <option value="1">Perorangan</option>
+                                        <option value="2">Rombongan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
+                                    <input type="number" value="" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="paket_id">Jenis Paket <font color="red">*</font></label>
+                                    <select name="paket_id" id="paket_id" class="form-control">
+                                        <option value="">-- Pilih -- </option>
+                                        <?php foreach ($tampilpaket as $tp => $data) : ?>
+                                            <option value="<?= $data->paket_id ?>"><?= $data->name ?> - <?= $data->price ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- end modal pesanan online -->
 
     <?php $this->load->view('templates/footer') ?>
 

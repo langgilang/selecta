@@ -137,10 +137,11 @@ class Marketing extends CI_Controller
             'add_diskon' => $diskon,
         );
         $this->marketing_m->add_paket($paket, $wahana);
+
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Tambah data paket berhasil disimpan');
+            redirect('marketing/tampil_paket');
         }
-        redirect('marketing/tampil_paket');
     }
 
     public function proses_edit_paket()
@@ -148,15 +149,16 @@ class Marketing extends CI_Controller
         $paket_id = $this->input->post('paket_id', TRUE);
         $code = $this->input->post('code', TRUE);
         $name = $this->input->post('name', TRUE);
-        $price = $this->input->post('price', TRUE);
+        $diskon = $this->input->post('diskon', TRUE);
         $wahana = $this->input->post('wahana', TRUE);
 
         $data = array(
             'code' => $code,
             'name' => $name,
-            'price' => $price,
+            'diskon' => $diskon,
         );
-
+        // print_r($data);
+        // die();
         $this->marketing_m->edit_paket($paket_id, $data, $wahana);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Update data paket berhasil');
@@ -201,7 +203,7 @@ class Marketing extends CI_Controller
 
         $this->marketing_m->edit_wahana($data, $where);
         if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+            $this->session->set_flashdata('success', 'Update data wahana berhasil disimpan');
         }
         redirect('marketing/tampil_wahana');
     }

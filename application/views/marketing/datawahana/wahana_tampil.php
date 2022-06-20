@@ -32,10 +32,13 @@
                             <h3 class="card-title">
                                 Wahana Table
                             </h3>
-                            <a href="<?= site_url('marketing/add_wahana') ?>" class="btn btn-sm btn-success float-right">
+                            <!-- <a href="<?= site_url('marketing/add_wahana') ?>" class="btn btn-sm btn-success float-right">
                                 <li class="fa fa-plus"></li>
                                 Add Wahana
-                            </a>
+                            </a> -->
+                            <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#addWahana">
+                                <li class="fa fa-plus"></li> Add Paket
+                            </button>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -57,11 +60,11 @@
                                             <td><?= $no++; ?></td>
                                             <td><?= $row->code; ?></td>
                                             <td><?= $row->name; ?></td>
-                                            <td><?= $row->price; ?></td>
-                                            <td class="text-center" width="160px">
-                                                <a href="<?= site_url('marketing/edit_wahana/' . $row->wahana_id); ?>" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
+                                            <td><?= 'Rp. ' . number_format($row->price, 0, ".", ","); ?></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateWahana<?= $row->wahana_id; ?>">
+                                                    <li class="fa fa-edit"></li>
+                                                </button>
                                                 <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
                                                     <i class="fa fa-trash-alt"></i>
                                                 </a>
@@ -83,3 +86,99 @@
 </div>
 
 <?php $this->load->view('templates/js') ?>
+
+<!-- modal tambah data -->
+<form action="<?= site_url('marketing/proses_add') ?>" method="post">
+    <div class="modal fade" id="addWahana" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Wahana</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Kode Wahana <font color="red">*</font></label>
+                        <input type="hidden" id="wahana_id" name="wahana_id">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Nama Wahana <font color="red">*</font></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
+                        <div class="col-sm-5">
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</form>
+<!-- end modal tambah data -->
+
+<!-- modal edit-->
+<?php
+foreach ($tampilwahana as $i) :
+    $wahana_id = $i->wahana_id;
+    $code = $i->code;
+    $name = $i->name;
+    $price = $i->price;
+?>
+    <form action="<?= site_url('marketing/proses_edit') ?>" method="post">
+        <div class="modal fade" id="updateWahana<?= $wahana_id; ?>" data-backdrop="static">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Wahana</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Kode Wahana <font color="red">*</font></label>
+                            <input type="hidden" value="<?= $wahana_id ?>" id="wahana_id" name="wahana_id">
+                            <div class="col-sm-10">
+                                <input type="text" value="<?= $code ?>" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Nama Wahana <font color="red">*</font></label>
+                            <div class="col-sm-10">
+                                <input type="text" value="<?= $name ?>" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
+                            <div class="col-sm-5">
+                                <input type="number" value="<?= $price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </form>
+<?php endforeach; ?>
+<!-- end edit -->

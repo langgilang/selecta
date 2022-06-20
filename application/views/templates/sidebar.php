@@ -38,8 +38,18 @@
                 <!-- MENU MARKETING -->
                 <?php if ($this->session->userdata('level') ==  1) { ?>
 
+                    <?php
+                    $uri2 = $this->uri->segment(2);
+                    $uri3 = $this->uri->segment(3);
+                    ?>
+                    <li class="nav-header">MASTER DATA</li>
                     <li class="nav-item">
-                        <a href="<?= site_url('marketing/dashboard') ?>" class="nav-link ">
+                        <a href="<?= site_url('marketing/dashboard') ?>" class="nav-link
+                        <?php
+                        if ($uri2 == 'dashboard') { ?>active
+                        <?php
+                        }
+                        ?>">
                             <i class=" nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -47,9 +57,15 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fas fa-chart-pie"></i>
+                    <li class="nav-item 
+                    <?php
+                    if ($uri2 == 'tampil_pesananonline' | $uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>menu-open
+                    <?php
+                    }
+                    ?>">
+                        <a href="#" class="nav-link <?php if ($uri2 == 'tampil_pesananonline' | $uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>active<?php
+                                                                                                                                                            } ?>">
+                            <i class="fas fa-ticket-alt nav-icon"></i>
                             <p>
                                 Tiket
                                 <i class="right fas fa-angle-left"></i>
@@ -57,13 +73,28 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?= site_url('marketing/tampil_pesananonline') ?>" class="nav-link">
+                                <a href="<?= site_url('marketing/tampil_pesananonline') ?>" class="nav-link
+                                <?php
+                                if ($uri2 == 'tampil_pesananonline') { ?>active
+                                <?php
+                                }
+                                ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Data Pesanan</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
+                            <li class="nav-item
+                            <?php
+                            if ($uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>menu-open
+                            <?php
+                            }
+                            ?>">
+                                <a href="#" class="nav-link
+                                <?php
+                                if ($uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>active
+                                <?php
+                                }
+                                ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Wahana
                                         <i class="right fas fa-angle-left"></i>
@@ -71,13 +102,23 @@
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="<?= site_url('marketing/tampil_wahana') ?>" class="nav-link">
+                                        <a href="<?= site_url('marketing/tampil_wahana') ?>" class="nav-link
+                                        <?php
+                                        if ($uri2 == 'tampil_wahana') { ?>active
+                                        <?php
+                                        }
+                                        ?>">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Data Wahana</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?= site_url('marketing/tampil_paket') ?>" class="nav-link">
+                                        <a href="<?= site_url('marketing/tampil_paket') ?>" class="nav-link
+                                        <?php
+                                        if ($uri2 == 'tampil_paket') { ?>active
+                                        <?php
+                                        }
+                                        ?>">
                                             <i class="far fa-dot-circle nav-icon"></i>
                                             <p>Data Paket Wahana</p>
                                         </a>
@@ -87,6 +128,31 @@
                         </ul>
                     </li>
 
+                    <li class="nav-header">MASTER USER</li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fa fa-address-book nav-icon"></i>
+                            <p>
+                                Data Portir
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fa fa-address-book nav-icon"></i>
+                            <p>
+                                Data Kasir
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fa fa-address-book nav-icon"></i>
+                            <p>
+                                Data Konsumen
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-header">SETTING</li>
                     <li class="nav-item">
                         <a href="<?= site_url('auth/logout') ?>" class="nav-link">
@@ -155,17 +221,30 @@
 
                 <!-- MENU KONSUMEN -->
                 <?php if ($this->session->userdata('level') ==  4) { ?>
+                    <?php
+                    $uri = $this->uri->segment(2);
+                    ?>
                     <li class="nav-header">DATA</li>
                     <li class="nav-item">
-                        <a href="<?= site_url('konsumen/dashboard') ?>" class="nav-link ">
+                        <a href="<?= site_url('konsumen/dashboard') ?>" class="nav-link 
+                        <?php
+                        if ($uri == 'dashboard') { ?>active
+                        <?php
+                        }
+                        ?>">
                             <i class=" nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link ">
+                    <li class="nav-item">
+                        <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link 
+                        <?php
+                        if ($uri == 'tampil_konsumen') { ?>active
+                        <?php
+                        }
+                        ?>">
                             <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Pesan Tiket

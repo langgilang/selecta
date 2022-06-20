@@ -25,6 +25,7 @@ class Konsumen extends CI_Controller
             'header' => 'Pesan Tiket Online',
             'semuatiketonline' => $query->result(),
             'transaksi' => $this->konsumen_m->get_transaksi()->result(),
+            'order_key' => $this->konsumen_m->order_key()
         ];
         // var_dump($data);
         $this->load->view('konsumen/tiketonline/tiketonline_tampil', $data);
