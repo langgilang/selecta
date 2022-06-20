@@ -7,16 +7,17 @@
     <?php $this->load->view('templates/sidebar') ?>
 
     <div class="content-wrapper">
+
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Pesan Tiket</h1>
+                        <h1 class="m-0">Data Wahana</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Pesan Tiket</li>
+                            <li class="breadcrumb-item active">Data Wahana</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,7 +27,10 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <?php $this->view('marketing/messages') ?>
+                    <?php
+                    // $this->view('marketing/messages') 
+                    ?>
+                    <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -37,7 +41,7 @@
                                 Add Wahana
                             </a> -->
                             <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#addWahana">
-                                <li class="fa fa-plus"></li> Add Paket
+                                <li class="fa fa-plus"></li> Add Wahana
                             </button>
                         </div>
                         <div class="card-body">
@@ -65,7 +69,7 @@
                                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateWahana<?= $row->wahana_id; ?>">
                                                     <li class="fa fa-edit"></li>
                                                 </button>
-                                                <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" id="btn-delete" class="btn btn-sm btn-danger">
                                                     <i class="fa fa-trash-alt"></i>
                                                 </a>
                                             </td>
@@ -84,9 +88,6 @@
     <?php $this->load->view('templates/footer') ?>
 
 </div>
-
-<?php $this->load->view('templates/js') ?>
-
 <!-- modal tambah data -->
 <form action="<?= site_url('marketing/proses_add') ?>" method="post">
     <div class="modal fade" id="addWahana" data-backdrop="static">
@@ -182,3 +183,33 @@ foreach ($tampilwahana as $i) :
     </form>
 <?php endforeach; ?>
 <!-- end edit -->
+
+<?php $this->load->view('templates/js') ?>
+
+<script>
+    var flash = $('#flash').data('flash');
+    if (flash) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: flash
+        })
+    }
+    $(document).on('click', '#btn-delete', function(e) {
+        e.preventDefault();
+        var link = $(this).attr('href');
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Data Akan dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = link;
+            }
+        })
+    });
+</script>

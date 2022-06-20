@@ -22,7 +22,10 @@ class Marketing extends CI_Controller
     // TAMPIL MENU DATA PESANAN
     public function tampil_pesananonline()
     {
-        $data['pesananonline'] = $this->marketing_m->get_pesananonline();
+        $data = array(
+            'header' => 'Data Pesanan',
+            'pesananonline' => $this->marketing_m->get_pesananonline(),
+        );
         $this->load->view('marketing/datapesanan/pesanan_tampil', $data);
     }
 

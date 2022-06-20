@@ -27,6 +27,20 @@ class Auth extends CI_Controller
         if (isset($post['login'])) {
             $this->load->model('users_m');
             $query = $this->users_m->login($post);
+?>
+            <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/sweetalert2/sweetalert2.min.css">
+            <script src="<?= base_url('assets/') ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+            <style>
+                body {
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 1.124em;
+                    font-weight: normal;
+                }
+            </style>
+
+            <body>
+            </body>
+            <?php
             if ($query->num_rows() > 0) {
                 $row = $query->row();
                 $params = array(
@@ -34,11 +48,19 @@ class Auth extends CI_Controller
                     'level' => $row->level
                 );
                 $this->session->set_userdata($params);
+
                 if ($params['level'] == 1) {
-                    echo "<script>
-                    alert('Selamat, Anda berhasil login sebagai marketing');
-                    window.location='" . site_url('marketing/dashboard') . "';
-                    </script>";
+            ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Selamat, Login Marleting berhasil'
+                        }).then((result) => {
+                            window.location = '<?= site_url('marketing/dashboard') ?>';
+                        })
+                    </script>
+                <?php
                 } elseif ($params['level'] == 2) {
                     echo "<script>
                     alert('Selamat, Anda berhasil login sebagai kasir');
@@ -56,10 +78,17 @@ class Auth extends CI_Controller
                     </script>";
                 }
             } else {
-                echo "<script>
-                    alert('Login gagal, silahkan login kembali');
-                    window.location='" . site_url('auth') . "';
-                </script>";
+                ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failure!',
+                        text: 'Login Gagal, Username atau Password salah!'
+                    }).then((result) => {
+                        window.location = '<?= site_url('auth') ?>';
+                    })
+                </script>
+<?php
             }
         }
     }

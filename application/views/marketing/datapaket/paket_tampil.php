@@ -1,4 +1,5 @@
 <?php $this->load->view('templates/header') ?>
+
 <div class="wrapper">
 
     <?php $this->load->view('templates/navbar') ?>
@@ -25,7 +26,10 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="col-md-12">
-                    <?php $this->view('marketing/messages') ?>
+                    <?php
+                    // $this->view('marketing/messages') 
+                    ?>
+                    <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
@@ -68,7 +72,7 @@
                                                 <a href="#" class="btn btn-sm btn-warning update-record" data-paket_id="<?= $row->paket_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-code="<?= $row->code_paket; ?>" data-diskon="<?= $row->diskon; ?>">
                                                     <li class="fa fa-edit"></li>
                                                 </a>
-                                                <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" id="btn-delete" class="btn btn-sm btn-danger">
                                                     <i class="fa fa-trash-alt"></i>
                                                 </a>
                                                 <!-- <a href="#" class="btn btn-sm btn-default">
@@ -89,7 +93,7 @@
 
     <!-- modal tambah data -->
     <form action="<?= site_url('marketing/proses_add_paket') ?>" method="post">
-        <div class="modal fade" id="UpdateModal" data-backdrop="static">
+        <div class="modal fade" id="addPaket" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -103,13 +107,13 @@
                             <label class="col-sm-2 col-form-label">Kode Paket <font color="red">*</font></label>
                             <input type="hidden" id="add_paket_id" name="add_paket_id">
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="add_code" name="add_code" placeholder="Masukan kode wahana" required>
+                                <input type="text" class="form-control" id="add_code" name="add_code" placeholder="Masukan Kode Paket" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama Paket <font color="red">*</font></label>
                             <div class="col-sm-10">
-                                <input type="char" class="form-control" id="add_name" name="add_name" placeholder="Masukan Nama Wahana" required>
+                                <input type="char" class="form-control" id="add_name" name="add_name" placeholder="Masukan Nama Paket" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -196,6 +200,7 @@
     <?php $this->load->view('templates/footer') ?>
 
 </div>
+<?php $this->load->view('templates/js') ?>
 <script type="text/javascript">
     $(document).ready(function() {
         $('.select2').select2();
@@ -203,6 +208,33 @@
         //Initialize Select2 Elements
         $('.select2bs4').select2({
             theme: 'bootstrap4'
+        });
+
+        //SWEETALERT2
+        var flash = $('#flash').data('flash');
+        if (flash) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: flash
+            })
+        }
+        $(document).on('click', '#btn-delete', function(e) {
+            e.preventDefault();
+            var link = $(this).attr('href');
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Data Akan dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location = link;
+                }
+            })
         });
 
         //GET UPDATE 
@@ -243,4 +275,3 @@
         });
     });
 </script>
-<?php $this->load->view('templates/js') ?>

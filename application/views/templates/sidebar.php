@@ -42,6 +42,16 @@
                     $uri2 = $this->uri->segment(2);
                     $uri3 = $this->uri->segment(3);
                     ?>
+                    <li class="nav-header">WEBSITE</li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="fab fa-page4 nav-icon"></i>
+                            <p>
+                                Landing Page
+                            </p>
+                        </a>
+                    </li>
+
                     <li class="nav-header">MASTER DATA</li>
                     <li class="nav-item">
                         <a href="<?= site_url('marketing/dashboard') ?>" class="nav-link
@@ -128,31 +138,6 @@
                         </ul>
                     </li>
 
-                    <li class="nav-header">MASTER USER</li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="fa fa-address-book nav-icon"></i>
-                            <p>
-                                Data Portir
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="fa fa-address-book nav-icon"></i>
-                            <p>
-                                Data Kasir
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link">
-                            <i class="fa fa-address-book nav-icon"></i>
-                            <p>
-                                Data Konsumen
-                            </p>
-                        </a>
-                    </li>
                     <li class="nav-header">SETTING</li>
                     <li class="nav-item">
                         <a href="<?= site_url('auth/logout') ?>" class="nav-link">
