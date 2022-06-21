@@ -15,10 +15,10 @@ class Marketing_m extends CI_Model
     public function get_wahana($id = null)
     {
         $this->db->select('*');
+        $this->db->from('tb_wahana');
         if ($id != null) {
             $this->db->where('wahana_id', $id);
         }
-        $this->db->from('tb_wahana');
         $this->db->order_by('code');
         return $this->db->get();
     }
@@ -66,6 +66,7 @@ class Marketing_m extends CI_Model
             'code' => $data['code'],
             'name' => $data['name'],
             'price' => $data['price'],
+            'image' => $data['image'],
         );
         $this->db->insert('tb_wahana', $param);
     }
@@ -103,6 +104,7 @@ class Marketing_m extends CI_Model
             'price' => $data['price'],
             'updated_at' => date('Y-m-d H:i:s'),
         );
+
         $this->db->where($where);
         $this->db->update('tb_wahana', $param);
     }

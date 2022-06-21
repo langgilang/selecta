@@ -49,6 +49,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Foto</th>
                                         <th>Code</th>
                                         <th>Nama Wahana</th>
                                         <th>Harga</th>
@@ -62,6 +63,11 @@
                                     foreach ($tampilwahana as $row) : ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
+                                            <td>
+                                                <?php if ($row->image != null) { ?>
+                                                    <img src="<?= base_url('uploads/foto_wahana/' . $row->image); ?>" style="width: 100px;">
+                                                <?php } ?>
+                                            </td>
                                             <td><?= $row->code; ?></td>
                                             <td><?= $row->name; ?></td>
                                             <td><?= 'Rp. ' . number_format($row->price, 0, ".", ","); ?></td>
@@ -101,26 +107,26 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Kode Wahana <font color="red">*</font></label>
+                        <label class="col-sm-2 col-form-label">Kode <font color="red">*</font></label>
                         <input type="hidden" id="wahana_id" name="wahana_id">
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nama Wahana <font color="red">*</font></label>
+                        <label class="col-sm-2 col-form-label">Nama <font color="red">*</font></label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
+                        <label class="col-sm-2 col-form-label">Harga<font color="red">*</font></label>
                         <div class="col-sm-5">
                             <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image <font color="red">*</font></label>
+                        <label class="col-sm-2 col-form-label">Image<font color="red">*</font></label>
                         <div class="col-sm-10">
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
@@ -145,8 +151,9 @@ foreach ($tampilwahana as $i) :
     $code = $i->code;
     $name = $i->name;
     $price = $i->price;
+    $image = $i->image;
 ?>
-    <form action="<?= site_url('marketing/proses_edit') ?>" method="post">
+    <form action="<?= site_url('marketing/proses_edit') ?>" method="post" enctype="multipart/form-data">
         <div class="modal fade" id="updateWahana<?= $wahana_id; ?>" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -158,14 +165,14 @@ foreach ($tampilwahana as $i) :
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Kode Wahana <font color="red">*</font></label>
+                            <label class="col-sm-2 col-form-label">Kode <font color="red">*</font></label>
                             <input type="hidden" value="<?= $wahana_id ?>" id="wahana_id" name="wahana_id">
                             <div class="col-sm-10">
                                 <input type="text" value="<?= $code ?>" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama Wahana <font color="red">*</font></label>
+                            <label class="col-sm-2 col-form-label">Nama <font color="red">*</font></label>
                             <div class="col-sm-10">
                                 <input type="text" value="<?= $name ?>" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
                             </div>
@@ -174,6 +181,21 @@ foreach ($tampilwahana as $i) :
                             <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
                             <div class="col-sm-5">
                                 <input type="number" value="<?= $price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Image <font color="red">*</font></label>
+                            <div class="col-sm-10">
+                                <?php if ($image != null) { ?>
+                                    <small style="color: black;">Preview</small>
+                                    <div style="margin-bottom: 10px;">
+                                        <img src="<?= base_url('uploads/foto_wahana/' . $image); ?>" style="width: 100px;">
+                                    </div>
+                                    <small style="color: red;">(Biarkan kosong jika gambar ada)</small>
+                                <?php
+                                }
+                                ?>
+                                <input type="file" class="form-control" id="image" name="image">
                             </div>
                         </div>
                     </div>
