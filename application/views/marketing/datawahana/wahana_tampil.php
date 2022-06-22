@@ -53,6 +53,7 @@
                                         <th>Code</th>
                                         <th>Nama Wahana</th>
                                         <th>Harga</th>
+                                        <th>Status</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -63,15 +64,42 @@
                                     foreach ($tampilwahana as $row) : ?>
                                         <tr>
                                             <td><?= $no++; ?></td>
-                                            <td>
+                                            <td align="center">
                                                 <?php if ($row->image != null) { ?>
-                                                    <img src="<?= base_url('uploads/foto_wahana/' . $row->image); ?>" style="width: 100px;">
+                                                    <img src="<?= base_url('uploads/foto_wahana/' . $row->image); ?>" style="width: 150px; ">
                                                 <?php } ?>
                                             </td>
                                             <td><?= $row->code; ?></td>
                                             <td><?= $row->name; ?></td>
                                             <td><?= 'Rp. ' . number_format($row->price, 0, ".", ","); ?></td>
+                                            <td>
+                                                <?php
+                                                if ($row->status == 1) {
+                                                ?>
+                                                    <label class="badge bg-success">Active</label>
+                                                <?php
+                                                } else {
+                                                ?> <label class="badge bg-danger">Inactive</label>
+                                                <?php
+                                                }
+                                                ?>
+                                            </td>
                                             <td class="text-center">
+                                                <?php
+                                                if ($row->status == 1) {
+                                                ?>
+                                                    <a href="<?= site_url('marketing/editwahana_inactive/') . $row->wahana_id ?>" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </a>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <a href="<?= site_url('marketing/editwahana_active/') . $row->wahana_id ?>" class="btn btn-sm btn-default">
+                                                        <i class="fas fa-check-circle"></i>
+                                                    </a>
+                                                <?php
+                                                }
+                                                ?>
                                                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateWahana<?= $row->wahana_id; ?>">
                                                     <li class="fa fa-edit"></li>
                                                 </button>

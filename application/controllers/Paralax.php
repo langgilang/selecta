@@ -13,6 +13,7 @@ class Paralax extends CI_Controller
         $data = array(
             'header' => 'Selecta.com',
             'getpaket' => $this->paralax_m->get_paket()->result(),
+            'getwahana' => $this->paralax_m->get_wahana()->result(),
         );
         $this->load->view('paralax/index', $data);
     }

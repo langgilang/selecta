@@ -31,6 +31,7 @@ class Marketing_m extends CI_Model
         COUNT(tb_wahana.wahana_id) AS wahana_item,
         tb_paket.name AS paket_name,
         tb_wahana.name AS wahana_name,
+        tb_paket.status AS paket_status,
         SUM(tb_wahana.price) AS wahana_price');
         $this->db->from('tb_paket');
         $this->db->join('tb_detail_paket', 'paket_id = detail_paket_id');

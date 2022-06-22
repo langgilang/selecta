@@ -262,7 +262,7 @@ class Marketing extends CI_Controller
         echo json_encode($value);
     }
 
-    public function editwahana_active($id)
+    public function editpaket_active($id)
     {
         $data = array(
             'status' => 1
@@ -275,7 +275,7 @@ class Marketing extends CI_Controller
         redirect('marketing/tampil_paket');
     }
 
-    public function editwahana_inactive($id)
+    public function editpaket_inactive($id)
     {
         $data = array(
             'status' => 2
@@ -286,5 +286,31 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('success', 'Paket Telah Inactive');
         }
         redirect('marketing/tampil_paket');
+    }
+
+    public function editwahana_active($id)
+    {
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('wahana_id', $id);
+        $this->db->update('tb_wahana', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Wahana Telah Active');
+        }
+        redirect('marketing/tampil_wahana');
+    }
+
+    public function editwahana_inactive($id)
+    {
+        $data = array(
+            'status' => 2
+        );
+        $this->db->where('wahana_id', $id);
+        $this->db->update('tb_wahana', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Wahana Telah Inactive');
+        }
+        redirect('marketing/tampil_wahana');
     }
 }

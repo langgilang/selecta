@@ -65,22 +65,13 @@
                                             <td><?= $row->code_paket; ?></td>
                                             <td><?= $row->paket_name; ?></td>
                                             <td><?= $row->wahana_item; ?> Items</td>
-
-                                            <!-- <td>
-                                                <?php
-                                                foreach ($tampilpaket as $w) :
-                                                ?>
-                                                    <?= $row->name; ?> Items
-                                                <?php endforeach; ?>
-                                            </td> -->
-
                                             <td>Rp. <?= number_format($row->wahana_price, 0, ",", ".") ?></td>
                                             <td><?= $row->diskon ?>% <font class="text-danger">(Rp. <?= $diskon = ($row->diskon / 100) * $row->wahana_price; ?>)</font>
                                             </td>
                                             <td>Rp. <?= number_format($row->wahana_price - $diskon, 0, ",", ".") ?></td>
                                             <td>
                                                 <?php
-                                                if ($row->status == 1) {
+                                                if ($row->paket_status == 1) {
                                                 ?>
                                                     <label class="badge bg-success">Active</label>
                                                 <?php
@@ -92,21 +83,20 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php
-                                                if ($row->status == 1) {
+                                                if ($row->paket_status == 1) {
                                                 ?>
-                                                    <a href="<?= site_url('marketing/editwahana_inactive/') . $row->paket_id ?>" class="btn btn-sm btn-danger">
+                                                    <a href="<?= site_url('marketing/editpaket_inactive/') . $row->paket_id ?>" class="btn btn-sm btn-danger">
                                                         <i class="fas fa-times-circle"></i>
                                                     </a>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <a href="<?= site_url('marketing/editwahana_active/') . $row->paket_id ?>" class="btn btn-sm btn-default">
+                                                    <a href="<?= site_url('marketing/editpaket_active/') . $row->paket_id ?>" class="btn btn-sm btn-default">
                                                         <i class="fas fa-check-circle"></i>
                                                     </a>
                                                 <?php
                                                 }
                                                 ?>
-
 
                                                 <a href="#" class="btn btn-sm btn-warning update-record" data-paket_id="<?= $row->paket_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-code="<?= $row->code_paket; ?>" data-diskon="<?= $row->diskon; ?>">
                                                     <li class="fa fa-edit"></li>
@@ -168,7 +158,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Diskon <font color="red">(%)</font></label>
                             <div class="col-sm-4">
-                                <input type="number" class="form-control" id="add_diskon" name="add_diskon" placeholder="%" >
+                                <input type="number" class="form-control" id="add_diskon" name="add_diskon" placeholder="%">
                             </div>
                         </div>
                     </div>
