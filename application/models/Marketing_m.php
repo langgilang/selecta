@@ -105,6 +105,10 @@ class Marketing_m extends CI_Model
             'updated_at' => date('Y-m-d H:i:s'),
         );
 
+        if ($data['image'] != null) {
+            $param['image'] = $data['image'];
+        }
+
         $this->db->where($where);
         $this->db->update('tb_wahana', $param);
     }
