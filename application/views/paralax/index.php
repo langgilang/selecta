@@ -86,7 +86,7 @@
         <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>Taman Rekreasi Selecta</h1>
           <h2>Segera daftar untuk mendapatkan promo menarik di aplikasi kami</h2>
-          <div><a href="<?= site_url('auth/register') ?>" class="btn-get-started scrollto">Register</a></div>
+          <div><a href="<?= site_url('auth/register') ?>" class="btn-get-started scrollto">Get Started</a></div>
         </div>
         <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
           <img src="<?= base_url('assets/assets_parallaxs/') ?>img/hero-img.png" class="img-fluid animated" alt="">
@@ -109,13 +109,10 @@
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
             <h3>Taman Rekreasi Selecta</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              TAMAN REKREASI SELECTA, SURGA TERSEMBUNYI DI KOTA BATU
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              <li><i class="bi bi-check-circle"></i> Taman Rekreasi dilengkapi dengan Kolam renang, taman Bunga dan berbagai wahana</li>
             </ul>
             <!-- <a href="#" class="read-more">Read More <i class="bi bi-long-arrow-right"></i></a> -->
           </div>
@@ -221,7 +218,7 @@
                 if ($row->diskon > 0) {
                 ?>
                   <h4>
-                    <font style="color: brown; text-decoration: line-through;"><sup>Rp</sup>s<?= number_format($row->wahana_price) ?></font><span> / orang</span>
+                    <font style="color: brown; text-decoration: line-through;"><sup>Rp</sup><?= number_format($row->wahana_price) ?></font><span> / orang</span>
                   </h4>
                   <hr>
                 <?php
@@ -237,7 +234,7 @@
                   <li>Include <?= $row->wahana_item ?> Wahana</li>
                 </ul>
                 <div class="btn-wrap">
-                  <a href="#" class="btn-buy">Buy Now</a>
+                  <a href="<?= site_url('auth') ?>" class="btn-buy">Buy Now</a>
                 </div>
               </div>
             </div>
@@ -265,7 +262,7 @@
                 <i class=" bx bx-wifi"></i>
               </div>
               <h4><a href="">Free Wifi</a></h4>
-              <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              <p>Kami menyediakan layanan wifi gratis disemua area Wisata Taman Rekreasi Selecta</p>
             </div>
           </div>
 
@@ -278,7 +275,7 @@
                 <i class="bx bx-bus"></i>
               </div>
               <h4><a href="">Shuttle Selecta</a></h4>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              <p>Wisata Taman Rekreasi Selecta menyediakan free shuttle bus bagi pengunjung yang mendapatkan area parkir jauh dari loket masuk</p>
             </div>
           </div>
 
@@ -290,8 +287,8 @@
                 </svg>
                 <i class="bx bx-swim"></i>
               </div>
-              <h4><a href="">Swimmingpool</a></h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              <h4><a href="">Swimming Pool</a></h4>
+              <p>Selecta terkenal dengan Kolam renang dengan Air yang jernih yang membuat anda berlama lama disini, Bermain bersama Keluarga Disediakan juga Water Park dan Area Anak – anak</p>
             </div>
           </div>
 
@@ -304,7 +301,7 @@
                 <i class="bx bx-restaurant"></i>
               </div>
               <h4><a href="">Restaurant</a></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              <p>Menyediakan Berbagai macam masakan Indonesia dan Cantonese</p>
             </div>
           </div>
 
@@ -317,7 +314,7 @@
                 <i class="bx bx-hotel"></i>
               </div>
               <h4><a href="">Hotel</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
+              <p>Hotel Selecta Memiliki 80 kamar dengan berbagai fasilitas yang cocok untuk berbagai keperluan</p>
             </div>
           </div>
 
@@ -329,7 +326,7 @@
                 </svg>
                 <i class="bx bx-coffee"></i>
               </div>
-              <h4><a href="">Coffe</a></h4>
+              <h4><a href="">Coffee</a></h4>
               <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
             </div>
           </div>
@@ -627,7 +624,7 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Fasility</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Swimmingpool</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Swimming pool</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Shuttle Selecta</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Free Wifi</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Breakfast</a></li>

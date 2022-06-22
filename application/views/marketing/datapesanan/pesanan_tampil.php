@@ -59,7 +59,7 @@
                                         <td><?= $row->paket_name ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->ticket_total ?></td>
-                                        <td>Rp. <?= ($row->price * $row->ticket_total) + 45000 ?></td>
+                                      s -->
                                         <td class="text-center" width="160px">
                                             <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-default">
                                                 <i class="fa fa-lop"></i> Detail

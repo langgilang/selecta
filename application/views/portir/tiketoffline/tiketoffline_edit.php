@@ -39,27 +39,36 @@
                                         <label for="name">Nama Customer <font color="red">*</font></label>
                                         <input type="text" value="<?= $row->customer_name ?>" id="name" name="name" class="form-control" placeholder="Masukan Nama Portir" required>
                                     </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-3">
                                         <label for="ticket_total">Total Tiket<font color="red">*</font></label>
                                         <input type="number" value="<?= $row->ticket_total ?>" id="ticket_total" name="ticket_total" class="form-control" placeholder="Masukan Jumlah Tiket" required>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="form-group col-3">
                                         <label>Paket <font color="red">*</font></label>
                                         <select class="form-control" id="paket_id" name="paket_id" style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
-                                            <option value="<?= $row->paket_id ?>">-- Pilih --</option>
-                                            <?php foreach ($tampilpaket as $data) { ?>
-                                                <option value="<?= $data->paket_id; ?>"><?= $data->name ?> - <?= $data->price ?> </option>
-                                            <?php } ?>
+                                            <option value="">- Pilih -</option>
+                                            <?php
+                                            foreach ($tampilpaket as $v) {
+                                            ?>
+                                                <option value="<?= $v->paket_id ?>" <?php foreach ($tampilselect as $r) {
+                                                                                        if ($v->paket_id == $r->paket_id) { ?> selected <?php }
+                                                                                                                                } ?>>
+                                                    <?= $v->name ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="form-group col-3">
                                         <label>Jenis Tiket <font color="red">*</font></label>
                                         <select name="ticket_type" id="ticket_type" class="form-control">
                                             <option value=""> - Pilih - </option>
-                                            <option value="1"> Perorangan </option>
-                                            <option value="2"> Rombongan </option>
+                                            <option value="1" <?= $row->ticket_type == '1' ? 'selected' : null ?>> Perorangan </option>
+                                            <option value="2" <?= $row->ticket_type == '2' ? 'selected' : null ?>> Rombongan </option>
                                         </select>
                                     </div>
                                 </div>
