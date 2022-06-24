@@ -20,12 +20,13 @@ class Konsumen extends CI_Controller
 
     public function tampil_konsumen()
     {
-        $query = $this->konsumen_m->getall();
         $data = [
             'header' => 'Pesan Tiket Online',
-            'semuatiketonline' => $query->result(),
+            'semuatiketonline' => $this->konsumen_m->getall()->result(),
             'transaksi' => $this->konsumen_m->get_transaksi()->result(),
-            'order_key' => $this->konsumen_m->order_key()
+            'order_key' => $this->konsumen_m->order_key(),
+            'tampilpaket' => $this->konsumen_m->get_paket()->result(),
+            'tampilwahana' => $this->konsumen_m->get_wahana()->result(),
         ];
         // var_dump($data);
         $this->load->view('konsumen/tiketonline/tiketonline_tampil', $data);
@@ -47,13 +48,12 @@ class Konsumen extends CI_Controller
         // $this->load->view('konsumen/tiketonline/tiketonline_edit');
     }
 
-    public function proses()
+    public function proses_add_rombongan()
     {
+        $order_key = $this->konsumen_m->order_key();
         $nik = $this->input->post('nik', TRUE);
         $name = $this->input->post('name', TRUE);
         $telp = $this->input->post('telp', TRUE);
-        $order_key = $this->konsumen_m->order_key();
-        $ticket_type = $this->input->post('ticket_type', TRUE);
         $ticket_total = $this->input->post('ticket_total', TRUE);
         $reservationdate = $this->input->post('reservationdate', TRUE);
         $paket_id = $this->input->post('paket_id', TRUE);
@@ -64,13 +64,14 @@ class Konsumen extends CI_Controller
             'nik' => $nik,
             'name' => $name,
             'telp' => $telp,
-            'ticket_type' => $ticket_type,
             'ticket_total' => $ticket_total,
             'paket_id' => $paket_id,
         );
-        $this->konsumen_m->add_pesanan_tiketonline($data);
+        // print_r($data);
+        // die();
+        $this->konsumen_m->add_rombongan($data);
         if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Pesanan Online berhasil disimpan');
+            $this->session->set_flashdata('success', 'Data Pesanan Tiket Online Rombongan berhasil disimpan');
         }
         redirect('konsumen/tampil_konsumen');
     }

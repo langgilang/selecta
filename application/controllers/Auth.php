@@ -55,27 +55,48 @@ class Auth extends CI_Controller
                         Swal.fire({
                             icon: 'success',
                             title: 'Success!',
-                            text: 'Selamat, Login Marleting berhasil'
+                            text: 'Selamat, Login Marketing berhasil!'
                         }).then((result) => {
                             window.location = '<?= site_url('marketing/dashboard') ?>';
                         })
                     </script>
                 <?php
                 } elseif ($params['level'] == 2) {
-                    echo "<script>
-                    alert('Selamat, Anda berhasil login sebagai kasir');
-                    window.location='" . site_url('kasir/dashboard') . "';
-                    </script>";
+                ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Selamat, Login Kasir berhasil!'
+                        }).then((result) => {
+                            window.location = '<?= site_url('kasir/dashboard') ?>';
+                        })
+                    </script>
+                <?php
                 } elseif ($params['level'] == 3) {
-                    echo "<script>
-                    alert('Selamat, Anda berhasil login sebagai portir');
-                    window.location='" . site_url('portir/dashboard') . "';
-                    </script>";
+                ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Selamat, Login Portir berhasil!'
+                        }).then((result) => {
+                            window.location = '<?= site_url('portir/dashboard') ?>';
+                        })
+                    </script>
+                <?php
                 } elseif ($params['level'] == 4) {
-                    echo "<script>
-                    alert('Selamat, Anda berhasil login sebagai konsumen');
-                    window.location='" . site_url('konsumen/dashboard') . "';
-                    </script>";
+                ?>
+                    <script>
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Selamat, Login Konsumen berhasil!'
+                        }).then((result) => {
+                            window.location = '<?= site_url('konsumen/dashboard') ?>';
+                        })
+                    </script>
+                <?php
                 }
             } else {
                 ?>
@@ -88,7 +109,7 @@ class Auth extends CI_Controller
                         window.location = '<?= site_url('auth') ?>';
                     })
                 </script>
-<?php
+            <?php
             }
         }
     }
@@ -98,20 +119,47 @@ class Auth extends CI_Controller
         if (isset($_POST['add'])) {
             $inputan = $this->input->post(null, TRUE);
             $this->auth->add($inputan);
+
+            ?>
+            <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/sweetalert2/sweetalert2.min.css">
+            <script src="<?= base_url('assets/') ?>plugins/sweetalert2/sweetalert2.min.js"></script>
+            <style>
+                body {
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    font-size: 1.124em;
+                    font-weight: normal;
+                }
+            </style>
+
+            <body>
+            </body>
+            <?php
+
             if ($inputan == false) {
-                echo "<script>
-                    alert('Register gagal, silahkan daftar kembali kembali');
-                    window.location='" . site_url('auth/register') . "';
-                </script>";
+            ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failure!',
+                        text: 'Register Gagal, silahkan mendaftar kembali!'
+                    }).then((result) => {
+                        window.location = '<?= site_url('auth/register') ?>';
+                    })
+                </script>
+            <?php
             } else {
-                echo "<script>
-                    alert('Register berhasil, silahkan ke halaman login');
-                    window.location='" . site_url('auth') . "';
-                </script>";
+            ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Register Berhasil, silahkan login!'
+                    }).then((result) => {
+                        window.location = '<?= site_url('auth') ?>';
+                    })
+                </script>
+<?php
             }
-        } else if (isset($_POST['edit'])) {
-            $inputan = $this->input->post(null, TRUE);
-            $this->auth->edit($inputan);
         }
     }
 

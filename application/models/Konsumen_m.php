@@ -4,11 +4,20 @@ class Konsumen_m extends CI_Model
 {
     public function getall($id = null)
     {
-        $userlogin = $this->fungsi->user_login()->user_id;
-        $this->db->select('t.*, p.*, t.name AS username,');
-        $this->db->join('tb_paket AS p', 't.paket_id = p.paket_id');
-        $this->db->where('user_id', $userlogin);
-        return $this->db->get('tb_tiketonline as t');
+        $user = $this->fungsi->user_login()->user_id;
+        $this->db->select('*, 
+        COUNT(tb_wahana.wahana_id),
+        tb_paket.name AS paket_name,
+        COUNT(tb_wahana.wahana_id) AS paket_items,
+        tb_tiketonline.name AS customer_name,
+        SUM(tb_wahana.price) AS wahana_price');
+        $this->db->from('tb_tiketonline');
+        $this->db->join('tb_paket', 'tb_paket.paket_id=tb_tiketonline.paket_id');
+        $this->db->join('tb_detail_paket', 'tb_paket.paket_id = tb_detail_paket.detail_paket_id');
+        $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
+        $this->db->group_by('tb_paket.paket_id');
+        $this->db->where('user_id', $user);
+        return $this->db->get();
     }
 
     public function get_transaksi()
@@ -19,9 +28,12 @@ class Konsumen_m extends CI_Model
 
     public function get_paket()
     {
-        $this->db->select('*');
-        $this->db->from('tb_paket');
-        return $this->db->get();
+        return $this->db->get('tb_paket');
+    }
+
+    public function get_wahana()
+    {
+        return $this->db->get('tb_wahana');
     }
 
     public function order_key()
@@ -41,7 +53,7 @@ class Konsumen_m extends CI_Model
         return $order_id;
     }
 
-    public function add_pesanan_tiketonline($data)
+    public function add_rombongan($data)
     {
         $user = $this->fungsi->user_login()->user_id;
         $param = array(
@@ -50,7 +62,7 @@ class Konsumen_m extends CI_Model
             'nik' => $data['nik'],
             'name' => $data['name'],
             'telp' => $data['telp'],
-            'ticket_type' => $data['ticket_type'],
+            'ticket_type' => 2,
             'ticket_total' => $data['ticket_total'],
             'paket_id' => $data['paket_id'],
             'user_id' => $user
@@ -65,13 +77,12 @@ class Konsumen_m extends CI_Model
         tb_wahana.*, 
         tb_tiketonline.*,
         tb_paket.name AS paket_name,
-        tb_wahana.name AS wahana_name');
+        tb_wahana.name AS wahana_name,
+        SUM(tb_wahana.price) AS wahana_price');
         $this->db->join('tb_tiketonline', 'tb_tiketonline.paket_id = tb_paket.paket_id');
         $this->db->join('tb_detail_paket', 'tb_detail_paket.detail_paket_id = tb_paket.paket_id');
         $this->db->join('tb_wahana', 'tb_wahana.wahana_id = tb_detail_paket.detail_wahana_id');
-        if ($id != null) {
-            $this->db->where('tb_tiketonline.tiketonline_id', $id);
-        }
+        $this->db->where('tb_tiketonline.tiketonline_id', $id);
         $this->db->from('tb_paket');
         return $this->db->get();
     }
