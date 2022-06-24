@@ -192,7 +192,7 @@ class Marketing extends CI_Controller
         $config['upload_path'] = './uploads/foto_wahana/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
         $config['max_size'] = 10240;
-        $this->load->library('upload', $config);
+        $this->load->initialize($config);
 
         if (!$this->upload->do_upload('image')) {
             $image = null;

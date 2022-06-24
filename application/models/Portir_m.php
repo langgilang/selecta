@@ -19,6 +19,16 @@ class Portir_m extends CI_Model
         return $this->db->get('tb_paket');
     }
 
+    public function get_selectpaket($id)
+    {
+        $sql = "SELECT * 
+                FROM tb_paket 
+                JOIN tb_tiketoffline ON tb_tiketoffline.paket_id = tb_paket.paket_id 
+                WHERE tiketoffline_id=$id";
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     public function add($data)
     {
         $user = $this->fungsi->user_login()->id;
