@@ -67,36 +67,48 @@
                     </div>
                     <!-- /.row -->
 
+                    <?php
+                    $diskon = (($row->diskon / 100) * $row->wahana_price);
+                    $harga_paket_diskon = $row->wahana_price - $diskon;
+
+                    $subtotal_tiket = $harga_paket_diskon * $row->ticket_total;
+                    $total_hargatiketmasuk = $row->ticket_total * 40000;
+                    $total_tiketall = $subtotal_tiket + $total_hargatiketmasuk;
+                    ?>
+
                     <!-- Table row -->
                     <div class="row">
                         <div class="col-12 table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Jumlah Paket</th>
                                         <th>Jenis Tiket</th>
                                         <th>Jenis Paket</th>
-                                        <th>Harga Paket</th>
                                         <th>Detail Paket</th>
+                                        <th>Harga Paket</th>
+                                        <th>Jumlah Paket</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><?= $row->ticket_total; ?>x</td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan";; ?></td>
-                                        <td><?= $row->paket_name; ?></td>
-                                        <td>Rp. <?= number_format($row->paket_price); ?></td>
-
+                                        <td><?= $row->paket_name ?></td>
                                         <td>
-                                            <?php foreach ($getwahana as $w) { ?>
-                                                <p>- <?= $w->wahana_name ?> </p>
-                                            <?php } ?>
+                                            <?php
+                                            foreach ($get_wahana_by_invoice as $v) {
+                                            ?>
+                                                <ul>
+                                                    <li><?= $v->wahana_name ?></li>
+                                                </ul>
+                                            <?php
+                                            }
+                                            ?>
+
                                         </td>
-                                        <td>Rp. <?=
-                                                $subtotal = ($row->paket_price * $row->ticket_total);
-                                                $subtotal ?>
-                                        </td>
+                                        <td><?= 'Rp ' . number_format($harga_paket_diskon, 0, ".", ",") ?></td>
+                                        <td><?= number_format($row->ticket_total, 0, ".", ",") ?> tiket</td>
+                                        <td><?= 'Rp ' . number_format($subtotal_tiket, 0, ".", ",") ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -116,23 +128,18 @@
                                 <table class="table">
                                     <tr>
                                         <th style="width:50%">Subtotal:</th>
-                                        <td>Rp. <?=
-                                                $subtotal = ($row->paket_price * $row->ticket_total);
-                                                $subtotal ?></td>
+                                        <td><?= 'Rp ' . number_format($subtotal_tiket, 0, ".", ",") ?></td>
                                     </tr>
+
                                     <tr>
-                                        <th>Tiket Masuk <font color="red">(<?= $row->ticket_total ?>x)</font>
+                                        <th>Tiket Masuk <font color="red">(Rp 40,000)</font>
                                         </th>
-                                        <td>Rp. <?= $tiketmasuk = ($row->ticket_total * 45000);
-                                                $tiketmasuk; ?>
-                                        </td>
+                                        <td><?= 'Rp ' . number_format($total_hargatiketmasuk, 0, ".", ",") ?></td>
                                     </tr>
+
                                     <tr>
                                         <th>Total:</th>
-                                        <td>Rp. <?=
-                                                $total = ($row->paket_price * $row->ticket_total) + ($row->ticket_total * 45000);
-                                                $total; ?>
-                                        </td>
+                                        <td><?= 'Rp ' . number_format($total_tiketall, 0, ".", ",") ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -146,7 +153,7 @@
                     <div class="row no-print">
                         <div class="col-12">
                             <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                            <a href="" id="pay-button" class="btn btn-success float-right" data-order_key="<?= $row->order_key; ?>" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-total="<?= $total; ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>" data-ticket_total="<?= $row->ticket_total; ?>" data-paket_price="<?= $row->paket_price; ?>">
+                            <a href="" id="pay-button" class="btn btn-success float-right" data-paket_id="<?= $row->paket_id ?>" data-total_all="<?= $total_tiketall ?>" data-harga_paket_diskon="<?= $harga_paket_diskon ?>" data-ticket_total="<?= $row->ticket_total ?>" data-order_key="<?= $row->order_key; ?>" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>">
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
@@ -174,7 +181,7 @@
 
 <script type="text/javascript">
     $('#pay-button').click(function(event) {
-        var total = $(this).data('total');
+        var total_all = $(this).data('total_all');
         var order_key = $(this).data('order_key');
         var order_name = $(this).data('order_name');
         var telp = $(this).data('telp');
@@ -182,7 +189,7 @@
         var tiketonline_id = $(this).data('tiketonline_id');
         var paket_name = $(this).data('paket_name');
         var ticket_total = $(this).data('ticket_total');
-        var paket_price = $(this).data('paket_price');
+        var harga_paket_diskon = $(this).data('harga_paket_diskon');
         event.preventDefault();
         $(this).attr("disabled", "disabled");
 
@@ -190,7 +197,7 @@
             url: '<?= site_url() ?>snap/token',
             cache: false,
             data: {
-                total: total,
+                total_all: total_all,
                 order_key: order_key,
                 order_name: order_name,
                 telp: telp,
@@ -198,7 +205,7 @@
                 tiketonline_id: tiketonline_id,
                 paket_name: paket_name,
                 ticket_total: ticket_total,
-                paket_price: paket_price
+                harga_paket_diskon: harga_paket_diskon,
             },
 
             success: function(data) {

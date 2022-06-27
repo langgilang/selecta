@@ -18,7 +18,7 @@
 
   <!-- Vendor CSS Files -->
   <link href="<?= base_url('assets/assets_parallaxs/') ?>vendor/aos/aos.css" rel="stylesheet">
-  <link href="<?= base_url('assets/assets_parallaxs/') ?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?= base_url('assets/') ?>assets_parallaxs/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?= base_url('assets/assets_parallaxs/') ?>vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="<?= base_url('assets/assets_parallaxs/') ?>vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="<?= base_url('assets/assets_parallaxs/') ?>vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
