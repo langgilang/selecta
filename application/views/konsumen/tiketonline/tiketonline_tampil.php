@@ -11,12 +11,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Pesanan Tiket Online</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
+                            <li class="breadcrumb-item active">Pesanan Tiket Online</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -50,11 +50,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Data Pesanan Online</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -72,6 +67,12 @@
                                     <th>Harga <br>Paket</th>
                                     <th>Jumlah <br>Tiket</th>
                                     <th>Subtotal <br>Tiket</th>
+                                    <th>Type <br> Pembayaran</th>
+                                    <th>Total <br> Pembayaran</th>
+                                    <th>Bank</th>
+                                    <th>VA Number</th>
+                                    <th>Status</th>
+                                    <th>Tiket <br> Online</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -83,7 +84,7 @@
                                     <?php
                                     $diskon = (($row->diskon / 100) * $row->wahana_price);
                                     $subtotal_paket = $row->wahana_price - $diskon;
-                                    $subtotal_tiket = $row->wahana_price * $row->ticket_total;
+                                    $subtotal_tiket = $subtotal_paket * $row->ticket_total;
                                     ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
@@ -93,7 +94,7 @@
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->paket_name; ?></td>
                                         <td><?= $row->paket_items; ?> items</td>
-                                        <?php if ($row->diskon >= 0) {
+                                        <?php if ($row->diskon > 0) {
                                         ?>
                                             <td style="width: 80px;">
                                                 <p style="text-decoration: line-through; color: darkred;"> <?= 'Rp ' . number_format($row->wahana_price, 0, ".", ",") ?> </p>
@@ -106,18 +107,20 @@
                                         <?php
                                         }
                                         ?>
-                                        <td><?= $row->ticket_total ?> tiket</td>
-                                        <td style="width: 90px;"><?= 'Rp ' . number_format($subtotal_tiket, 0, ".", ",") ?></td>
-                                        <td class="text-center" width="160px">
-                                            <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </a>
-                                            <a href="<?= site_url('konsumen/invoice/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-warning">
-                                                <i class="fa fa-credit-card"></i>
-                                            </a>
+                                        <td><?= number_format($row->ticket_total, 0, ".", ",") ?> tiket</td>
+                                        <td style="width: 100px;"><?= 'Rp ' . number_format($subtotal_tiket, 0, ".", ",") ?></td>
+                                        <td>
+                                            <?php
+                                            if ($row->payment_type == null) {
+                                            ?>
+                                                <label class="badge bg-danger">type pembayaran kosong</label>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <?= $row->payment_type ?>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -173,56 +176,119 @@
                                         <td><?= $row->va_number; ?></td>
                                         <td>
                                             <?php
-                                            if ($row->transaction_status == "settlement") {
+                                            if ($row->gross_amount == null) {
                                             ?>
-                                                <label class="badge bg-success">Success</label>
-                                            <?php
-                                            } else if ($row->transaction_status == "pending") {
-                                            ?>
-                                                <label class="badge bg-warning">Pending</label>
+                                                <label class="badge bg-danger">total pembayaran kosong</label>
                                             <?php
                                             } else {
                                             ?>
-                                                <label class="badge bg-primary">Expired</label>
+                                                <?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?>
                                             <?php
                                             }
                                             ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->transaction_status == "settlement") {
+                                            if ($row->bank == null) {
                                             ?>
-                                                <a href="<?= $row->pdf_url; ?>" target="_blank" class="btn btn-danger btn-sm">
-                                                    <li class="fa fa-trash-alt"></li>
-                                                </a>
-
-                                            <?php
-                                            } else if ($row->transaction_status == "pending") {
-                                            ?>
-                                                <a href="<?= $row->pdf_url; ?>" target="_blank" class="btn btn-success btn-sm">
-                                                    <li class="fa fa-download"></li>
-                                                </a>
+                                                <label class="badge bg-danger">bank kosong</label>
                                             <?php
                                             } else {
                                             ?>
-                                                <a href="<?= $row->pdf_url; ?>" target="_blank" class="btn btn-danger btn-sm">
-                                                    <li class="fa fa-trash-alt"></li>
-                                                </a>
+                                                <?= $row->bank ?>
                                             <?php
                                             }
                                             ?>
                                         </td>
+                                        <td>
+                                            <?php
+                                            if ($row->va_number == null) {
+                                            ?>
+                                                <label class="badge bg-danger">va number kosong</label>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <?= $row->va_number ?>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row->status_code == 200) {
+                                            ?>
+                                                <label class="badge bg-success">Success</label>
+                                            <?php
+                                            } else if ($row->status_code == 201) {
+                                            ?>
+                                                <label class="badge bg-warning">Pending</label>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <label class="badge bg-danger">Menunggu Pembayaran</label>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($row->status_code == 200) {
+                                            ?>
+                                                <a href="#">cetak tiket</a>
+                                            <?php
+                                            } else if ($row->status_code == 201) {
+                                            ?>
+                                                <a href="#" class="badge bg-danger">tiket kosong</a>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <a href="#" class="badge bg-danger">tiket kosong</a>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="text-center" style="width: 150px;">
+                                            <?php
+                                            if ($row->status_code == 200) {
+                                            ?>
+                                                <a href="<?= $row->pdf_url ?>" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            <?php
+                                            } else if ($row->status_code == 201) {
+                                            ?>
+                                                <a href="<?= $row->pdf_url ?>" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-download"></i>
+                                                </a>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+
+                                                <a href="<?= site_url('konsumen/invoice/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-warning">
+                                                    <i class="fa fa-credit-card"></i>
+                                                </a>
+                                            <?php
+                                            }
+                                            ?>
+                                            <!-- <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </a> -->
+                                        </td>
                                     </tr>
                                 <?php
-                                endforeach; ?>
+
+                                endforeach;
+                                ?>
                             </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->
                 </div>
-                <!-- end tabel transaksi -->
+                <!-- end tabel pesanan -->
                 <br>
-                <!-- /.card -->
             </div><!-- /.container-fluid -->
         </section>
     </div>
@@ -370,7 +436,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
-                                    <input type="number" min="30" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
+                                    <input type="number" min="30" max="300" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
                                 </div>
                             </div>
 

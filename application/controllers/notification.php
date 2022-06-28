@@ -35,6 +35,16 @@ class Notification extends CI_Controller
 		$json_result = file_get_contents('php://input');
 		$result = json_decode($json_result, "true");
 
+		$order_id = $result['order_id'];
+		$data = [
+			'status_code' => $result['status_code']
+		];
+
+		if ($result['status_code'] == 200) {
+			$this->db->update('tb_tiketonline', $data, array('order_key' => $order_id));
+		}
+
+
 		// if ($result) {
 		// 	$notif = $this->veritrans->status($result->order_id);
 		// }

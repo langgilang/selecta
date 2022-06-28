@@ -40,27 +40,27 @@ class Snap extends CI_Controller
 	public function token()
 	{
 
-		$total = $this->input->get('total');
+		$total_all = $this->input->get('total_all');
 		$order_key = $this->input->get('order_key');
 		$order_name = $this->input->get('order_name');
 		$telp = $this->input->get('telp');
 		$email = $this->input->get('email');
 		$tiketonline_id = $this->input->get('tiketonline_id');
-		$paket_price = $this->input->get('paket_price');
+		$harga_paket_diskon = $this->input->get('harga_paket_diskon');
 		$ticket_total = $this->input->get('ticket_total');
 		$paket_name = $this->input->get('paket_name');
 
 		// Required
 		$transaction_details = array(
 			'order_id' => $order_key,
-			'gross_amount' => $total  // no decimal allowed for creditcard
+			'gross_amount' => $total_all  // no decimal allowed for creditcard
 		);
 
 
 		// Optional
 		$item1_details = array(
 			'id' => $tiketonline_id,
-			'price' => $paket_price,
+			'price' => $harga_paket_diskon,
 			'quantity' => $ticket_total,
 			'name' => $paket_name
 		);
@@ -68,7 +68,7 @@ class Snap extends CI_Controller
 		// Optional
 		$item2_details = array(
 			'id' => $tiketonline_id,
-			'price' => 45000,
+			'price' => 40000,
 			'quantity' => $ticket_total,
 			'name' => "Tiket Masuk"
 		);
@@ -131,25 +131,30 @@ class Snap extends CI_Controller
 		echo $snapToken;
 	}
 
+
+
 	public function finish()
 	{
+
 		$result = json_decode($this->input->post('result_data'), TRUE);
 		// echo '<pre>';
 		// var_dump($result);
 		// echo '</pre>';
 		$data = array(
-			'order_id' => $result['order_id'],
 			'gross_amount' => $result['gross_amount'],
 			'payment_type' => $result['payment_type'],
 			'transaction_time' => $result['transaction_time'],
-			'transaction_status' => $result['transaction_status'],
+			'status_code' => $result['status_code'],
 			'bank' => $result['va_numbers'][0]['bank'],
 			'va_number' => $result['va_numbers'][0]['va_number'],
 			'pdf_url' => $result['pdf_url'],
 		);
-		$this->midtrans_m->add($data);
+
+		$where['order_key'] = $result['order_id'];
+
+		$this->midtrans_m->edit($data, $where);
 		if ($this->db->affected_rows() > 0) {
-			$this->session->set_flashdata('success', 'Transaksi Berhasil');
+			$this->session->set_flashdata('success', 'Pembayaran Berhasil');
 		}
 		redirect('konsumen/tampil_konsumen');
 	}

@@ -60,14 +60,15 @@
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
         $('#example2').DataTable({
-            "paging": true,
+            "responsive": true,
             "lengthChange": false,
-            "searching": false,
+            "autoWidth": false,
+            "paging": true,
             "ordering": true,
             "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            "buttons": ["colvis"]
+        }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
 
         $('#example3').DataTable({
             "paging": true,

@@ -104,9 +104,6 @@
                                                 <a href="<?= site_url('marketing/del_paket/') . $row->paket_id ?>" id="btn-delete" class="btn btn-sm btn-danger">
                                                     <i class="fa fa-trash-alt"></i>
                                                 </a>
-                                                <!-- <a href="#" class="btn btn-sm btn-default">
-                                                    <i class="fa fa-eye"></i>
-                                                </a> -->
                                             </td>
                                         </tr>
                                     <?php

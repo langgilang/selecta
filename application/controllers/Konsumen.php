@@ -83,7 +83,7 @@ class Konsumen extends CI_Controller
             $data = array(
                 'header' => 'Detail Pesanan Online',
                 'row' => $query->row(),
-                'getwahana' => $this->konsumen_m->get_invoice($id)->result(),
+                'get_wahana_by_invoice' => $this->konsumen_m->get_wahana_by_invoice($id)->result(),
             );
             $this->load->view('konsumen/tiketonline/tiketonline_detail', $data);
         } else {
