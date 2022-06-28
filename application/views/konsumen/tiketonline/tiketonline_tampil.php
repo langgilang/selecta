@@ -165,7 +165,7 @@
                                 foreach ($transaksi as $row) : ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
-                                        <td><?= $row->order_id; ?></td>
+                                        <td><?= $row->order_; ?></td>
                                         <td>Rp. <?= number_format($row->gross_amount); ?></td>
                                         <td><?= $row->payment_type ?></td>
                                         <td><?= $row->transaction_time ?></td>

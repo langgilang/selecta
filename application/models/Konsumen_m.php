@@ -15,7 +15,7 @@ class Konsumen_m extends CI_Model
         $this->db->join('tb_paket', 'tb_paket.paket_id=tb_tiketonline.paket_id');
         $this->db->join('tb_detail_paket', 'tb_paket.paket_id = tb_detail_paket.detail_paket_id');
         $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
-        $this->db->group_by('tb_paket.paket_id');
+        $this->db->group_by('tb_tiketonline.tiketonline_id');
         $this->db->where('user_id', $user);
         return $this->db->get();
     }
@@ -23,7 +23,7 @@ class Konsumen_m extends CI_Model
     public function get_transaksi()
     {
         $this->db->select('*');
-        return $this->db->get('tb_transaksi');
+        return $this->db->get('tb_tiketonline');
     }
 
     public function get_paket()
