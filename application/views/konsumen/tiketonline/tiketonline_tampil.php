@@ -97,7 +97,6 @@
                                         <?php
                                         }
                                         ?>
-
                                         <td>
                                             <?php
                                             if ($row->gross_amount == null) {

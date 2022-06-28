@@ -40,8 +40,7 @@ class Konsumen_m extends CI_Model
     {
         $user = $this->fungsi->user_login()->user_id;
         $this->db->select('*');
-        $this->db->where('user_id', $user);
-        return $this->db->get('tb_transaksi');
+        return $this->db->get('tb_tiketonline');
     }
 
     public function get_paket($id = null)
