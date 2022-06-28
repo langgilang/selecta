@@ -19,7 +19,7 @@ class Konsumen_m extends CI_Model
         return $order_id;
     }
 
-    public function getall($id = null)
+    public function getall()
     {
         $user = $this->fungsi->user_login()->user_id;
         $this->db->select('*, 
@@ -44,10 +44,21 @@ class Konsumen_m extends CI_Model
         return $this->db->get('tb_transaksi');
     }
 
-    public function get_paket()
+    public function get_paket($id = null)
     {
-        return $this->db->get('tb_paket');
+        $this->db->select('*');
+        $this->db->from('tb_paket');
+        if ($id != null) {
+            $this->db->where('paket_id', $id);
+        }
+        return $this->db->get();
     }
+
+    // public function get_paket_selected($id)
+    // {
+    //     $this->db->select('tb_tiketonline.paket_id, tb_paket.name AS paket_name');
+    //     $this->db->from()
+    // }
 
     public function get_wahana()
     {
@@ -75,6 +86,26 @@ class Konsumen_m extends CI_Model
             'name' => $data['name'],
             'telp' => $data['telp'],
             'ticket_type' => 2,
+            'status_tiket' => 1,
+            'ticket_total' => $data['ticket_total'],
+            'paket_id' => $data['paket_id'],
+            'status_code' => 202,
+            'user_id' => $user
+        );
+        $this->db->insert('tb_tiketonline', $param);
+    }
+
+    public function add_perorangan($data)
+    {
+        $user = $this->fungsi->user_login()->user_id;
+        $param = array(
+            'order_key' => $data['order_key'],
+            'reservationdate' => $data['reservationdate'],
+            'nik' => $data['nik'],
+            'name' => $data['name'],
+            'telp' => $data['telp'],
+            'ticket_type' => 1,
+            'status_tiket' => 1,
             'ticket_total' => $data['ticket_total'],
             'paket_id' => $data['paket_id'],
             'status_code' => 202,

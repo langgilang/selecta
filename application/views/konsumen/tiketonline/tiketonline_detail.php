@@ -34,9 +34,6 @@
                             <h4>
                                 <i class="fas fa-globe"></i> Detail Pesanan Tiket Online.
                                 <!-- <small class="float-right">Date: 2/10/2014</small> -->
-                                <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="btn btn-sm btn-warning float-right">
-                                    <i class="fas fa-undo"></i> Back
-                                </a>
                             </h4>
                         </div>
                         <!-- /.col -->
@@ -152,11 +149,14 @@
                     <!-- this row will not appear when printing -->
                     <div class="row no-print">
                         <div class="col-12">
-                            <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                             <a href="" id="pay-button" class="btn btn-success float-right" data-paket_id="<?= $row->paket_id ?>" data-total_all="<?= $total_tiketall ?>" data-harga_paket_diskon="<?= $harga_paket_diskon ?>" data-ticket_total="<?= $row->ticket_total ?>" data-order_key="<?= $row->order_key; ?>" data-order_name="<?= $row->name; ?>" data-telp="<?= $row->telp; ?>" data-email="<?= $this->fungsi->user_login()->email ?>" data-tiketonline_id="<?= $row->tiketonline_id; ?>" data-paket_name="<?= $row->paket_name; ?>">
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
+                            <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="btn btn-sm btn-warning float-left">
+                                <i class="fas fa-undo"></i> Back
+                            </a>
+                            <!-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default float-right" style="margin-right: 5px;"><i class="fas fa-print"></i> Print</a> -->
                         </div>
                     </div>
                 </div>

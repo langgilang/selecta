@@ -60,19 +60,11 @@
                                     <th>No</th>
                                     <th>Order Id</th>
                                     <th>Nama</th>
-                                    <th>Telephone</th>
                                     <th>Jenis <br>Tiket</th>
                                     <th>Paket <br>Pilihan</th>
-                                    <th>Paket <br>Items</th>
                                     <th>Harga <br>Paket</th>
-                                    <th>Jumlah <br>Tiket</th>
-                                    <th>Subtotal <br>Tiket</th>
-                                    <th>Type <br> Pembayaran</th>
                                     <th>Total <br> Pembayaran</th>
-                                    <th>Bank</th>
-                                    <th>VA Number</th>
                                     <th>Status</th>
-                                    <th>Tiket <br> Online</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -90,10 +82,8 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row->order_key; ?></td>
                                         <td><?= $row->customer_name; ?></td>
-                                        <td><?= $row->telp ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->paket_name; ?></td>
-                                        <td><?= $row->paket_items; ?> items</td>
                                         <?php if ($row->diskon > 0) {
                                         ?>
                                             <td style="width: 80px;">
@@ -107,21 +97,7 @@
                                         <?php
                                         }
                                         ?>
-                                        <td><?= number_format($row->ticket_total, 0, ".", ",") ?> tiket</td>
-                                        <td style="width: 100px;"><?= 'Rp ' . number_format($subtotal_tiket, 0, ".", ",") ?></td>
-                                        <td>
-                                            <?php
-                                            if ($row->payment_type == null) {
-                                            ?>
-                                                <label class="badge bg-danger">type pembayaran kosong</label>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <?= $row->payment_type ?>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
+
                                         <td>
                                             <?php
                                             if ($row->gross_amount == null) {
@@ -137,39 +113,13 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row->bank == null) {
-                                            ?>
-                                                <label class="badge bg-danger">bank kosong</label>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <?= $row->bank ?>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($row->va_number == null) {
-                                            ?>
-                                                <label class="badge bg-danger">va number kosong</label>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <?= $row->va_number ?>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php
                                             if ($row->status_code == 200) {
                                             ?>
-                                                <label class="badge bg-success">Success</label>
+                                                <label class="badge bg-success">Pembayaran Success</label>
                                             <?php
                                             } else if ($row->status_code == 201) {
                                             ?>
-                                                <label class="badge bg-warning">Pending</label>
+                                                <label class="badge bg-warning">Pembayaran Pending</label>
                                             <?php
                                             } else {
                                             ?>
@@ -178,52 +128,45 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center" style="width: 200px;">
                                             <?php
                                             if ($row->status_code == 200) {
                                             ?>
-                                                <a href="#">cetak tiket</a>
-                                            <?php
-                                            } else if ($row->status_code == 201) {
-                                            ?>
-                                                <a href="#" class="badge bg-danger">tiket kosong</a>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <a href="#" class="badge bg-danger">tiket kosong</a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="text-center" style="width: 150px;">
-                                            <?php
-                                            if ($row->status_code == 200) {
-                                            ?>
-                                                <a href="<?= $row->pdf_url ?>" class="btn btn-sm btn-default">
-                                                    <i class="fa fa-eye"></i>
+                                                <a href="#" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-print"></i> Cetak Tiket
                                                 </a>
+                                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailPesanan<?= $row->tiketonline_id; ?>">
+                                                    <li class="fa fa-eye"></li>
+                                                </button>
                                             <?php
                                             } else if ($row->status_code == 201) {
                                             ?>
                                                 <a href="<?= $row->pdf_url ?>" class="btn btn-sm btn-success">
                                                     <i class="fa fa-download"></i>
                                                 </a>
+                                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailPesanan<?= $row->tiketonline_id; ?>">
+                                                    <li class="fa fa-eye"></li>
+                                                </button>
                                             <?php
                                             } else {
                                             ?>
-                                                <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-edit"></i>
+                                                <a type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateReservation<?= $row->tiketonline_id; ?>">
+                                                    <li class="fa fa-edit"></li>
                                                 </a>
 
                                                 <a href="<?= site_url('konsumen/invoice/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-warning">
                                                     <i class="fa fa-credit-card"></i>
                                                 </a>
+                                                <a href="<?= site_url('konsumen/batal_pesanan/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-danger">
+                                                    Batal
+                                                </a>
+                                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailPesanan<?= $row->tiketonline_id; ?>">
+                                                    <li class="fa fa-eye"></li>
+                                                </button>
                                             <?php
                                             }
                                             ?>
-                                            <!-- <a href="<?= site_url('konsumen/del/' . $row->tiketonline_id) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data ini?')" class="btn btn-sm btn-danger">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </a> -->
+
                                         </td>
                                     </tr>
                                 <?php
@@ -242,7 +185,7 @@
     </div>
 
     <!-- modal tambah pesanan perorangan -->
-    <form action="" method="post">
+    <form action="<?= site_url('konsumen/proses_add_perorangan') ?>" method="post">
         <div class="modal fade" id="addPesananPerorangan" data-backdrop="static">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -328,7 +271,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                                 <div class="form-group ">
                                     <label>Wahana <font color="red">*</font></label>
                                     <select class="select2 select2bs4" id="add_wahana[]" name="add_wahana[]" multiple style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
@@ -337,19 +280,56 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Simpan </button>
+                        <button type="submit" class="btn btn-primary">Simpan </button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
     <!-- end tambah pesanan perorangan -->
+
+    <!-- modal update reservationdate -->
+    <?php
+    foreach ($semuatiketonline as $detail) :
+        $tiketonline_id = $detail->tiketonline_id;
+        $reservationdate = $detail->reservationdate;
+    ?>
+        <form action="" method="post">
+            <div class="modal fade" id="updateReservation<?= $tiketonline_id ?>" data-backdrop="static">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Tanggal Reservasi</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+                                <input type="hidden" value="<?= $tiketonline_id ?>" name="tiketonline_id">
+                                <label class="col-sm-3 col-form-label">Tanggal Reservasi <font color="red">*</font></label>
+                                <div class="col-sm-9">
+                                    <input type="date" value="<?= $reservationdate ?>" id="reservationdate" name="reservationdate" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Simpan </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <?php endforeach; ?>
+    <!-- end update reservationdate -->
 
     <!-- modal tambah pesanan rombongan -->
     <form action="<?= site_url('konsumen/proses_add_rombongan') ?>" method="post">
@@ -450,6 +430,245 @@
     </form>
     <!-- end tambah pesanan rombongan -->
 
+    <!-- modal detail-->
+    <?php
+    foreach ($semuatiketonline as $detail) :
+        $tiketonline_id = $detail->tiketonline_id;
+        $order_id = $detail->order_key;
+        $nik = $detail->nik;
+        $customer_name = $detail->customer_name;
+        $telp = $detail->telp;
+        $ticket_total = $detail->ticket_total;
+        $reservationdate = $detail->reservationdate;
+        $ticket_type = $detail->ticket_type;
+        $paket_id = $detail->paket_id;
+        $paket_name = $detail->paket_name;
+        $paket_items = $detail->paket_items;
+        $gross_amount = $detail->gross_amount;
+        $payment_type = $detail->payment_type;
+        $transaction_time = $detail->transaction_time;
+        $status_code = $detail->status_code;
+        $bank = $detail->bank;
+        $va_number  = $detail->va_number;
+    ?>
+        <form action="<?= site_url('marketing/proses_edit') ?>" method="post" enctype="multipart/form-data">
+            <div class="modal fade" id="detailPesanan<?= $tiketonline_id; ?>">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detail Pesanan Online</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Oder Id </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $order_id; ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">NIK </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $nik; ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nama </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $customer_name ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Telephone </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $telp; ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tanggal Pesanan </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $reservationdate ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Jumlah Pesanan </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $ticket_total; ?> Tiket</td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Pilihan Paket </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $paket_name; ?></td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Paket Items </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?= $paket_items; ?> Items</td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Total Pesanan </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td>
+                                        <?php
+                                        if ($gross_amount == null) {
+                                        ?>
+                                            <label class="badge bg-danger">total pembayaran kosong</label>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Tipe Pembayaran </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td>
+                                        <?php
+                                        if ($payment_type == null) {
+                                        ?>
+                                            <label class="badge bg-danger">type pembayaran kosong</label>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <?= $payment_type ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Bank </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td>
+                                        <?php
+                                        if ($bank == null) {
+                                        ?>
+                                            <label class="badge bg-danger">bank kosong</label>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <?= strtoupper($bank) ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">VA Number </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td>
+                                        <?php
+                                        if ($va_number == null) {
+                                        ?>
+                                            <label class="badge bg-danger">va number kosong</label>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <?= $va_number ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Status Pembayaran </label>
+                                <div class="col-sm-1">
+                                    <td>:</td>
+                                </div>
+                                <div class="col-sm-8">
+                                    <td><?php
+                                        if ($status_code == 200) {
+                                        ?>
+                                            <label class="badge bg-success">Pembayaran Success</label>
+                                        <?php
+                                        } else if ($status_code == 201) {
+                                        ?>
+                                            <label class="badge bg-warning">Pembayaran Pending</label>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <label class="badge bg-danger">Menunggu Pembayaran</label>
+                                        <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </form>
+    <?php endforeach; ?>
+    <!-- end modal detail -->
+
     <?php $this->load->view('templates/footer') ?>
 
 </div>
@@ -467,22 +686,5 @@
                 text: flash
             })
         }
-        $(document).on('click', '#btn-delete', function(e) {
-            e.preventDefault();
-            var link = $(this).attr('href');
-            Swal.fire({
-                title: 'Apakah anda yakin?',
-                text: "Data Akan dihapus!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = link;
-                }
-            })
-        });
     });
 </script>

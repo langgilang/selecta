@@ -36,10 +36,6 @@
                             <h3 class="card-title">
                                 Wahana Table
                             </h3>
-                            <!-- <a href="<?= site_url('marketing/add_wahana') ?>" class="btn btn-sm btn-success float-right">
-                                <li class="fa fa-plus"></li>
-                                Add Wahana
-                            </a> -->
                             <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#addWahana">
                                 <li class="fa fa-plus"></li> Add Wahana
                             </button>
