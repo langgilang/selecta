@@ -18,37 +18,33 @@ class Konsumen extends CI_Controller
         $this->load->view('konsumen/dashboard/dashboard_tampil', $data);
     }
 
-    public function tampil_konsumen($id = null)
+    public function tampil_konsumen()
     {
-        if ($id != null) {
-            $tampilwahanaselect = $this->konsumen_m->get_paket($id)->result();
-            $data = [
-                'header' => 'Pesan Tiket Online',
-                'semuatiketonline' => $this->konsumen_m->getall()->result(),
-                'transaksi' => $this->konsumen_m->get_transaksi()->result(),
-                'order_key' => $this->konsumen_m->order_key(),
-                'tampilpaket' => $this->konsumen_m->get_paket()->result(),
-                'tampilwahana' => $this->konsumen_m->get_wahana()->result(),
-                'tampilselectwahana' => $tampilwahanaselect,
-                'editperorangan' => $this->konsumen_m->getall()->result(),
-                'editrombongan' => $this->konsumen_m->getall()->result(),
-            ];
-            $this->load->view('konsumen/tiketonline/tiketonline_tampil', $data);
-        }
 
         $data = [
             'header' => 'Pesan Tiket Online',
             'semuatiketonline' => $this->konsumen_m->getall()->result(),
-            'transaksi' => $this->konsumen_m->get_transaksi()->result(),
             'order_key' => $this->konsumen_m->order_key(),
             'tampilpaket' => $this->konsumen_m->get_paket()->result(),
-            'tampilwahana' => $this->konsumen_m->get_wahana()->result(),
-            'editperorangan' => $this->konsumen_m->getall()->result(),
-            'editrombongan' => $this->konsumen_m->getall()->result(),
+            'tampilwahana' => $this->konsumen_m->get_wahana()->result()
         ];
 
         // var_dump($data);
         $this->load->view('konsumen/tiketonline/tiketonline_tampil', $data);
+    }
+
+    public function tampil_history()
+    {
+        $data = [
+            'header' => 'History Pesanan',
+            'history' => $this->konsumen_m->get_history()->result(),
+            'order_key' => $this->konsumen_m->order_key(),
+            'tampilpaket' => $this->konsumen_m->get_paket()->result(),
+            'tampilwahana' => $this->konsumen_m->get_wahana()->result()
+        ];
+
+        // var_dump($data);
+        $this->load->view('konsumen/tiketonline/tiketonline_history', $data);
     }
 
     public function add()
@@ -121,6 +117,34 @@ class Konsumen extends CI_Controller
             $this->session->set_flashdata('success', 'Data Pesanan Tiket Online Perorangtan berhasil disimpan!');
         }
         redirect('konsumen/tampil_konsumen');
+    }
+
+    public function update_reservationdate()
+    {
+        $tiketonline_id = $this->input->post('tiketonline_id');
+        $reservationdate = $this->input->post('reservationdate');
+        $data = [
+            'reservationdate' => $reservationdate
+        ];
+        $this->db->where('tiketonline_id', $tiketonline_id);
+        $this->db->update('tb_tiketonline', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Update Tanggal Reservasi Berhasil!');
+        }
+        redirect('konsumen/tampil_konsumen');
+    }
+
+    public function batal_pesanan($id)
+    {
+        $data = [
+            'status_tiket' => 4
+        ];
+        $this->db->where('tiketonline_id', $id);
+        $this->db->update('tb_tiketonline', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Pesanan Berhasil di batalkan!');
+        }
+        redirect('konsumen/tampil_history');
     }
 
     public function invoice($id)
