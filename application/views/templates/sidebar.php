@@ -170,28 +170,15 @@
                             </p>
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="<?= site_url('portir/tampil_tiketoffline') ?>" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Pesan Tiket Offline
-                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= site_url('portir/tampil_tiketoffline') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Data Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?= site_url('portir/add') ?>" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Add Order Ticket</p>
-                                </a>
-                            </li>
-                        </ul>
+
                     </li>
                     <li class="nav-item">
                         <a href="<?= site_url('portir/tampil_tiketonline') ?>" class="nav-link">
@@ -232,19 +219,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link 
-                        <?php
-                        if ($uri == 'tampil_konsumen') { ?>active
-                        <?php
-                        }
-                        ?>">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p>
-                                Pesan Tiket
-                            </p>
-                        </a>
-                    </li>
+                    
                     <li class="nav-header">SETTING</li>
                     <li class="nav-item">
                         <a href="<?= site_url('auth/logout') ?>" class="nav-link">
