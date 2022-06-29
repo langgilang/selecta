@@ -36,4 +36,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/sweetalert2/sweetalert2.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed 
+<?= $this->uri->segment(2) == 'tampil_konsumen' ||
+    $this->uri->segment(2) == 'tampil_history' ||
+    $this->uri->segment(2) == 'tampil_paket'
+    ? 'sidebar-collapse' : null; ?>
+">

@@ -129,6 +129,24 @@ class Konsumen_m extends CI_Model
         tb_detail_paket.*, 
         tb_wahana.*, 
         tb_tiketonline.*,
+        tb_tiketonline.name AS customer_name,
+        tb_wahana.name AS wahana_name,
+        tb_paket.name AS paket_name,
+        SUM(tb_wahana.price) AS wahana_price');
+        $this->db->join('tb_tiketonline', 'tb_tiketonline.paket_id = tb_paket.paket_id');
+        $this->db->join('tb_detail_paket', 'tb_detail_paket.detail_paket_id = tb_paket.paket_id');
+        $this->db->join('tb_wahana', 'tb_wahana.wahana_id = tb_detail_paket.detail_wahana_id');
+        $this->db->where('tb_tiketonline.tiketonline_id', $id);
+        $this->db->from('tb_paket');
+        return $this->db->get();
+    }
+
+    public function get_print($id = null)
+    {
+        $this->db->select('tb_paket.*, 
+        tb_detail_paket.*, 
+        tb_wahana.*, 
+        tb_tiketonline.tiketonline_id AS tiket_id,
         tb_wahana.name AS wahana_name,
         tb_paket.name AS paket_name,
         SUM(tb_wahana.price) AS wahana_price');

@@ -153,7 +153,7 @@
                                 <i class="far fa-credit-card"></i> Submit
                                 Payment
                             </a>
-                            <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="btn btn-sm btn-warning float-left">
+                            <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="btn btn-sm btn-warning float-left                                                                                                              ">
                                 <i class="fas fa-undo"></i> Back
                             </a>
                             <!-- <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default float-right" style="margin-right: 5px;"><i class="fas fa-print"></i> Print</a> -->

@@ -40,7 +40,6 @@
 
                     <?php
                     $uri2 = $this->uri->segment(2);
-                    $uri3 = $this->uri->segment(3);
                     ?>
                     <li class="nav-header">MASTER DATA</li>
                     <li class="nav-item">
