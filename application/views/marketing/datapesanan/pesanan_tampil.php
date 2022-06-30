@@ -59,7 +59,7 @@
                                         <td><?= $row->paket_name ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->ticket_total ?></td>
-                                      s -->
+
                                         <td class="text-center" width="160px">
                                             <a href="<?= site_url('konsumen/edit/' . $row->tiketonline_id) ?>" class="btn btn-xs btn-default">
                                                 <i class="fa fa-lop"></i> Detail
@@ -67,7 +67,7 @@
                                         </td>
                                     </tr>
                                 <?php
-                                    $total += $row->price * $row->ticket_total;
+                                    $total += $row->gross_amount * $row->ticket_total;
                                 endforeach; ?>
                             </tbody>
                         </table>

@@ -42,25 +42,6 @@
                     $uri2 = $this->uri->segment(2);
                     $uri3 = $this->uri->segment(3);
                     ?>
-                    <!-- <li class="nav-header">WEBSITE</li>
-                    <li class="nav-item">
-                        <a href="<?= site_url('marketing/landingpage') ?>" class="nav-link">
-                            <i class="fab fa-page4 nav-icon"></i>
-                            <p>
-                                Check Website
-                            </p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="<?= site_url('paralax/setting') ?>" class="nav-link">
-                            <i class="nav-icon fa fa-edit"></i>
-                            <p>
-                                Setting Website
-                            </p>
-                        </a>
-                    </li> -->
-
                     <li class="nav-header">MASTER DATA</li>
                     <li class="nav-item">
                         <a href="<?= site_url('marketing/dashboard') ?>" class="nav-link
@@ -219,7 +200,32 @@
                             </p>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a href="<?= site_url('konsumen/tampil_konsumen') ?>" class="nav-link 
+                        <?php
+                        if ($uri == 'tampil_konsumen') { ?>active
+                        <?php
+                        }
+                        ?>">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                Pesan Tiket
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= site_url('konsumen/tampil_history') ?>" class="nav-link 
+                        <?php
+                        if ($uri == 'tampil_history') { ?>active
+                        <?php
+                        }
+                        ?>">
+                            <i class="nav-icon fas fa-clock"></i>
+                            <p>
+                                History Pesanan
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-header">SETTING</li>
                     <li class="nav-item">
                         <a href="<?= site_url('auth/logout') ?>" class="nav-link">

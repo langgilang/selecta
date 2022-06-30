@@ -41,10 +41,7 @@
                         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addPesananRombongan">Tiket Rombongan</button>
                     </div>
                 </div>
-
-                <!-- <button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#addPesanan">
-                    <i class="fa fa-plus-circle"></i> Tambah Pesanan
-                </button> -->
+                
                 <br><br>
                 <!-- tabel pesanan -->
                 <div class="card">

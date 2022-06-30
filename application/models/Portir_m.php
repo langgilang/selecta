@@ -2,7 +2,22 @@
 
 class Portir_m extends CI_Model
 {
-
+    public function order_key()
+    {
+        $sql = "SELECT MAX(MID(order_key,9,4)) AS order_number 
+                FROM tb_tiketoffline 
+                WHERE MID(order_key,3,6) = DATE_FORMAT(CURDATE(), '%y%m%d')";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $n = ((int)$row->order_number) + 1;
+            $no = sprintf("%'.04d", $n);
+        } else {
+            $no = "0001";
+        }
+        $order_id = "OF" . date('ymd' . $no);
+        return $order_id;
+    }
     public function get($id = null)
     {
         // $query=$this->db->query("SELECT * FROM tb_tiketoffline");
@@ -19,6 +34,11 @@ class Portir_m extends CI_Model
         return $this->db->get('tb_paket');
     }
 
+    public function get_wahana()
+    {
+        return $this->db->get('tb_wahana');
+    }
+
     public function get_selectpaket($id)
     {
         $sql = "SELECT * 
@@ -29,16 +49,16 @@ class Portir_m extends CI_Model
         return $query;
     }
 
-    public function add($data)
+    public function add_perorangan($data)
     {
-        $user = $this->fungsi->user_login()->id;
+        $user = $this->fungsi->user_login()->user_id;
         $param = array(
-            'tiketoffline_id' => $data['tiketoffline_id'],
-            'user_id' => $user,
+            'order_key' => $data['order_key'],
             'name' => $data['name'],
             'ticket_total' => $data['ticket_total'],
+            'ticket_type' => 1,
             'paket_id' => $data['paket_id'],
-            'ticket_type' => $data['ticket_type'],
+            'user_id' => $user
         );
         $this->db->insert('tb_tiketoffline', $param);
     }
