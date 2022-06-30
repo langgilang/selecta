@@ -18,15 +18,23 @@ class Portir_m extends CI_Model
         $order_id = "OF" . date('ymd' . $no);
         return $order_id;
     }
-    public function get($id = null)
+    public function get()
     {
         // $query=$this->db->query("SELECT * FROM tb_tiketoffline");
-        $this->db->select('t.*, p.*, t.name AS customer_name, p.name AS paket_name');
-        $this->db->join('tb_paket AS p', 'p.paket_id = t.paket_id');
-        if ($id != null) {
-            $this->db->where('t.tiketoffline_id ', $id);
-        }
-        return $this->db->get('tb_tiketoffline AS t');
+        $this->db->select('
+        tb_tiketoffline.*,
+        tb_paket.*,
+        tb_tiketoffline.name AS customer_name,
+        tb_paket.name AS paket_name,
+        COUNT(tb_wahana.wahana_id) AS wahana_item,
+        SUM(tb_wahana.price) AS paket_price,
+        ');
+        $this->db->from('tb_tiketoffline');
+        $this->db->join('tb_paket', 'tb_tiketoffline.paket_id = tb_paket.paket_id');
+        $this->db->join('tb_detail_paket', 'tb_detail_paket.detail_paket_id = tb_paket.paket_id');
+        $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
+        $this->db->group_by('tb_tiketoffline.paket_id');
+        return $this->db->get();
     }
 
     public function get_paket()
@@ -57,6 +65,7 @@ class Portir_m extends CI_Model
             'name' => $data['name'],
             'ticket_total' => $data['ticket_total'],
             'ticket_type' => 1,
+            'status_tiket' => 1,
             'paket_id' => $data['paket_id'],
             'user_id' => $user
         );

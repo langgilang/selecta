@@ -67,7 +67,7 @@ class Portir extends CI_Controller
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data Pesanan Tiket Offline Rombongan berhasil disimpan!');
         }
-        redirect('portir/tampiltiketoffline');
+        redirect('portir/tampil_tiketoffline');
     }
 
     public function proses_add_rombongan()
@@ -172,5 +172,18 @@ class Portir extends CI_Controller
             $this->session->set_flashdata('success', 'Data berhasil dihapus');
         }
         redirect('portir/tampil_portir');
+    }
+
+    public function update_status_tiket($id)
+    {
+        $data = array(
+            'status_tiket' => 2
+        );
+        $this->db->where('tiketoffline_id', $id);
+        $this->db->update('tb_tiketoffline', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Tiket Telah di Check Out');
+        }
+        redirect('portir/tampil_tiketoffline');
     }
 }

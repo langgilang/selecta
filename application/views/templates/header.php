@@ -39,6 +39,7 @@
 <body class="hold-transition sidebar-mini layout-fixed 
 <?= $this->uri->segment(2) == 'tampil_konsumen' ||
     $this->uri->segment(2) == 'tampil_history' ||
-    $this->uri->segment(2) == 'tampil_paket'
+    $this->uri->segment(2) == 'tampil_paket' ||
+    $this->uri->segment(2) == 'tampil_tiketoffline'
     ? 'sidebar-collapse' : null; ?>
 ">
