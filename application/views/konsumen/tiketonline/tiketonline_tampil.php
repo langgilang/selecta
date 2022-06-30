@@ -41,10 +41,7 @@
                         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addPesananRombongan">Tiket Rombongan</button>
                     </div>
                 </div>
-
-                <!-- <button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#addPesanan">
-                    <i class="fa fa-plus-circle"></i> Tambah Pesanan
-                </button> -->
+                
                 <br><br>
                 <!-- tabel pesanan -->
                 <div class="card">
@@ -300,7 +297,7 @@
         $tiketonline_id = $detail->tiketonline_id;
         $reservationdate = $detail->reservationdate;
     ?>
-        <form action="<?= site_url('konsumen/update_reservationdate') ?>" method="post">
+        <form action="" method="post">
             <div class="modal fade" id="updateReservation<?= $tiketonline_id ?>" data-backdrop="static">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -313,7 +310,7 @@
                         <div class="modal-body">
 
                             <div class="form-group row">
-                                <input type="hidden" value="<?= $tiketonline_id ?>" id="tiketonline_id" name="tiketonline_id">
+                                <input type="hidden" value="<?= $tiketonline_id ?>" name="tiketonline_id">
                                 <label class="col-sm-3 col-form-label">Tanggal Reservasi <font color="red">*</font></label>
                                 <div class="col-sm-9">
                                     <input type="date" value="<?= $reservationdate ?>" id="reservationdate" name="reservationdate" class="form-control" required>
@@ -557,7 +554,7 @@
                                         <?php
                                         } else {
                                         ?>
-                                            <?= 'Rp ' . number_format($gross_amount, 0, ".", ",") ?>
+                                            <?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?>
                                         <?php
                                         }
                                         ?>
@@ -687,6 +684,5 @@
                 text: flash
             })
         }
-
     });
 </script>
