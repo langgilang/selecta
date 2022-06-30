@@ -8,6 +8,7 @@ class Konsumen extends CI_Controller
         check_not_login();
         check_konsumen();
         $this->load->model(['konsumen_m', 'wahana_m']);
+        $this->load->library('Ciqrcode');
     }
 
     public function dashboard()
@@ -163,6 +164,38 @@ class Konsumen extends CI_Controller
         }
     }
 
+    public function qrcode($id)
+    {
+        $data = array(
+            'header' => 'Cetak Tiket Online',
+            'row' => $this->konsumen_m->get_invoice($id)->row(),
+            'get_wahana_by_invoice' => $this->konsumen_m->get_wahana_by_invoice($id)->result(),
+        );
+        $this->load->view('konsumen/tiketonline/tiketonline_barcode', $data);
+    }
+
+
+    public function tampil_qrcode($id)
+    {
+        QRcode::png(
+            $id,
+            $outfile = FALSE,
+            $level = QR_ECLEVEL_H,
+            $size = 6,
+            $margin = 2,
+        );
+    }
+
+    public function print($id)
+    {
+        $data = [
+            'header' => 'Export PDF',
+            'row' => $this->konsumen_m->get_invoice($id)->row(),
+        ];
+        $html =  $this->load->view('konsumen/tiketonline/tiketonline_print', $data, true);
+        $this->fungsi->PdfGenerator($html, 'barcode-' . $data['row']->order_key, 'A4', 'potrait');
+    }
+
     public function del($id)
     {
         $this->konsumen_m->del($id);
@@ -170,5 +203,13 @@ class Konsumen extends CI_Controller
             $this->session->set_flashdata('success', 'Data pesanan berhasil dihapus');
         }
         redirect('konsumen/tampil_konsumen');
+    }
+
+    //QRCODE
+
+    public function tes()
+    {
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
     }
 }

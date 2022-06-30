@@ -124,12 +124,12 @@
                                             }
                                             ?>
                                         </td>
-                                        <td class="text-center" style="width: 200px;">
+                                        <td class="text-left" style="width: 200px;">
                                             <?php
                                             if ($row->status_code == 200) {
                                             ?>
-                                                <a href="#" class="btn btn-sm btn-default">
-                                                    <i class="fa fa-print"></i> Cetak Tiket
+                                                <a href="<?= site_url('konsumen/qrcode/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-qrcode"></i> Cetak Tiket
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailPesanan<?= $row->tiketonline_id; ?>">
                                                     <li class="fa fa-eye"></li>
@@ -664,6 +664,7 @@
         </form>
     <?php endforeach; ?>
     <!-- end modal detail -->
+
 
     <?php $this->load->view('templates/footer') ?>
 
