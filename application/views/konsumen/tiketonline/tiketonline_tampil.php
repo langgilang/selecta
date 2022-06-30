@@ -87,8 +87,9 @@
                                         <?php if ($row->diskon > 0) {
                                         ?>
                                             <td style="width: 80px;">
-                                                <p style="text-decoration: line-through; color: darkred;"> <?= 'Rp ' . number_format($row->wahana_price, 0, ".", ",") ?> </p>
-                                                <p><?= 'Rp ' . number_format($subtotal_paket, 0, ".", ",") ?></p>
+                                                <p>
+                                                    <font style="text-decoration: line-through; color: darkred;"><?= 'Rp ' . number_format($row->wahana_price, 0, ".", ",") ?></font> <?= 'Rp ' . number_format($subtotal_paket, 0, ".", ",") ?>
+                                                </p>
                                             </td>
                                         <?php
                                         } else {
@@ -508,7 +509,7 @@
                                     <td>:</td>
                                 </div>
                                 <div class="col-sm-8">
-                                    <td><?= $reservationdate ?></td>
+                                    <td><?= date('d F Y', strtotime($reservationdate)) ?></td>
                                 </div>
                             </div>
 

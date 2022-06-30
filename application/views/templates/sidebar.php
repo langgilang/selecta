@@ -140,6 +140,78 @@
                 <?php } ?>
                 <!-- END MENU MARKETING -->
 
+                <!-- MENU KASIR -->
+                <?php if ($this->session->userdata('level') ==  2) { ?>
+                    <?php
+                    $uri = $this->uri->segment(2);
+                    ?>
+                    <li class="nav-header">DATA</li>
+                    <li class="nav-item">
+                        <a href="<?= site_url('kasir/dashboard') ?>" class="nav-link 
+                        <?php
+                        if ($uri == 'dashboard') { ?>active
+                        <?php
+                        }
+                        ?>">
+                            <i class=" nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item 
+                    <?php
+                    if ($uri == 'tiket_online' | $uri == 'tiket_offline') { ?>menu-open
+                    <?php
+                    }
+                    ?>">
+                        <a href="#" class="nav-link <?php if ($uri == '' | $uri == '') { ?>active<?php
+                                                                                                } ?>">
+                            <i class="fas fa-book nav-icon"></i>
+                            <p>
+                                Laporan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= site_url('kasir/tiket_online') ?>" class="nav-link
+                                <?php
+                                if ($uri == 'tiket_online') { ?>active
+                                <?php
+                                }
+                                ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tiket Online</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= site_url('kasir/tiket_offline') ?>" class="nav-link
+                                <?php
+                                if ($uri == 'tiket_offline') { ?>active
+                                <?php
+                                }
+                                ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tiket Offline</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-header">SETTING</li>
+                    <li class="nav-item">
+                        <a href="<?= site_url('auth/logout') ?>" class="nav-link">
+                            <i class="fas fa-sign-out-alt nav-icon"></i>
+                            <p>
+                                Logout
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>
+                <!-- END MENU KASIR -->
+
                 <!-- MENU PORTIR -->
                 <?php if ($this->session->userdata('level') ==  3) { ?>
                     <li class="nav-item">

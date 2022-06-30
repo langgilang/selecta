@@ -178,8 +178,8 @@ foreach ($tampilwahana as $i) :
     $image = $i->image;
 ?>
     <form action="<?= site_url('marketing/proses_edit') ?>" method="post" enctype="multipart/form-data">
-        <div class="modal fade" id="updateWahana<?= $wahana_id; ?>" data-backdrop="static">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade " id="updateWahana<?= $wahana_id; ?>" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Wahana</h4>
@@ -211,9 +211,9 @@ foreach ($tampilwahana as $i) :
                             <label class="col-sm-2 col-form-label">Image <font color="red">*</font></label>
                             <div class="col-sm-10">
                                 <?php if ($image != null) { ?>
-                                    <small style="color: black;">Preview</small>
+                                    <small style="color: black; font-size: 16px;">Preview</small><br>
                                     <div style="margin-bottom: 10px;">
-                                        <img src="<?= base_url('uploads/foto_wahana/' . $image); ?>" style="width: 100px;">
+                                        <img src="<?= base_url('uploads/foto_wahana/' . $image); ?>" style="width: 500px;">
                                     </div>
                                     <small style="color: red;">(Biarkan kosong jika gambar ada)</small>
                                 <?php
