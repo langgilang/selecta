@@ -116,13 +116,13 @@
                                             <?php
                                             if ($row->status_tiket == 1) {
                                             ?>
-                                                <a href="<?= site_url('portir/update_status_tiket/' . $row->tiketoffline_id) ?>" class="btn btn-xs btn-danger">
-                                                    <li class="fa fa-logout"></li> Check Out
+                                                <a href="<?= site_url('portir/update_status_tiket/' . $row->tiketoffline_id) ?>" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-sign-out-alt"></i>
                                                 </a>
                                             <?php
                                             } else {
                                             ?>
-                                                <a href="#" class="btn btn-xs btn-default">
+                                                <a href="#" class="btn btn-sm btn-default">
                                                     <li class="fa fa-eye"></li>
                                                 </a>
                                             <?php

@@ -66,7 +66,8 @@
                                             <td><?= $row->paket_name; ?></td>
                                             <td><?= $row->wahana_item; ?> Items</td>
                                             <td>Rp. <?= number_format($row->wahana_price, 0, ",", ".") ?></td>
-                                            <td><?= $row->diskon ?>% <font class="text-danger">(Rp. <?= $diskon = ($row->diskon / 100) * $row->wahana_price; ?>)</font>
+                                            <td>
+                                                <?= $row->diskon ?>% <font class="text-danger">(Rp. <?= $diskon = ($row->diskon / 100) * $row->wahana_price; ?>)</font>
                                             </td>
                                             <td>Rp. <?= number_format($row->wahana_price - $diskon, 0, ",", ".") ?></td>
                                             <td>

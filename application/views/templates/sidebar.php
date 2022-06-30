@@ -214,8 +214,17 @@
 
                 <!-- MENU PORTIR -->
                 <?php if ($this->session->userdata('level') ==  3) { ?>
+                    <?php
+                    $uri = $this->uri->segment(2);
+                    ?>
                     <li class="nav-item">
-                        <a href="<?= site_url('portir/dashboard') ?>" class="nav-link">
+                        <a href="<?= site_url('portir/dashboard') ?>" class="nav-link
+                        <?php if ($uri == 'dashboard') {
+                        ?>
+                        active
+                            <?php
+                        } ?>
+                        ">
                             <i class=" nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
@@ -224,7 +233,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="<?= site_url('portir/tampil_tiketoffline') ?>" class="nav-link">
+                        <a href="<?= site_url('portir/tampil_tiketoffline') ?>" class="nav-link
+                        <?php if ($uri == 'tampil_tiketoffline') {
+                        ?>
+                        active
+                            <?php
+                        } ?>
+                        ">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Pesan Tiket Offline
@@ -233,7 +248,13 @@
 
                     </li>
                     <li class="nav-item">
-                        <a href="<?= site_url('portir/tampil_tiketonline') ?>" class="nav-link">
+                        <a href="<?= site_url('portir/tampil_tiketonline') ?>" class="nav-link 
+                        <?php if ($uri == 'tampil_tiketonline') {
+                        ?>
+                        active
+                            <?php
+                        } ?>
+                        ">
                             <i class="nav-icon fas fa-list-alt"></i>
                             <p>
                                 Data Order Tiket Online

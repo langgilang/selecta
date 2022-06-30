@@ -40,6 +40,7 @@
 <?= $this->uri->segment(2) == 'tampil_konsumen' ||
     $this->uri->segment(2) == 'tampil_history' ||
     $this->uri->segment(2) == 'tampil_paket' ||
-    $this->uri->segment(2) == 'tampil_tiketoffline'
+    $this->uri->segment(2) == 'tampil_tiketoffline' ||
+    $this->uri->segment(2) == 'tampil_tiketonline'
     ? 'sidebar-collapse' : null; ?>
 ">

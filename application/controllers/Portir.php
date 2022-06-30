@@ -45,7 +45,11 @@ class Portir extends CI_Controller
 
     public function tampil_tiketonline()
     {
-        $this->load->view('portir/tiketonline/tiketonline_tampil');
+        $data = [
+            'header' => 'Data Pesanan Online',
+            'semuatiketonline' => $this->portir_m->gett_all_tiketonline()->result(),
+        ];
+        $this->load->view('portir/tiketonline/tiketonline_tampil', $data);
     }
 
 
@@ -120,50 +124,6 @@ class Portir extends CI_Controller
         redirect('portir/tampil_tiketoffline');
     }
 
-    // public function proses_edit()
-    // {
-    //     $tiketoffline_id = $this->input->post('tiketoffline_id', TRUE);
-    //     $user_id = $this->input->post('user_id', TRUE);
-    //     $name = $this->input->post('name', TRUE);
-    //     $ticket_total = $this->input->post('ticket_total', TRUE);
-    //     $paket_id = $this->input->post('paket_id', TRUE);
-    //     $ticket_type = $this->input->post('ticket_type', TRUE);
-
-    //     $data = array(
-    //         'tiketoffline_id' => $tiketoffline_id,
-    //         'user_id' => $user_id,
-    //         'name' => $name,
-    //         'ticket_total' => $ticket_total,
-    //         'paket_id' => $paket_id,
-    //         'ticket_type' => $ticket_type
-    //     );
-    //     $where['tiketoffline_id'] = $tiketoffline_id;
-
-    //     $this->portir_m->add($data);
-    //     if ($this->db->affected_rows() > 0) {
-    //         $this->session->set_flashdata('success', 'Data pesanan Offline berhasil disimpan');
-    //     }
-    //     redirect('portir/tampil_tiketoffline');
-    // }
-
-
-    // public function edit($id)
-    // {
-    //     $query = $this->portir_m->get($id);
-    //     if ($query->num_rows() > 0) {
-    //         $data = array(
-    //             'header' => 'Edit Data Tiket Offline',
-    //             'row' => $query->row(),
-    //             'tampilpaket' => $this->portir_m->get_paket()->result(),
-    //             'tampilselect' => $this->portir_m->get_selectpaket($id)->result(),
-
-    //         );
-    //         $this->load->view('portir/tiketoffline/tiketoffline_edit', $data);
-    //     } else {
-    //         echo "<script>alert('Data tidak ditemukan');";
-    //         echo "window.location='" . site_url('portir/edit/') . "';</script>";
-    //     }
-    // }
 
     public function del($id)
     {

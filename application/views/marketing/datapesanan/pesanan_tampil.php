@@ -42,7 +42,6 @@
                                     <th>Paket Pilihan</th>
                                     <th>Jenis Tiket</th>
                                     <th>Jumlah Tiket</th>
-                                    <th>Sub Total</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
