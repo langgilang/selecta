@@ -101,11 +101,11 @@
                                             <?php
                                             if ($row->status_tiket == 1) {
                                             ?>
-                                                <label class="badge badge-success">Check In</label>
+                                                <label class="badge badge-success">Tiket Check-In</label>
                                             <?php
                                             } else {
                                             ?>
-                                                <label class="badge badge-danger">Check Out </label>
+                                                <label class="badge badge-danger">Tiket Check-Out </label>
                                             <?php
                                             }
 
@@ -117,7 +117,7 @@
                                             if ($row->status_tiket == 1) {
                                             ?>
                                                 <a href="<?= site_url('portir/update_status_tiket/' . $row->tiketoffline_id) ?>" class="btn btn-sm btn-danger">
-                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    <i class="fas fa-sign-out-alt"></i> Checkout
                                                 </a>
                                             <?php
                                             } else {

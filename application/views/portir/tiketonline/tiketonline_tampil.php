@@ -31,6 +31,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Data Pesanan Online</h3>
                     </div>
+                    <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -60,16 +61,43 @@
                                         <td><?= $row->ticket_total ?> Tiket</td>
                                         <td><?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?></td>
                                         <td>
-
+                                            <?php if ($row->status_tiket == 1) {
+                                            ?>
+                                                <label class="badge badge-warning">Tiket belum digunakan</label>
+                                            <?php
+                                            } else if ($row->status_tiket == 2) {
+                                            ?>
+                                                <label class="badge badge-success">Tiket Check-in</label>
+                                            <?php
+                                            } else if ($row->status_tiket == 3) {
+                                            ?>
+                                                <label class="badge badge-danger">Tiket Check-out</label>
+                                            <?php
+                                            } else {
+                                            ?>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                         <td class="text-left">
                                             <?php if ($row->status_tiket == 1) {
                                             ?>
-                                                <a href="" class="btn btn-sm btn-danger">
-                                                    <li class="fas fa-sign-out-alt nav-icon"></li>
+                                                <a href="<?= site_url('portir/update_checkin/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-success">
+                                                    <li class="fas fa-sign-in-alt"></li> Check-in
                                                 </a>
                                             <?php
-                                            } ?>
+                                            } else if ($row->status_tiket == 2) {
+                                            ?>
+                                                <a href="<?= site_url('portir/update_checkout/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-danger">
+                                                    <li class="fas fa-sign-out-alt"></li> Check-out
+                                                </a>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <label class="badge badge-success">Tiket sudah digunakan</label>
+                                            <?php
+                                            }
+                                            ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -125,3 +153,14 @@
 <!-- end modal tambah data -->
 
 <?php $this->load->view('templates/js') ?>
+
+<script>
+    var flash = $('#flash').data('flash');
+    if (flash) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: flash
+        })
+    }
+</script>

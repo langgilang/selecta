@@ -84,16 +84,6 @@ class Marketing extends CI_Controller
         $this->load->view('marketing/datawahana/wahana_add', $data);
     }
 
-    // KE HALAMAN ADD PAKET
-    // public function add_paket()
-    // {
-    //     $data = array(
-    //         'header' => 'Tambah Data Paket',
-    //         'tampilwahana' => $this->marketing_m->get_wahana()->result(),
-    //     );
-    //     $this->load->view('marketing/datapaket/paket_add', $data);
-    // }
-
     public function edit_paket($id)
     {
         $query = $this->marketing_m->get_wahana_by_paket($id);

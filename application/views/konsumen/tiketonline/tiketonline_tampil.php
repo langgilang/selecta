@@ -41,7 +41,7 @@
                         <button class="dropdown-item" type="button" data-toggle="modal" data-target="#addPesananRombongan">Tiket Rombongan</button>
                     </div>
                 </div>
-                
+
                 <br><br>
                 <!-- tabel pesanan -->
                 <div class="card">
@@ -99,7 +99,7 @@
                                             <?php
                                             if ($row->gross_amount == null) {
                                             ?>
-                                                <label class="badge bg-danger">total pembayaran kosong</label>
+                                                <label class="badge bg-danger">Menunggu Pembayaran</label>
                                             <?php
                                             } else {
                                             ?>
@@ -139,7 +139,10 @@
                                             } else if ($row->status_code == 201) {
                                             ?>
                                                 <a href="<?= $row->pdf_url ?>" class="btn btn-sm btn-success">
-                                                    <i class="fa fa-download"></i>
+                                                    <i class="fa fa-download"></i> Cara Bayar
+                                                </a>
+                                                <a href="<?= site_url('konsumen/batal_pesanan/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-danger">
+                                                    Batal
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailPesanan<?= $row->tiketonline_id; ?>">
                                                     <li class="fa fa-eye"></li>
@@ -152,7 +155,7 @@
                                                 </a>
 
                                                 <a href="<?= site_url('konsumen/invoice/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-warning">
-                                                    <i class="fa fa-credit-card"></i>
+                                                    <i class="fa fa-credit-card"></i> Bayar
                                                 </a>
                                                 <a href="<?= site_url('konsumen/batal_pesanan/' . $row->tiketonline_id) ?>" class="btn btn-sm btn-danger">
                                                     Batal
@@ -290,6 +293,116 @@
         </div>
     </form>
     <!-- end tambah pesanan perorangan -->
+
+    <!-- cetak tiket -->
+    <form action="<?= site_url('konsumen/proses_add_perorangan') ?>" method="post">
+        <div class="modal fade" id="addPesananPerorangan" data-backdrop="static">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Form Pesanan Tiket Online Perorangan</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <input type="hidden" value="" name="tiketonline_id">
+                                    <label for="order_key">Order Id <font color="red">*</font></label>
+                                    <input type="text" value="<?= $order_key ?>" id="order_key" name="order_key" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <input type="hidden" value="" name="tiketonline_id">
+                                    <label for="reservationdate">Tanggal Reservasi <font color="red">*</font></label>
+                                    <input type="date" value="" id="reservationdate" name="reservationdate" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
+                                    <input type="number" min="1" max="29" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label for="ticket_type">Jenis Tiket <font color="red">*</font></label>
+                                    <select name="ticket_type" id="ticket_type" class="form-control" disabled="true">
+                                        <option value="1">Perorangan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md 3">
+                                <div class="form-group">
+                                    <label for="nik">NIK <font color="red">*</font></label>
+                                    <input type="text" value="" id="nik" name="nik" class="form-control" placeholder="Masukkan Nik " required>
+                                </div>
+                            </div>
+
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <label for="name">Nama <font color="red">*</font></label>
+                                    <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda " required>
+                                </div>
+                            </div>
+
+                            <div class="col-md 3">
+                                <div class="form-group ">
+                                    <label for="telp">Telephone <font color="red">*</font></label>
+                                    <input type="text" value="" id="telp" name="telp" class="form-control" placeholder="Masukkan Telephone " required>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="paket_id">Jenis Paket <font color="red">*</font></label>
+                                    <select name="paket_id" id="paket_id" class="form-control">
+                                        <option value="">-- Pilih -- </option>
+                                        <?php foreach ($tampilpaket as $data) : ?>
+                                            <option value="<?= $data->paket_id ?>"><?= $data->name ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Wahana <font color="red">*</font></label>
+                                    <select class="select2 select2bs4" id="add_wahana[]" name="add_wahana[]" multiple style="width: 100%;" data-select2-id="7" tabindex="-1" aria-hidden="true">
+                                        <?php foreach ($tampilwahana as $data) { ?>
+                                            <option value="<?= $data->wahana_id; ?>"><?= $data->name ?> - <?= $data->price ?> </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Simpan </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- end cetak tiket -->
 
     <!-- modal update reservationdate -->
     <?php
@@ -550,11 +663,11 @@
                                         <?php
                                         if ($gross_amount == null) {
                                         ?>
-                                            <label class="badge bg-danger">total pembayaran kosong</label>
+                                            <label class="badge bg-danger">Menunggu Pembayaran</label>
                                         <?php
                                         } else {
                                         ?>
-                                            <?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?>
+                                            <?= 'Rp ' . number_format($gross_amount, 0, ".", ",") ?>
                                         <?php
                                         }
                                         ?>
@@ -572,7 +685,7 @@
                                         <?php
                                         if ($payment_type == null) {
                                         ?>
-                                            <label class="badge bg-danger">type pembayaran kosong</label>
+                                            <label class="badge bg-danger">Menunggu Pembayaran</label>
                                         <?php
                                         } else {
                                         ?>
@@ -594,7 +707,7 @@
                                         <?php
                                         if ($bank == null) {
                                         ?>
-                                            <label class="badge bg-danger">bank kosong</label>
+                                            <label class="badge bg-danger">Menunggu Pembayaran</label>
                                         <?php
                                         } else {
                                         ?>
@@ -616,7 +729,7 @@
                                         <?php
                                         if ($va_number == null) {
                                         ?>
-                                            <label class="badge bg-danger">va number kosong</label>
+                                            <label class="badge bg-danger">Menunggu Pembayaran</label>
                                         <?php
                                         } else {
                                         ?>

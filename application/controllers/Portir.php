@@ -134,6 +134,7 @@ class Portir extends CI_Controller
         redirect('portir/tampil_portir');
     }
 
+    //tiket offline
     public function update_status_tiket($id)
     {
         $data = array(
@@ -142,8 +143,35 @@ class Portir extends CI_Controller
         $this->db->where('tiketoffline_id', $id);
         $this->db->update('tb_tiketoffline', $data);
         if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Tiket Telah di Check Out');
+            $this->session->set_flashdata('success', 'Tiket berhasil di Check-Out');
         }
         redirect('portir/tampil_tiketoffline');
+    }
+
+    // tiket online
+    public function update_checkin($id)
+    {
+        $data = array(
+            'status_tiket' => 2
+        );
+        $this->db->where('tiketonline_id', $id);
+        $this->db->update('tb_tiketonline', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Tiket berhasil Check-In');
+        }
+        redirect('portir/tampil_tiketonline');
+    }
+
+    public function update_checkout($id)
+    {
+        $data = array(
+            'status_tiket' => 3
+        );
+        $this->db->where('tiketonline_id', $id);
+        $this->db->update('tb_tiketonline', $data);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Tiket berhasil di Check-Out');
+        }
+        redirect('portir/tampil_tiketonline');
     }
 }

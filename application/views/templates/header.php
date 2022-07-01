@@ -41,6 +41,8 @@
     $this->uri->segment(2) == 'tampil_history' ||
     $this->uri->segment(2) == 'tampil_paket' ||
     $this->uri->segment(2) == 'tampil_tiketoffline' ||
-    $this->uri->segment(2) == 'tampil_tiketonline'
+    $this->uri->segment(2) == 'tampil_tiketonline' ||
+    $this->uri->segment(2) == 'tiket_online' ||
+    $this->uri->segment(2) == 'tiket_offline'
     ? 'sidebar-collapse' : null; ?>
 ">

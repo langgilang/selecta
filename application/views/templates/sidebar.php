@@ -58,73 +58,52 @@
 
                     <li class="nav-item 
                     <?php
-                    if ($uri2 == 'tampil_pesananonline' | $uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>menu-open
+                    if ($uri2 == 'tampil_wahana' || $uri2 == 'tampil_paket') { ?>menu-open
                     <?php
                     }
                     ?>">
-                        <a href="#" class="nav-link <?php if ($uri2 == 'tampil_pesananonline' | $uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>active<?php
-                                                                                                                                                            } ?>">
-                            <i class="fas fa-ticket-alt nav-icon"></i>
-                            <p>
-                                Tiket
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="<?= site_url('marketing/tampil_pesananonline') ?>" class="nav-link
-                                <?php
-                                if ($uri2 == 'tampil_pesananonline') { ?>active
-                                <?php
-                                }
-                                ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Data Pesanan</p>
-                                </a>
-                            </li>
-                            <li class="nav-item
+                    <li class="nav-item
                             <?php
                             if ($uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>menu-open
                             <?php
                             }
                             ?>">
-                                <a href="#" class="nav-link
+                        <a href="#" class="nav-link
                                 <?php
                                 if ($uri2 == 'tampil_wahana' | $uri2 == 'tampil_paket') { ?>active
                                 <?php
                                 }
                                 ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Wahana
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="<?= site_url('marketing/tampil_wahana') ?>" class="nav-link
+                            <i class="fas fa-ticket-alt nav-icon"></i>
+                            <p>Wahana
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= site_url('marketing/tampil_wahana') ?>" class="nav-link
                                         <?php
                                         if ($uri2 == 'tampil_wahana') { ?>active
                                         <?php
                                         }
                                         ?>">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Data Wahana</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="<?= site_url('marketing/tampil_paket') ?>" class="nav-link
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Data Wahana</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= site_url('marketing/tampil_paket') ?>" class="nav-link
                                         <?php
                                         if ($uri2 == 'tampil_paket') { ?>active
                                         <?php
                                         }
                                         ?>">
-                                            <i class="far fa-dot-circle nav-icon"></i>
-                                            <p>Data Paket Wahana</p>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Data Paket Wahana</p>
+                                </a>
                             </li>
                         </ul>
+                    </li>
                     </li>
 
                     <li class="nav-header">SETTING</li>

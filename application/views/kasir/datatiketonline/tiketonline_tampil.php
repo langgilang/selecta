@@ -41,6 +41,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Telephone</th>
+                                    <th>Tanggal <br> Reservasi</th>
                                     <th>Paket <br>Pilihan</th>
                                     <th>Jenis <br>Tiket</th>
                                     <th>Jumlah <br>Tiket</th>
@@ -57,13 +58,14 @@
                                         <td><?= $no++; ?></td>
                                         <td><?= $row->customer_name ?></td>
                                         <td><?= $row->telp ?></td>
+                                        <td><?= date('d F Y', strtotime($row->reservationdate)) ?></td>
                                         <td><?= $row->paket_name ?></td>
                                         <td><?= $row->ticket_type == 1 ? "Perorangan" : "Rombongan"; ?></td>
                                         <td><?= $row->ticket_total ?> Tiket</td>
                                         <td><?= 'Rp ' . number_format($row->gross_amount, 0, ".", ",") ?></td>
 
                                         <td class="text-left">
-                                            <a href="#" class="btn btn-sm btn-default">
+                                            <a href="<?= site_url('kasir/print_per_id/' . $row->tiketonline_id) ?>" target="_blank" class="btn btn-sm btn-default">
                                                 <li class="fa fa-print"></li>
                                             </a>
                                         </td>
@@ -77,6 +79,7 @@
                 </div>
             </div>
         </section>
+        <br>
     </div>
 
     <?php $this->load->view('templates/footer') ?>
@@ -84,7 +87,7 @@
 </div>
 
 <!-- modal tambah data -->
-<form action="" method="post">
+<form action="<?= site_url('kasir/print_arrage') ?>" method="POST" target="_blank">
     <div class="modal fade" id="printArrage" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -98,19 +101,19 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Tanggal Awal <font color="red">*</font></label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control " name="reservationdate" id="reservationdate">
+                            <input type="date" class="form-control " name="tgl_awal" id="tgl_awal" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Tanggal Akhir <font color="red">*</font></label>
                         <div class="col-sm-8">
-                            <input type="date" class="form-control " name="reservationdate" id="reservationdate">
+                            <input type="date" class="form-control " name="tgl_akhir" id="tgl_akhir" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Cetak</button>
+                    <input type="submit" name="cetak_arrage" class="btn btn-primary" value="Cetak"></input>
                 </div>
             </div>
             <!-- /.modal-content -->

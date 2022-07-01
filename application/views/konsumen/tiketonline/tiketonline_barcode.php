@@ -49,18 +49,67 @@
                         <!-- /.card -->
                     </div>
 
-                    <!-- <div class="col-md-9">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Data Pesanan Online</h3>
                             </div>
                             <div class="card-body">
+                                <div class="tab-pane" id="settings">
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label for="inputName">Name</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label for="">:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <td><?= $row->customer_name ?></td>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label for="inputName">Telephone</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label for="">:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <td><?= $row->telp ?></td>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label for="inputName">Tanggal Reservasi</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label for="">:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <td><?= date('d F Y', strtotime($row->reservationdate)) ?></td>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label for="inputName">Paket Pilihan</label>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <label for="">:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <td><?= $row->paket_name ?></td>
+                                        </div>
+                                    </div>
 
 
+                                </div>
                             </div>
                         </div>
-                    </div> -->
-
+                    </div>
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

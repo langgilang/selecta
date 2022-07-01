@@ -34,6 +34,7 @@ class Portir_m extends CI_Model
         $this->db->join('tb_detail_paket', 'tb_detail_paket.detail_paket_id = tb_paket.paket_id');
         $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
         $this->db->group_by('tb_tiketoffline.tiketoffline_id');
+        $this->db->order_by('status_tiket');
         return $this->db->get();
     }
 
@@ -104,7 +105,8 @@ class Portir_m extends CI_Model
         $this->db->join('tb_detail_paket', 'tb_paket.paket_id = tb_detail_paket.detail_paket_id');
         $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
         $this->db->group_by('tb_tiketonline.tiketonline_id');
-        $this->db->where('status_code', 200);
+        $this->db->where(array('status_code' => 200));
+        $this->db->order_by('status_tiket');
         return $this->db->get('tb_tiketonline');
     }
 }

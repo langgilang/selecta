@@ -33,24 +33,40 @@ class Konsumen_m extends CI_Model
         $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
         $this->db->group_by('tb_tiketonline.tiketonline_id');
         $this->db->where(array('status_tiket' => 1, 'user_id' => $user));
+        $this->db->order_by('status_code');
         return $this->db->get();
     }
 
     public function get_history()
     {
         $user = $this->fungsi->user_login()->user_id;
-        $this->db->select('*, 
-        tb_paket.name AS paket_name,
-        COUNT(tb_wahana.wahana_id) AS paket_items,
-        tb_tiketonline.name AS customer_name,
-        SUM(tb_wahana.price) AS wahana_price');
-        $this->db->from('tb_tiketonline');
-        $this->db->join('tb_paket', 'tb_paket.paket_id=tb_tiketonline.paket_id');
-        $this->db->join('tb_detail_paket', 'tb_paket.paket_id = tb_detail_paket.detail_paket_id');
-        $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
-        $this->db->group_by('tb_tiketonline.tiketonline_id');
-        $this->db->where(array('status_tiket' => 3, 'status_tiket' => 4));
-        return $this->db->get();
+        $sql = "SELECT *,
+                tb_paket.name AS paket_name,
+                COUNT(tb_wahana.wahana_id) AS paket_items,
+                tb_tiketonline.name AS customer_name,
+                SUM(tb_wahana.price) AS wahana_price
+                FROM tb_tiketonline
+                JOIN tb_paket ON tb_paket.paket_id=tb_tiketonline.paket_id
+                JOIN tb_detail_paket ON tb_paket.paket_id = tb_detail_paket.detail_paket_id
+                JOIN tb_wahana ON tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id
+                WHERE status_tiket = 3 OR status_tiket = 4 AND user_id = '$user'
+                GROUP BY tb_tiketonline.tiketonline_id
+                ORDER BY status_tiket ASC
+                ";
+        return $this->db->query($sql);
+        // $this->db->select('*, 
+        // tb_paket.name AS paket_name,
+        // COUNT(tb_wahana.wahana_id) AS paket_items,
+        // tb_tiketonline.name AS customer_name,
+        // SUM(tb_wahana.price) AS wahana_price');
+        // $this->db->from('tb_tiketonline');
+        // $this->db->join('tb_paket', 'tb_paket.paket_id=tb_tiketonline.paket_id');
+        // $this->db->join('tb_detail_paket', 'tb_paket.paket_id = tb_detail_paket.detail_paket_id');
+        // $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
+        // $this->db->group_by('tb_tiketonline.tiketonline_id');
+        // $this->db->where('status_tiket', 3  4);
+        // $this->db->where('user_id', $user);
+        // return $this->db->get();
     }
 
     public function get_paket($id = null)
