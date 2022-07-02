@@ -162,4 +162,38 @@ class Marketing_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    public function total_wahana()
+    {
+        $query = "SELECT 
+        COUNT(wahana_id) AS total_wahana
+        FROM tb_wahana";
+        return $this->db->query($query);
+    }
+
+    public function total_paket()
+    {
+        $query = "SELECT 
+        COUNT(paket_id) AS total_paket
+        FROM tb_paket";
+        return $this->db->query($query);
+    }
+
+    public function total_paket_non_diskon()
+    {
+        $query = "SELECT 
+        COUNT(paket_id) AS total_paket
+        FROM tb_paket
+        WHERE diskon = 0";
+        return $this->db->query($query);
+    }
+
+    public function total_paket_diskon()
+    {
+        $query = "SELECT 
+        COUNT(paket_id) AS total_paket
+        FROM tb_paket
+        WHERE diskon > 0";
+        return $this->db->query($query);
+    }
 }

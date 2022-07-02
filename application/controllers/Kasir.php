@@ -10,10 +10,20 @@ class Kasir extends CI_Controller
 
     public function dashboard()
     {
-        $data = [
-            'header' => 'Dashboard'
-        ];
-        $this->load->view('kasir/dashboard/kasir_dashboard', $data);
+        $query = $this->kasir_m->total_tiketonline_done();
+        $query2 = $this->kasir_m->total_tiketoffline_done();
+        $query3 = $this->kasir_m->off_checkin();
+        $query4 = $this->kasir_m->off_checkout();
+        if ($query->num_rows == 0 || $query2->num_rows == 0 || $query3->num_rows == 0 || $query4->num_rows == 0) {
+            $data = [
+                'header' => 'Dashboard',
+                'tiketonline_done' => $query->row(),
+                'tiketoffline_done' => $query2->row(),
+                'in' => $query3->row(),
+                'out' => $query4->row(),
+            ];
+            $this->load->view('kasir/dashboard/kasir_dashboard', $data);
+        }
     }
 
     public function tiket_online()

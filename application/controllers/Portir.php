@@ -11,10 +11,20 @@ class Portir extends CI_Controller
     // DASHBOARD PORTIR
     public function dashboard()
     {
-        $data = array(
-            'header' => 'Dashboard'
-        );
-        $this->load->view('portir/dashboard/dashboard_tampil', $data);
+        $query = $this->portir_m->total_pesanan_offline();
+        $query2 = $this->portir_m->total_pesanan_online_checkin();
+        $query3 = $this->portir_m->tiketoffline_checkout();
+        $query4 = $this->portir_m->tiketonline_checkout();
+        if ($query->num_rows == 0 || $query2->num_rows == 0 || $query3->num_rows == 0 || $query4->num_rows == 0) {
+            $data = array(
+                'header' => 'Dashboard',
+                'total_tiketoffline' => $query->row(),
+                'total_pesanan_online_checkin' => $query2->row(),
+                'offline_checkout' => $query3->row(),
+                'online_checkout' => $query4->row(),
+            );
+            $this->load->view('portir/dashboard/dashboard_tampil', $data);
+        }
     }
 
     //TAMPIL MENU DATA TIKET OFFLINE 
@@ -60,45 +70,36 @@ class Portir extends CI_Controller
         $ticket_total = $this->input->post('ticket_total', TRUE);
         $paket_id = $this->input->post('paket_id', TRUE);
 
-        $data = array(
-            'order_key' => $order_key,
-            'name' => $name,
-            'ticket_total' => $ticket_total,
-            'paket_id' => $paket_id,
-        );
-        // print_r($data);
-        $this->portir_m->add_perorangan($data);
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Pesanan Tiket Offline Rombongan berhasil disimpan!');
+        if ($ticket_total < 30) {
+            $data = array(
+                'order_key' => $order_key,
+                'name' => $name,
+                'ticket_total' => $ticket_total,
+                'ticket_type' => 1,
+                'paket_id' => $paket_id,
+            );
+            // print_r($data);
+            $this->portir_m->add_tiketoffline($data);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Tiket perorangan berhasil disimpan!');
+            }
+            redirect('portir/tampil_tiketoffline');
+        } else {
+            $data = array(
+                'order_key' => $order_key,
+                'name' => $name,
+                'ticket_total' => $ticket_total,
+                'ticket_type' => 2,
+                'paket_id' => $paket_id,
+            );
+            // print_r($data);
+            $this->portir_m->add_tiketoffline($data);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Tiket rombongan berhasil disimpan!');
+            }
+            redirect('portir/tampil_tiketoffline');
         }
-        redirect('portir/tampil_tiketoffline');
     }
-
-    public function proses_add_rombongan()
-    {
-        $order_key = $this->portir_m->order_key();
-        $nik = $this->input->post('nik', TRUE);
-        $name = $this->input->post('name', TRUE);
-        $telp = $this->input->post('telp', TRUE);
-        $ticket_total = $this->input->post('ticket_total', TRUE);
-        $paket_id = $this->input->post('paket_id', TRUE);
-
-        $data = array(
-            'order_key' => $order_key,
-            'nik' => $nik,
-            'name' => $name,
-            'telp' => $telp,
-            'ticket_total' => $ticket_total,
-            'paket_id' => $paket_id,
-        );
-
-        $this->portir_m->add_rombongan($data);
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Pesanan Tiket Offline Rombongan berhasil disimpan!');
-        }
-        redirect('portir/tampil_tiketoffline');
-    }
-
 
     public function proses()
     {
@@ -173,5 +174,15 @@ class Portir extends CI_Controller
             $this->session->set_flashdata('success', 'Tiket berhasil di Check-Out');
         }
         redirect('portir/tampil_tiketonline');
+    }
+
+    public function print($id)
+    {
+        $data = [
+            'header' => 'Cetak Tiket',
+            'row' => $this->portir_m->get_print($id)->row(),
+        ];
+        $html =  $this->load->view('portir/tiketoffline/tiketoffline_print', $data, true);
+        $this->fungsi->PdfGenerator($html, 'barcode-' . $data['row']->order_key, 'A4', 'potrait');
     }
 }

@@ -113,4 +113,39 @@ class Kasir_m extends CI_Model
         $this->db->where('tb_tiketoffline.created_at <=', $tgl2);
         return $this->db->get();
     }
+
+    public function total_tiketonline_done()
+    {
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan
+        FROM tb_tiketonline 
+        WHERE status_code = 200";
+        return $this->db->query($query);
+    }
+
+    public function total_tiketoffline_done()
+    {
+        $query = "SELECT 
+        COUNT(tiketoffline_id) AS total_pesanan
+        FROM tb_tiketoffline";
+        return $this->db->query($query);
+    }
+
+    public function off_checkin()
+    {
+        $query = "SELECT 
+        COUNT(tiketoffline_id) AS total
+        FROM tb_tiketoffline
+        WHERE status_tiket = 1";
+        return $this->db->query($query);
+    }
+
+    public function off_checkout()
+    {
+        $query = "SELECT 
+        COUNT(tiketoffline_id) AS total
+        FROM tb_tiketoffline
+        WHERE status_tiket = 2";
+        return $this->db->query($query);
+    }
 }

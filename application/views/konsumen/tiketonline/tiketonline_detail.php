@@ -163,6 +163,7 @@
 
             </div><!-- /.container-fluid -->
         </section>
+        <br>
     </div>
 
     <?php $this->load->view('templates/footer') ?>

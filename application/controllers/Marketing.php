@@ -13,10 +13,20 @@ class Marketing extends CI_Controller
     // DASHBOARD MARKETING
     public function dashboard()
     {
-        $data = array(
-            'header' => 'Dashboard'
-        );
-        $this->load->view('marketing/dashboard/dashboard_tampil', $data);
+        $query = $this->marketing_m->total_wahana();
+        $query2 = $this->marketing_m->total_paket();
+        $query3 = $this->marketing_m->total_paket_non_diskon();
+        $query4 = $this->marketing_m->total_paket_diskon();
+        if ($query->num_rows == 0 || $query2->num_rows == 0 || $query3->num_rows == 0 || $query4->num_rows == 0) {
+            $data = array(
+                'header' => 'Dashboard',
+                'total_wahana' => $query->row(),
+                'total_paket' => $query2->row(),
+                'diskon' => $query3->row(),
+                'gak_diskon' => $query4->row(),
+            );
+            $this->load->view('marketing/dashboard/dashboard_tampil', $data);
+        }
     }
 
     // TAMPIL MENU DATA PESANAN

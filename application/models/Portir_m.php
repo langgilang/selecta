@@ -25,6 +25,7 @@ class Portir_m extends CI_Model
         tb_tiketoffline.*,
         tb_paket.*,
         tb_tiketoffline.name AS customer_name,
+        tb_tiketoffline.created_at AS reservationdate,
         tb_paket.name AS paket_name,
         COUNT(tb_wahana.wahana_id) AS wahana_item,
         SUM(tb_wahana.price) AS paket_price,
@@ -58,14 +59,14 @@ class Portir_m extends CI_Model
         return $query;
     }
 
-    public function add_perorangan($data)
+    public function add_tiketoffline($data)
     {
         $user = $this->fungsi->user_login()->user_id;
         $param = array(
             'order_key' => $data['order_key'],
             'name' => $data['name'],
             'ticket_total' => $data['ticket_total'],
-            'ticket_type' => 1,
+            'ticket_type' => $data['ticket_type'],
             'status_tiket' => 1,
             'paket_id' => $data['paket_id'],
             'user_id' => $user
@@ -108,5 +109,62 @@ class Portir_m extends CI_Model
         $this->db->where(array('status_code' => 200));
         $this->db->order_by('status_tiket');
         return $this->db->get('tb_tiketonline');
+    }
+
+    public function total_pesanan_offline()
+    {
+        $query = "SELECT 
+        COUNT(tiketoffline_id) AS total_pesanan_offline
+        FROM tb_tiketoffline";
+        return $this->db->query($query);
+    }
+
+    public function total_pesanan_online_checkin()
+    {
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan_online_checkin
+        FROM tb_tiketonline
+        WHERE status_tiket = 2
+        ";
+        return $this->db->query($query);
+    }
+
+    public function tiketoffline_checkout()
+    {
+        $query = "SELECT 
+        COUNT(tiketoffline_id) AS offline_checkout
+        FROM tb_tiketoffline
+        WHERE status_tiket = 2
+        ";
+        return $this->db->query($query);
+    }
+
+    public function tiketonline_checkout()
+    {
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS online_checkout
+        FROM tb_tiketonline
+        WHERE status_tiket = 3
+        ";
+        return $this->db->query($query);
+    }
+
+    public function get_print($id)
+    {
+        $this->db->select('
+        tb_tiketoffline.*,
+        tb_paket.*,
+        tb_tiketoffline.name AS customer_name,
+        tb_tiketoffline.created_at AS reservationdate,
+        tb_paket.name AS paket_name,
+        COUNT(tb_wahana.wahana_id) AS wahana_item,
+        SUM(tb_wahana.price) AS paket_price,
+        ');
+        $this->db->from('tb_tiketoffline');
+        $this->db->join('tb_paket', 'tb_tiketoffline.paket_id = tb_paket.paket_id');
+        $this->db->join('tb_detail_paket', 'tb_detail_paket.detail_paket_id = tb_paket.paket_id');
+        $this->db->join('tb_wahana', 'tb_detail_paket.detail_wahana_id = tb_wahana.wahana_id');
+        $this->db->where('tb_tiketoffline.tiketoffline_id', $id);
+        return $this->db->get();
     }
 }

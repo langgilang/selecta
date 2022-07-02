@@ -109,6 +109,7 @@
                 </div>
             </div>
         </section>
+        <br>
     </div>
 
     <?php $this->load->view('templates/footer') ?>

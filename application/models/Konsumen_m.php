@@ -19,6 +19,46 @@ class Konsumen_m extends CI_Model
         return $order_id;
     }
 
+    public function total_pesanan()
+    {
+        $user = $this->fungsi->user_login()->user_id;
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan
+        FROM tb_tiketonline 
+        WHERE user_id = '$user'";
+        return $this->db->query($query);
+    }
+
+    public function pesanan_sukses()
+    {
+        $user = $this->fungsi->user_login()->user_id;
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan
+        FROM tb_tiketonline 
+        WHERE user_id = '$user' && status_code = 200";
+        return $this->db->query($query);
+    }
+
+    public function pesanan_pending()
+    {
+        $user = $this->fungsi->user_login()->user_id;
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan
+        FROM tb_tiketonline 
+        WHERE user_id = '$user' && status_code = 201";
+        return $this->db->query($query);
+    }
+
+    public function pesanan_batal()
+    {
+        $user = $this->fungsi->user_login()->user_id;
+        $query = "SELECT 
+        COUNT(tiketonline_id) AS total_pesanan
+        FROM tb_tiketonline 
+        WHERE user_id = '$user' && status_tiket = 4";
+        return $this->db->query($query);
+    }
+
     public function getall()
     {
         $user = $this->fungsi->user_login()->user_id;
@@ -79,12 +119,6 @@ class Konsumen_m extends CI_Model
         return $this->db->get();
     }
 
-    // public function get_paket_selected($id)
-    // {
-    //     $this->db->select('tb_tiketonline.paket_id, tb_paket.name AS paket_name');
-    //     $this->db->from()
-    // }
-
     public function get_wahana()
     {
         return $this->db->get('tb_wahana');
@@ -101,35 +135,17 @@ class Konsumen_m extends CI_Model
         return $this->db->get();
     }
 
-    public function add_rombongan($data)
+    public function add_tiket($data)
     {
         $user = $this->fungsi->user_login()->user_id;
+        //insert paket
         $param = array(
             'order_key' => $data['order_key'],
             'reservationdate' => $data['reservationdate'],
             'nik' => $data['nik'],
             'name' => $data['name'],
             'telp' => $data['telp'],
-            'ticket_type' => 2,
-            'status_tiket' => 1,
-            'ticket_total' => $data['ticket_total'],
-            'paket_id' => $data['paket_id'],
-            'status_code' => 202,
-            'user_id' => $user
-        );
-        $this->db->insert('tb_tiketonline', $param);
-    }
-
-    public function add_perorangan($data)
-    {
-        $user = $this->fungsi->user_login()->user_id;
-        $param = array(
-            'order_key' => $data['order_key'],
-            'reservationdate' => $data['reservationdate'],
-            'nik' => $data['nik'],
-            'name' => $data['name'],
-            'telp' => $data['telp'],
-            'ticket_type' => 1,
+            'ticket_type' => $data['ticket_type'],
             'status_tiket' => 1,
             'ticket_total' => $data['ticket_total'],
             'paket_id' => $data['paket_id'],

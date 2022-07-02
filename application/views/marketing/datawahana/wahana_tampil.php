@@ -26,93 +26,92 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div class="col-md-12">
-                    <?php
-                    // $this->view('marketing/messages') 
-                    ?>
-                    <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">
-                                Wahana Table
-                            </h3>
-                            <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#addWahana">
-                                <li class="fa fa-plus"></li> Add Wahana
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
+                <?php
+                // $this->view('marketing/messages') 
+                ?>
+                <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Wahana Table
+                        </h3>
+                        <button type="button" class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#addWahana">
+                            <li class="fa fa-plus"></li> Add Wahana
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Foto</th>
+                                    <th>Code</th>
+                                    <th>Nama Wahana</th>
+                                    <th>Harga</th>
+                                    <th>Status</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $total = 0;
+                                foreach ($tampilwahana as $row) : ?>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Foto</th>
-                                        <th>Code</th>
-                                        <th>Nama Wahana</th>
-                                        <th>Harga</th>
-                                        <th>Status</th>
-                                        <th>#</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $no = 1;
-                                    $total = 0;
-                                    foreach ($tampilwahana as $row) : ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td align="center">
-                                                <?php if ($row->image != null) { ?>
-                                                    <img src="<?= base_url('uploads/foto_wahana/' . $row->image); ?>" style="width: 150px; ">
-                                                <?php } ?>
-                                            </td>
-                                            <td><?= $row->code; ?></td>
-                                            <td><?= $row->name; ?></td>
-                                            <td><?= 'Rp. ' . number_format($row->price, 0, ".", ","); ?></td>
-                                            <td>
-                                                <?php
-                                                if ($row->status == 1) {
-                                                ?>
-                                                    <label class="badge bg-success">Active</label>
-                                                <?php
-                                                } else {
-                                                ?> <label class="badge bg-danger">Inactive</label>
-                                                <?php
-                                                }
-                                                ?>
-                                            </td>
-                                            <td class="text-center">
-                                                <?php
-                                                if ($row->status == 1) {
-                                                ?>
-                                                    <a href="<?= site_url('marketing/editwahana_inactive/') . $row->wahana_id ?>" class="btn btn-sm btn-danger">
-                                                        <i class="fas fa-times-circle"></i>
-                                                    </a>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <a href="<?= site_url('marketing/editwahana_active/') . $row->wahana_id ?>" class="btn btn-sm btn-default">
-                                                        <i class="fas fa-check-circle"></i>
-                                                    </a>
-                                                <?php
-                                                }
-                                                ?>
-                                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateWahana<?= $row->wahana_id; ?>">
-                                                    <li class="fa fa-edit"></li>
-                                                </button>
-                                                <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" id="btn-delete" class="btn btn-sm btn-danger">
-                                                    <i class="fa fa-trash-alt"></i>
+                                        <td><?= $no++; ?></td>
+                                        <td align="center">
+                                            <?php if ($row->image != null) { ?>
+                                                <img src="<?= base_url('uploads/foto_wahana/' . $row->image); ?>" style="width: 150px; ">
+                                            <?php } ?>
+                                        </td>
+                                        <td><?= $row->code; ?></td>
+                                        <td><?= $row->name; ?></td>
+                                        <td><?= 'Rp. ' . number_format($row->price, 0, ".", ","); ?></td>
+                                        <td>
+                                            <?php
+                                            if ($row->status == 1) {
+                                            ?>
+                                                <label class="badge bg-success">Active</label>
+                                            <?php
+                                            } else {
+                                            ?> <label class="badge bg-danger">Inactive</label>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php
+                                            if ($row->status == 1) {
+                                            ?>
+                                                <a href="<?= site_url('marketing/editwahana_inactive/') . $row->wahana_id ?>" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-times-circle"></i>
                                                 </a>
-                                            </td>
-                                        </tr>
-                                    <?php
-                                    endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <a href="<?= site_url('marketing/editwahana_active/') . $row->wahana_id ?>" class="btn btn-sm btn-default">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </a>
+                                            <?php
+                                            }
+                                            ?>
+                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateWahana<?= $row->wahana_id; ?>">
+                                                <li class="fa fa-edit"></li>
+                                            </button>
+                                            <a href="<?= site_url('marketing/del_wahana/' . $row->wahana_id); ?>" id="btn-delete" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </section><!-- /.content -->
+        <br>
     </div>
 
     <?php $this->load->view('templates/footer') ?>

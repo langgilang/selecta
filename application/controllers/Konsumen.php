@@ -13,10 +13,20 @@ class Konsumen extends CI_Controller
 
     public function dashboard()
     {
-        $data = array(
-            'header' => 'Dashboard'
-        );
-        $this->load->view('konsumen/dashboard/dashboard_tampil', $data);
+        $query = $this->konsumen_m->total_pesanan();
+        $query2 = $this->konsumen_m->pesanan_sukses();
+        $query3 = $this->konsumen_m->pesanan_pending();
+        $query4 = $this->konsumen_m->pesanan_batal();
+        if ($query->num_rows == 0 || $query2->num_rows == 0 || $query3->num_rows == 0 || $query4->num_rows == 0) {
+            $data = array(
+                'header' => 'Dashboard',
+                'total_pesanan' => $query->row(),
+                'total_pesanan_sukses' => $query2->row(),
+                'total_pesanan_pending' => $query3->row(),
+                'total_pesanan_batal' => $query4->row(),
+            );
+            $this->load->view('konsumen/dashboard/dashboard_tampil', $data);
+        }
     }
 
     public function tampil_konsumen()
@@ -58,13 +68,7 @@ class Konsumen extends CI_Controller
         $this->load->view('konsumen/tiketonline/tiketonline_add', $data);
     }
 
-    public function edit($id)
-    {
-        echo "halaman edit";
-        // $this->load->view('konsumen/tiketonline/tiketonline_edit');
-    }
-
-    public function proses_add_rombongan()
+    public function proses_add_tiketonline()
     {
         $order_key = $this->konsumen_m->order_key();
         $nik = $this->input->post('nik', TRUE);
@@ -73,51 +77,46 @@ class Konsumen extends CI_Controller
         $ticket_total = $this->input->post('ticket_total', TRUE);
         $reservationdate = $this->input->post('reservationdate', TRUE);
         $paket_id = $this->input->post('paket_id', TRUE);
+        $wahana = $this->input->post('wahana', TRUE);
 
-        $data = array(
-            'order_key' => $order_key,
-            'reservationdate' => $reservationdate,
-            'nik' => $nik,
-            'name' => $name,
-            'telp' => $telp,
-            'ticket_total' => $ticket_total,
-            'paket_id' => $paket_id,
-        );
-        // print_r($data);
-        // die();
-        $this->konsumen_m->add_rombongan($data);
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Pesanan Tiket Online Rombongan berhasil disimpan!');
+
+        if ($ticket_total < 30) {
+            $data = array(
+                'order_key' => $order_key,
+                'reservationdate' => $reservationdate,
+                'nik' => $nik,
+                'name' => $name,
+                'telp' => $telp,
+                'ticket_type' => 1,
+                'ticket_total' => $ticket_total,
+                'paket_id' => $paket_id,
+            );
+            // print_r($data);
+            // die();
+            $this->konsumen_m->add_tiket($data);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Tiket perorangan berhasil disimpan!');
+            }
+            redirect('konsumen/tampil_konsumen');
+        } else {
+            $data = array(
+                'order_key' => $order_key,
+                'reservationdate' => $reservationdate,
+                'nik' => $nik,
+                'name' => $name,
+                'telp' => $telp,
+                'ticket_type' => 2,
+                'ticket_total' => $ticket_total,
+                'paket_id' => $paket_id,
+            );
+            // print_r($data);
+            // die();
+            $this->konsumen_m->add_tiket($data);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Tiket rombongan berhasil disimpan!');
+            }
+            redirect('konsumen/tampil_konsumen');
         }
-        redirect('konsumen/tampil_konsumen');
-    }
-
-    public function proses_add_perorangan()
-    {
-        $order_key = $this->konsumen_m->order_key();
-        $nik = $this->input->post('nik', TRUE);
-        $name = $this->input->post('name', TRUE);
-        $telp = $this->input->post('telp', TRUE);
-        $ticket_total = $this->input->post('ticket_total', TRUE);
-        $reservationdate = $this->input->post('reservationdate', TRUE);
-        $paket_id = $this->input->post('paket_id', TRUE);
-
-        $data = array(
-            'order_key' => $order_key,
-            'reservationdate' => $reservationdate,
-            'nik' => $nik,
-            'name' => $name,
-            'telp' => $telp,
-            'ticket_total' => $ticket_total,
-            'paket_id' => $paket_id,
-        );
-        // print_r($data);
-        // die();
-        $this->konsumen_m->add_perorangan($data);
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Pesanan Tiket Online Perorangtan berhasil disimpan!');
-        }
-        redirect('konsumen/tampil_konsumen');
     }
 
     public function update_reservationdate()
