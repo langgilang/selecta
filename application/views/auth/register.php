@@ -26,8 +26,8 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
 
-                <form action="<?= site_url('auth/proses') ?>" method="post">
-                    <div class="input-group mb-3">
+                <form action="<?= site_url('auth/proses') ?>" method="post" id="register">
+                    <div class="input-group mb-3 form-group">
                         <input type="text" id="name" name="name" class="form-control" placeholder="Full name">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 form-group">
                         <input type="email" id="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 form-group">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -74,6 +74,58 @@
     <script src="<?php echo base_url('assets/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?php echo base_url('assets/') ?>dist/js/adminlte.min.js"></script>
+    <!-- validasi -->
+    <script src="<?= base_url('assets/') ?>plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?= base_url('assets/') ?>plugins/jquery-validation/additional-methods.min.js"></script>
+    <script>
+        //validasi form
+        jQuery.validator.addMethod("lettersonly", function(value, element) {
+            return this.optional(element) || /^[a-z\s]+$/i.test(value);
+        }, "Only alphabetical characters");
+
+        $('#register').validate({
+            rules: {
+                name: {
+                    required: true,
+                    lettersonly: true,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+            },
+            messages: {
+                email: {
+                    required: "Please enter a email address",
+                    email: "Please enter a valid email address"
+                },
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 5 characters long"
+                },
+                name: {
+                    required: "Please Insert your Full Name",
+                    lettersonly: "Only alphabetical characters",
+                },
+
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    </script>
 </body>
 
 </html>

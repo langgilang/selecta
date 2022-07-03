@@ -175,7 +175,7 @@
     </div>
 
     <!-- modal tambah pesanan  -->
-    <form action="<?= site_url('konsumen/proses_add_tiketonline') ?>" method="post">
+    <form action="<?= site_url('konsumen/proses_add_tiketonline') ?>" method="post" id="addpesanan">
         <div class="modal fade" id="addPesananPerorangan" data-backdrop="static">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -200,14 +200,14 @@
                                 <div class="form-group ">
                                     <input type="hidden" value="" name="tiketonline_id">
                                     <label for="reservationdate">Tanggal Reservasi <font color="red">*</font></label>
-                                    <input type="date" value="" id="reservationdate" name="reservationdate" class="form-control" required>
+                                    <input type="date" value="" id="reservationdate" name="reservationdate" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
-                                    <input type="number" min="1" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
+                                    <input type="text" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket">
                                 </div>
                             </div>
 
@@ -218,21 +218,21 @@
                             <div class="col-md 3">
                                 <div class="form-group">
                                     <label for="nik">NIK <font color="red">*</font></label>
-                                    <input type="text" value="" id="nik" name="nik" class="form-control" placeholder="Masukkan Nik " required>
+                                    <input type="text" value="" id="nik" name="nik" class="form-control" placeholder="Masukkan Nik ">
                                 </div>
                             </div>
 
                             <div class="col-md 3">
                                 <div class="form-group ">
                                     <label for="name">Nama <font color="red">*</font></label>
-                                    <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda " required>
+                                    <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda ">
                                 </div>
                             </div>
 
                             <div class="col-md 3">
                                 <div class="form-group ">
                                     <label for="telp">Telephone <font color="red">*</font></label>
-                                    <input type="text" value="" id="telp" name="telp" class="form-control" placeholder="Masukkan Telephone " required>
+                                    <input type="text" value="" id="telp" name="telp" class="form-control" placeholder="Masukkan Telephone ">
                                 </div>
                             </div>
 
@@ -665,5 +665,92 @@
                 text: flash
             })
         }
+
+        //validasi form
+        jQuery.validator.addMethod("lettersonly", function(value, element) {
+            return this.optional(element) || /^[a-z\s]+$/i.test(value);
+        }, "Hanya boleh huruf");
+
+        jQuery.validator.addMethod("numberonly", function(value, element) {
+            return this.optional(element) || /^[0-9]$/.test(value);
+        }, "Hanya boleh angka");
+
+        jQuery.validator.addMethod('uppercaseandsymbols', function(value) {
+            return value.match(/^[^A-Z0-9]+$/);
+        }, 'Haya boleh huruf kapital dan angka');
+
+        $('#addpesanan').validate({
+            rules: {
+                reservationdate: {
+                    required: true,
+                },
+
+                ticket_total: {
+                    required: true,
+                    numberonly: true,
+                    min: 1,
+                },
+
+                nik: {
+                    required: true,
+                    numberonly: true,
+                },
+
+                name: {
+                    required: true,
+                    lettersonly: true,
+                },
+
+                telp: {
+                    required: true,
+                    numberonly: true,
+                },
+
+                paket_id: {
+                    required: true,
+                },
+            },
+            messages: {
+                reservationdate: {
+                    required: "Tanggal Reservasi tidak boleh kosong",
+                },
+
+                ticket_total: {
+                    required: "Jumlah Tiket tidak boleh kosong",
+                    numberonly: "Jumlah Tiket hanya boleh angka",
+                    min: "Jumlah Tiket paling sedikit 1",
+                },
+
+                nik: {
+                    required: "NIK tidak boleh kosong",
+                    numberonly: "NIK hanya boleh angka",
+                },
+
+                name: {
+                    required: "Nama tidak boleh kosong",
+                    lettersonly: "Nama hanya boleh huruf",
+                },
+
+                telp: {
+                    required: "Telephone tidak boleh kosong",
+                    numberonly: "Telphone hanya boleh angka",
+                },
+
+                paket_id: {
+                    required: "Paket tidak boleh kosong",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
     });
 </script>

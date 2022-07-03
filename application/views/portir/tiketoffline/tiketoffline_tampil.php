@@ -140,42 +140,43 @@
 
 </div>
 
-<!--- Modal tambah pesanan perorangan --->
-<form action="<?= site_url('portir/proses_add_perorangan') ?>" method="POST">
+<!--- Modal tambah pesanan  --->
+<form action="<?= site_url('portir/proses_add_perorangan') ?>" method="POST" id="addtiketoffline">
     <div class="modal fade" id="addPesananPerorangan" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Form Pesanan Tiket Offline Perorangan</h4>
+                    <h4 class="modal-title">Form Pesanan Tiket Offline</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <input type="hidden" value="" name="tiketonline_id">
-                        <label for="order_key" class="col-sm-2 form-label">Order Id <font color="red">*</font></label>
-                        <div class="col-sm-10">
-                            <input type="text" value="<?= $order_key ?>" id="order_key" name="order_key" class="form-control" disabled>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="hidden" value="" name="tiketonline_id">
+                                <label for="order_key">Order Id <font color="red">*</font></label>
+                                <input type="text" value="<?= $order_key ?>" id="order_key" name="order_key" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ticket_total">Jumlah Tiket <font color="red">*</font></label>
+                                <input type="text" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="name">Nama <font color="red">*</font></label>
+                                <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda ">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="ticket_total" class="col-sm-2 form-label">Jumlah Tiket <font color="red">*</font></label>
-                        <div class="col-sm 10">
-                            <input type="number" min="1" class="form-control" id="ticket_total" name="ticket_total" placeholder="Masukan Jumlah Tiket" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="name" class="col-sm-2 form-label">Nama <font color="red">*</font></label>
-                        <div class="col-sm-10">
-                            <input type="text" value="" id="name" name="name" class="form-control" placeholder="Masukkan Nama Anda " required>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="paket_id" class="col-sm-2 form-label">Jenis Paket <font color="red">*</font></label>
-                        <div class="col-sm-10">
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label for="paket_id">Jenis Paket <font color="red">*</font></label>
                             <select name="paket_id" id="paket_id" class="form-control">
                                 <option value="">-- Pilih -- </option>
                                 <?php foreach ($tampilpaket as $data) : ?>
@@ -395,5 +396,66 @@ foreach ($semuatiketoffline as $detail) :
                 window.location = link;
             }
         })
+    });
+
+    //validasi form
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-z\s]+$/i.test(value);
+    }, "Hanya boleh huruf");
+
+    jQuery.validator.addMethod("numberonly", function(value, element) {
+        return this.optional(element) || /^[0-9]$/.test(value);
+    }, "Hanya boleh angka");
+
+    jQuery.validator.addMethod('uppercaseandsymbols', function(value) {
+        return value.match(/^[^A-Z0-9]+$/);
+    }, 'Haya boleh huruf kapital dan angka');
+
+    $('#addtiketoffline').validate({
+        rules: {
+            ticket_total: {
+                required: true,
+                number: true,
+                min: 1
+            },
+
+            name: {
+                required: true,
+                lettersonly: true,
+            },
+
+            paket_id: {
+                required: true,
+            },
+
+        },
+        messages: {
+            ticket_total: {
+                required: "Tiket harus diisi",
+                number: "Tiket hanya boleh diisi angka",
+                min: "Tiket minimal harus 1",
+            },
+
+            name: {
+                required: "Nama tidak boleh kosong",
+                lettersonly: "Nama hanya diisi boleh huruf",
+            },
+
+            paket_id: {
+                required: "Paket tidak boleh kosong",
+            },
+
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
     });
 </script>

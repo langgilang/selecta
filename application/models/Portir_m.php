@@ -41,7 +41,9 @@ class Portir_m extends CI_Model
 
     public function get_paket()
     {
-        return $this->db->get('tb_paket');
+        $this->db->from('tb_paket');
+        $this->db->where('status', 1);
+        return $this->db->get();
     }
 
     public function get_wahana()

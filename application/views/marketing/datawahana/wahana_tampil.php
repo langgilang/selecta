@@ -29,7 +29,8 @@
                 <?php
                 // $this->view('marketing/messages') 
                 ?>
-                <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
+                <div id="flash_success" data-flash_success="<?= $this->session->flashdata('success'); ?>"></div>
+                <div id="flash_error" data-flash_error="<?= $this->session->flashdata('error'); ?>"></div>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
@@ -118,46 +119,46 @@
 
 </div>
 <!-- modal tambah data -->
-<form action="<?= site_url('marketing/proses_add') ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('marketing/proses') ?>" method="post" enctype="multipart/form-data" id="addwahana">
     <div class="modal fade" id="addWahana" data-backdrop="static">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Wahana</h4>
+                    <h4 class="modal-title">Tambah Data Wahana</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Kode <font color="red">*</font></label>
-                        <input type="hidden" id="wahana_id" name="wahana_id">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" required>
+                    <div class="row">
+                        <div class="col-md 4">
+                            <div class="form-group ">
+                                <label>Kode <font color="red">* <small>Contoh (WHN001)</small></font></label>
+                                <input type="hidden" id="wahana_id" name="wahana_id">
+                                <input type="text" class="form-control" id="code" name="code" placeholder="Masukan kode wahana">
+                            </div>
+                        </div>
+                        <div class="col-md 4">
+                            <div class="form-group ">
+                                <label>Nama <font color="red">*</font></label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana">
+                            </div>
+                        </div>
+                        <div class="col-md 4">
+                            <div class="form-group">
+                                <label>Harga<font color="red">*</font></label>
+                                <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nama <font color="red">*</font></label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Harga<font color="red">*</font></label>
-                        <div class="col-sm-5">
-                            <input type="number" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Image<font color="red">*</font></label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" id="image" name="image">
-                        </div>
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" name="tambahwahana" class="btn btn-primary">Submit</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -176,7 +177,7 @@ foreach ($tampilwahana as $i) :
     $price = $i->price;
     $image = $i->image;
 ?>
-    <form action="<?= site_url('marketing/proses_edit') ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= site_url('marketing/proses') ?>" method="post" enctype="multipart/form-data" id="editwahana">
         <div class="modal fade " id="updateWahana<?= $wahana_id; ?>" data-backdrop="static">
             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <div class="modal-content">
@@ -187,27 +188,29 @@ foreach ($tampilwahana as $i) :
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Kode <font color="red">*</font></label>
-                            <input type="hidden" value="<?= $wahana_id ?>" id="wahana_id" name="wahana_id">
-                            <div class="col-sm-10">
-                                <input type="text" value="<?= $code ?>" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" readonly>
+                        <div class="row">
+                            <div class="col md-4">
+                                <div class="form-group">
+                                    <label>Kode <font color="red">*</font></label>
+                                    <input type="hidden" value="<?= $wahana_id ?>" id="wahana_id" name="wahana_id">
+                                    <input type="text" value="<?= $code ?>" class="form-control" id="code" name="code" placeholder="Masukan kode wahana" readonly>
+                                </div>
+                            </div>
+                            <div class="col md-4">
+                                <div class="form-group">
+                                    <label>Nama <font color="red">*</font></label>
+                                    <input type="text" value="<?= $name ?>" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana">
+                                </div>
+                            </div>
+                            <div class="col md-4">
+                                <div class="form-group">
+                                    <label>Harga <font color="red">*</font></label>
+                                    <input type="number" value="<?= $price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Nama <font color="red">*</font></label>
-                            <div class="col-sm-10">
-                                <input type="text" value="<?= $name ?>" class="form-control" id="name" name="name" placeholder="Masukan Nama Wahana" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Harga <font color="red">*</font></label>
-                            <div class="col-sm-5">
-                                <input type="number" value="<?= $price ?>" class="form-control" id="price" name="price" placeholder="Masukan harga wahana" required>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Image <font color="red">*</font></label>
+                        <div class="form-group">
+                            <label>Image <font color="red">*</font></label>
                             <div class="col-sm-10">
                                 <?php if ($image != null) { ?>
                                     <small style="color: black; font-size: 16px;">Preview</small><br>
@@ -224,7 +227,7 @@ foreach ($tampilwahana as $i) :
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" name="editwahana" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -238,12 +241,21 @@ foreach ($tampilwahana as $i) :
 <?php $this->load->view('templates/js') ?>
 
 <script>
-    var flash = $('#flash').data('flash');
-    if (flash) {
+    var flash_success = $('#flash_success').data('flash_success');
+    if (flash_success) {
         Swal.fire({
             icon: 'success',
             title: 'Success!',
-            text: flash
+            text: flash_success
+        })
+    }
+
+    var flash_error = $('#flash_error').data('flash_error');
+    if (flash_error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: flash_error
         })
     }
     $(document).on('click', '#btn-delete', function(e) {
@@ -263,4 +275,102 @@ foreach ($tampilwahana as $i) :
             }
         })
     });
+
+    //validasi
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || /^[a-z\s]+$/i.test(value);
+    }, "Hanya boleh huruf");
+
+    jQuery.validator.addMethod("numberonly", function(value, element) {
+        return this.optional(element) || /^[0-9]$/.test(value);
+    }, "Hanya boleh angka");
+
+    $.validator.addMethod("charnumber", function(value, element) {
+        return this.optional(element) || /^[a-z0-9]+$/i.test(value);
+    }, "Kode wahana hanya boleh huruf dan angka");
+
+    $('#addwahana').validate({
+        rules: {
+            code: {
+                required: true,
+                charnumber: true,
+                minlength: 6,
+                maxlength: 6,
+            },
+
+            name: {
+                required: true,
+            },
+
+            price: {
+                required: true,
+                number: true,
+            },
+        },
+        messages: {
+            code: {
+                required: "Kode harus diisi",
+                charnumber: "Kode hanya boleh huruf dan angka",
+                minlength: "Kode harus minimal 6 karakter",
+                maxlength: "Kode harus maximal 6 karakter",
+            },
+
+            name: {
+                required: "Nama harus diisi",
+            },
+
+            price: {
+                required: "Harga tidak boleh kosong",
+                number: "Harga hanya boleh angka",
+            },
+
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+    $('#editwahana').validate({
+        rules: {
+            name: {
+                required: true,
+            },
+
+            price: {
+                required: true,
+                number: true,
+            },
+        },
+        messages: {
+            name: {
+                required: "Nama harus diisi",
+            },
+
+            price: {
+                required: "Harga tidak boleh kosong",
+                number: "Harga hanya boleh angka",
+            },
+        },
+        errorElement: 'span',
+        errorPlacement: function(error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+    
 </script>

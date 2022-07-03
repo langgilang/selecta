@@ -61,15 +61,51 @@ class Marketing_m extends CI_Model
         return $this->db->get();
     }
 
-    public function add_wahana($data)
+    public function add_wahana($post)
     {
         $param = array(
-            'code' => $data['code'],
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'image' => $data['image'],
+            'code' => $post['code'],
+            'name' => $post['name'],
+            'price' => $post['price'],
+            'image' => $post['image'],
         );
         $this->db->insert('tb_wahana', $param);
+    }
+
+    public function edit_wahana($post)
+    {
+        $param = array(
+            'code' => $post['code'],
+            'name' => $post['name'],
+            'price' => $post['price'],
+            'updated_at' => date('Y-m-d H:i:s'),
+        );
+        if ($post['image'] != null) {
+            $param['image'] = $post['image'];
+        }
+
+        $this->db->where('wahana_id', $post['wahana_id']);
+        $this->db->update('tb_wahana', $param);
+    }
+
+    public function check_wahana_code($code, $id = null)
+    {
+        $this->db->from('tb_wahana');
+        $this->db->where('code', $code);
+        if ($id != null) {
+            $this->db->where('wahana_id !=', $id);
+        }
+        return $this->db->get();
+    }
+
+    public function check_paket_code($code, $id = null)
+    {
+        $this->db->from('tb_paket');
+        $this->db->where('code', $code);
+        if ($id != null) {
+            $this->db->where('paket_id !=', $id);
+        }
+        return $this->db->get();
     }
 
     public function add_paket($paket, $wahana)
@@ -78,6 +114,7 @@ class Marketing_m extends CI_Model
         $param = array(
             'code' => $paket['add_code'],
             'name' => $paket['add_name'],
+            'status' => 2,
             'diskon' => $paket['add_diskon'],
         );
         $this->db->insert('tb_paket', $param);
@@ -95,23 +132,6 @@ class Marketing_m extends CI_Model
         }
         //MULTIPLE INSERT TO DETAIL TABLE
         $this->db->insert_batch('tb_detail_paket', $result);
-    }
-
-    public function edit_wahana($data, $where)
-    {
-        $param = array(
-            'code' => $data['code'],
-            'name' => $data['name'],
-            'price' => $data['price'],
-            'updated_at' => date('Y-m-d H:i:s'),
-        );
-
-        if ($data['image'] != null) {
-            $param['image'] = $data['image'];
-        }
-
-        $this->db->where($where);
-        $this->db->update('tb_wahana', $param);
     }
 
     public function edit_paket($paket_id, $data, $wahana)
@@ -149,18 +169,6 @@ class Marketing_m extends CI_Model
     {
         $this->db->delete('tb_detail_paket', array('detail_paket_id' => $id));
         $this->db->delete('tb_paket', array('paket_id' => $id));
-    }
-
-    public function check_code($code, $id = null)
-    {
-        $this->db->select('*');
-        $this->db->from('tb_paket');
-        $this->db->where('code', $code);
-        if ($id != null) {
-            $this->db->where('paket_id !=', $id);
-        }
-        $query = $this->db->get();
-        return $query;
     }
 
     public function total_wahana()

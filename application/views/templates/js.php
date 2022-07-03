@@ -46,6 +46,9 @@
 <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= base_url('assets/') ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- jquery-validation -->
+<script src="<?= base_url('assets/') ?>plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= base_url('assets/') ?>plugins/jquery-validation/additional-methods.min.js"></script>
 <script>
     $(function() {
         $("#example1").DataTable({
@@ -91,6 +94,7 @@
         $('.reservationdate').datetimepicker({
             format: 'L'
         });
+
     });
 </script>
 </body>

@@ -63,7 +63,7 @@ class Marketing extends CI_Controller
     // DELETE WAHANA
     public function del_wahana($id)
     {
-        $item = $this->marketing_m->get_wahana($id['wahana_id'])->row();
+        $item = $this->marketing_m->get_wahana($id)->row();
         if ($item->image != null) {
             $target_file = './uploads/foto_wahana/' . $item->image;
             unlink($target_file);
@@ -83,15 +83,6 @@ class Marketing extends CI_Controller
             $this->session->set_flashdata('success', 'Data paket berhasil dihapus');
         }
         redirect('marketing/tampil_paket');
-    }
-
-    // KE HALAMAN TAMBAH WAHANA
-    public function add_wahana()
-    {
-        $data = array(
-            'header' => 'Tambah Data Wahana',
-        );
-        $this->load->view('marketing/datawahana/wahana_add', $data);
     }
 
     public function edit_paket($id)
@@ -115,22 +106,6 @@ class Marketing extends CI_Controller
         }
     }
 
-    // KE HALAMAN EDIT WAHANA
-    public function edit_wahana($id)
-    {
-        $query = $this->marketing_m->get_wahana($id);
-        if ($query->num_rows() > 0) {
-            $data = array(
-                'header' => 'Edit Data Wahana',
-                'row' => $query->row(),
-            );
-            $this->load->view('marketing/datawahana/wahana_edit', $data);
-        } else {
-            echo "<script>alert('Data tidak ditemukan');";
-            echo "window.location='" . site_url('marketing/edit_wahana') . "';</script>";
-        }
-    }
-
     // KE HALAMAN TAMBAH PAKET
     public function proses_add_paket()
     {
@@ -144,11 +119,16 @@ class Marketing extends CI_Controller
             'add_name' => $name,
             'add_diskon' => $diskon,
         );
-        $this->marketing_m->add_paket($paket, $wahana);
 
-        if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Tambah data paket berhasil disimpan');
+        if ($this->marketing_m->check_paket_code($code)->num_rows() > 0) {
+            $this->session->set_flashdata('error', "Kode paket $code sudah digunakan!");
             redirect('marketing/tampil_paket');
+        } else {
+            $this->marketing_m->add_paket($paket, $wahana);
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Tambah data paket berhasil disimpan');
+                redirect('marketing/tampil_paket');
+            }
         }
     }
 
@@ -175,80 +155,70 @@ class Marketing extends CI_Controller
     }
 
     // PROSES SIMPAN WAHANA
-    public function proses_add()
+    public function proses()
     {
-        $code = $this->input->post('code', TRUE);
-        $name = $this->input->post('name', TRUE);
-        $price = $this->input->post('price', TRUE);
-        $image = $_FILES['image']['name'];
-
-        $data = array(
-            'code' => $code,
-            'name' => $name,
-            'price' => $price,
-            'image' => $image
-        );
-
         $config['upload_path'] = './uploads/foto_wahana/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg|pdf';
         $config['max_size'] = 10240;
-        $this->load->initialize($config);
+        $config['file_name'] = 'item-' . date('ymd') . '-' . substr(md5(rand()), 0, 10);
+        $this->upload->initialize($config);
 
-        if (!$this->upload->do_upload('image')) {
-            $image = null;
-            $this->marketing_m->add_wahana($data);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data wahana berhasil disimpan!');
+        $post = $this->input->post(null, TRUE);
+        if (isset($_POST['tambahwahana'])) {
+            if ($this->marketing_m->check_wahana_code($post['code'])->num_rows() > 0) {
+                $this->session->set_flashdata('error', "Kode wahana $post[code] sudah digunakan!");
+            } else {
+                if (@$_FILES['image']['name'] != null) {
+                    if ($this->upload->do_upload('image')) {
+                        $post['image'] = $this->upload->data('file_name');
+                        $this->marketing_m->add_wahana($post);
+                        if ($this->db->affected_rows() > 0) {
+                            $this->session->set_flashdata('success', 'Data Wahana berhasil disimpan!');
+                            redirect('marketing/tampil_wahana');
+                        }
+                    } else {
+                        $error = $this->upload->display_errors();
+                        $this->session->set_flashdata('error', $error);
+                        redirect('marketing/tampil_wahana');
+                    }
+                } else {
+                    $post['image'] = null;
+                    $this->marketing_m->add_wahana($post);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->session->set_flashdata('success', 'Data Wahana berhasil disimpan!');
+                        redirect('marketing/tampil_wahana');
+                    }
+                }
             }
-            redirect('marketing/tampil_wahana');
-        } else {
-            $image = $this->upload->data('file_name');
-            $this->marketing_m->add_wahana($data);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data Wahana berhasil disimpan!');
+        } else if (isset($_POST['editwahana'])) {
+            if (@$_FILES['image']['name'] != null) {
+                if ($this->upload->do_upload('image')) {
+                    $post['image'] = $this->upload->data('file_name');
+
+                    $item = $this->marketing_m->get_wahana($post['wahana_id'])->row();
+                    if ($item->image != null) {
+                        $target_file = './uploads/foto_wahana/' . $item->image;
+                        unlink($target_file);
+                    }
+
+                    $this->marketing_m->edit_wahana($post);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->session->set_flashdata('success', 'Updated wahana berhasil disimpan!');
+                    }
+                    redirect('marketing/tampil_wahana');
+                } else {
+                    $error = $this->upload->display_errors();
+                    $this->session->set_flashdata('error', $error);
+                    redirect('marketing/tampil_wahana');
+                }
+            } else {
+                $post['image'] = null;
+                $this->marketing_m->edit_wahana($post);
+                if ($this->db->affected_rows() > 0) {
+                    $this->session->set_flashdata('success', 'Updated wahana berhasil disimpan!');
+                }
+                redirect('marketing/tampil_wahana');
             }
-            redirect('marketing/tampil_wahana');
-        }
-    }
-
-    // PROSES EDIT WAHANA
-    public function proses_edit()
-    {
-        $wahana_id = $this->input->post('wahana_id', TRUE);
-        $code = $this->input->post('code', TRUE);
-        $name = $this->input->post('name', TRUE);
-        $price = $this->input->post('price', TRUE);
-        $image = $_FILES['image']['name'];
-
-        $config = array(
-            'upload_path' => './uploads/foto_wahana',
-            'allowed_types' => 'gif|jpg|png|jpeg|pdf',
-            'max_size' => 10240,
-        );
-        $this->load->library('upload', $config);
-
-        $data = array(
-            'code' => $code,
-            'name' => $name,
-            'price' => $price,
-            'image' => $image,
-        );
-
-        $where['wahana_id'] = $wahana_id;
-
-        if (!$this->upload->do_upload('image')) {
-            $image = $this->upload->data('file_name');
-            $this->marketing_m->edit_wahana($data, $where);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Update data wahana berhasil disimpan');
-            }
-            redirect('marketing/tampil_wahana');
-        } else {
-            $this->marketing_m->edit_wahana($data, $where);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Update data wahana berhasil disimpan');
-            }
-            redirect('marketing/tampil_wahana');
         }
     }
 
