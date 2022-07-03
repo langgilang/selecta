@@ -113,6 +113,7 @@ class Konsumen_m extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tb_paket');
+        $this->db->where('status', 1);
         if ($id != null) {
             $this->db->where('paket_id', $id);
         }

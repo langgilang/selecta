@@ -10,7 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= base_url('assets/assets_parallaxs/') ?>img/favicon.png" rel="icon">
+  <!-- <link href="<?= base_url('assets/assets_parallaxs/') ?>img/favicon.png" rel="icon"> -->
   <link href="<?= base_url('assets/assets_parallaxs/') ?>assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -88,8 +88,8 @@
           <h2>Segera daftar untuk mendapatkan promo menarik di aplikasi kami</h2>
           <div><a href="<?= site_url('auth/register') ?>" class="btn-get-started scrollto">Get Started</a></div>
         </div>
-        <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
-          <img src="<?= base_url('assets/assets_parallaxs/') ?>img/hero-img.png" class="img-fluid animated" alt="">
+        <div class="col-xl-4 col-lg-6 order-1 order-lg-2 baruw1" data-aos="zoom-in" data-aos-delay="150">
+          <img src="<?= base_url('assets/assets_parallaxs/') ?>img/baruw1.png" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -104,7 +104,7 @@
 
         <div class="row">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="150">
-            <img src="<?= base_url('assets/assets_parallaxs/') ?>img/about.jpg" class="img-fluid" alt="">
+            <img src="<?= base_url('assets/assets_parallaxs/') ?>img/baruww.png" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
             <h3>Taman Rekreasi Selecta</h3>

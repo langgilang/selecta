@@ -31,12 +31,12 @@
                 // $this->view('konsumen/messages')
                 ?>
                 <div id="flash" data-flash="<?= $this->session->flashdata('success'); ?>"></div>
-                <button class="btn btn btn-success" type="button" data-toggle="modal" data-target="#addPesananPerorangan">Tambah Pesanan Tiket Online</button>
-                <br><br>
                 <!-- tabel pesanan -->
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Data Pesanan Online</h3>
+                        <button class="btn btn btn-success float-right" type="button" data-toggle="modal" data-target="#addPesananPerorangan">Tambah Pesanan Tiket Online</button>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

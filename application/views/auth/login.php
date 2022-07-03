@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>SELECTA | Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -78,31 +78,23 @@
 
         $('#login').validate({
             rules: {
-                name: {
-                    required: true,
-                    lettersonly: true,
-                },
                 email: {
                     required: true,
                     email: true,
                 },
                 password: {
                     required: true,
-                    minlength: 5
+                    minlength: 8
                 },
             },
             messages: {
                 email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
+                    required: "Email tidak boleh kosong",
+                    email: "Format email salah"
                 },
                 password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                name: {
-                    required: "Please Insert your Full Name",
-                    lettersonly: "Only alphabetical characters",
+                    required: "Password tidak boleh kosong",
+                    minlength: "Password diisi minimal 8 karakter"
                 },
 
             },
