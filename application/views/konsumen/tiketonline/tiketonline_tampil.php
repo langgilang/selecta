@@ -687,13 +687,13 @@
 
                 ticket_total: {
                     required: true,
-                    numberonly: true,
+                    number: true,
                     min: 1,
                 },
 
                 nik: {
                     required: true,
-                    numberonly: true,
+                    number: true,
                 },
 
                 name: {
@@ -703,7 +703,7 @@
 
                 telp: {
                     required: true,
-                    numberonly: true,
+                    number: true,
                 },
 
                 paket_id: {
@@ -717,13 +717,13 @@
 
                 ticket_total: {
                     required: "Jumlah Tiket tidak boleh kosong",
-                    numberonly: "Jumlah Tiket hanya boleh angka",
+                    number: "Jumlah Tiket hanya boleh angka",
                     min: "Jumlah Tiket paling sedikit 1",
                 },
 
                 nik: {
                     required: "NIK tidak boleh kosong",
-                    numberonly: "NIK hanya boleh angka",
+                    number: "NIK hanya boleh angka",
                 },
 
                 name: {
@@ -733,7 +733,7 @@
 
                 telp: {
                     required: "Telephone tidak boleh kosong",
-                    numberonly: "Telphone hanya boleh angka",
+                    number: "Telphone hanya boleh angka",
                 },
 
                 paket_id: {
